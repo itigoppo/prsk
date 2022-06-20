@@ -46,6 +46,10 @@ RUN dnf clean all
 RUN curl -sS https://getcomposer.org/installer | php && \
   mv composer.phar /usr/local/bin/composer
 
+# install Node.js
+RUN dnf module enable nodejs:16 -y
+RUN dnf install nodejs -y
+
 # timezone setting
 RUN cp /etc/localtime /etc/localtime.org
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime

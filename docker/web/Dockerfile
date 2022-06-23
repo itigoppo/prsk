@@ -39,6 +39,8 @@ RUN \
 
 RUN ln -s /bin/php73 /bin/php
 
+COPY ./php.ini /etc/opt/remi/php73/php.ini
+
 # clear dnf cache
 RUN dnf clean all
 

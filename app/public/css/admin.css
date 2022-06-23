@@ -20565,6 +20565,18 @@ readers do not read off random characters that represent icons */
   width: 350px;
 }
 
+@media screen and (max-width: 991px) {
+  #navbar-menu-wrapper .navbar-nav .nav-item.dropdown {
+    position: static;
+  }
+  #navbar-menu-wrapper .navbar-nav .nav-item .dropdown-menu {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 55px;
+    width: calc(100% - 40px);
+  }
+}
 #page-body-wrapper {
   padding-top: 55px;
 }

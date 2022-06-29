@@ -22,13 +22,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+
+    @hasSection('head')
+        @yield('head')
+    @endif
 </head>
 <body>
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm fixed-top d-flex flex-row">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('home') }}"><i
+            <a class="navbar-brand" href="{{ route('admin.home') }}"><i
                     class="fa-solid fa-snowflake"></i> {{ config('app.name', 'Laravel') }}</a>
 
             <div id="navbar-menu-wrapper" class="d-flex align-items-center justify-content-end">
@@ -86,61 +90,110 @@
         <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse pt-3">
             <div class="position-sticky">
                 <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">
-                            <i class="fa-solid fa-dashboard"></i>
-                            <span class="ml-2">Dashboard1</span>
-                        </a>
-                    </li>
+                    @if ( Request::routeIs('admin.home') )
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ route('admin.home') }}">
+                                <i class="fa-solid fa-dashboard"></i>
+                                <span class="ml-2">Dashboard</span>
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.home') }}">
+                                <i class="fa-solid fa-dashboard"></i>
+                                <span class="ml-2">Dashboard</span>
+                            </a>
+                        </li>
+                    @endif
 
                     @can('isAdmin')
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">
-                                <i class="fa-solid fa-dashboard"></i>
-                                <span class="ml-2">Dashboard2</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#icon-collapse"
-                               aria-expanded="false" aria-controls="icon-collapse">
-                                <i class="fa-solid fa-dashboard"></i>
-                                <span class="menu-title">Dashboard3</span>
-                                <i class="menu-arrow fa-lg fa-pull-right"></i>
-                            </a>
-                            <div class="collapse" id="icon-collapse">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="pages/icons/mdi.html">
-                                            Mdi icons
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">
-                                <i class="fa-solid fa-dashboard"></i>
-                                <span class="ml-2">Dashboard4</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#" data-bs-toggle="collapse"
-                               data-bs-target="#icon2-collapse"
-                               aria-expanded="true" aria-controls="icon2-collapse">
-                                <i class="fa-solid fa-dashboard"></i>
-                                <span class="menu-title">Dashboard5</span>
-                                <i class="menu-arrow fa-lg fa-pull-right"></i>
-                            </a>
-                            <div class="collapse show" id="icon2-collapse">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">
-                                            Mdi icons
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                        @if ( Request::routeIs('admin.units.*') && !Request::routeIs('admin.units.members.*') )
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ route('admin.units.index') }}">
+                                    <i class="fa-solid fa-users"></i>
+                                    <span class="ml-2">ユニット管理</span>
+                                </a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.units.index') }}">
+                                    <i class="fa-solid fa-users"></i>
+                                    <span class="ml-2">ユニット管理</span>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if ( Request::routeIs('admin.members.*') || Request::routeIs('admin.units.members.*') )
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"
+                                   href="{{ route('admin.members.index') }}">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span class="ml-2">メンバー管理</span>
+                                </a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.members.index') }}">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span class="ml-2">メンバー管理</span>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if ( Request::routeIs('admin.icons.*') )
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ route('admin.icons.index') }}">
+                                    <i class="fa-solid fa-file-image"></i>
+                                    <span class="ml-2">アイコン管理</span>
+                                </a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.icons.index') }}">
+                                    <i class="fa-solid fa-file-image"></i>
+                                    <span class="ml-2">アイコン管理</span>
+                                </a>
+                            </li>
+                        @endif
+
+
+
+                        {{--                        <li class="nav-item">--}}
+                        {{--                            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#icon-collapse"--}}
+                        {{--                               aria-expanded="false" aria-controls="icon-collapse">--}}
+                        {{--                                <i class="fa-solid fa-dashboard"></i>--}}
+                        {{--                                <span class="menu-title">Dashboard3</span>--}}
+                        {{--                                <i class="menu-arrow fa-lg fa-pull-right"></i>--}}
+                        {{--                            </a>--}}
+                        {{--                            <div class="collapse" id="icon-collapse">--}}
+                        {{--                                <ul class="nav flex-column sub-menu">--}}
+                        {{--                                    <li class="nav-item">--}}
+                        {{--                                        <a class="nav-link" href="pages/icons/mdi.html">--}}
+                        {{--                                            Mdi icons--}}
+                        {{--                                        </a>--}}
+                        {{--                                    </li>--}}
+                        {{--                                </ul>--}}
+                        {{--                            </div>--}}
+                        {{--                        </li>--}}
+                        {{--                        --}}
+                        {{--                        <li class="nav-item">--}}
+                        {{--                            <a class="nav-link active" href="#" data-bs-toggle="collapse"--}}
+                        {{--                               data-bs-target="#icon2-collapse"--}}
+                        {{--                               aria-expanded="true" aria-controls="icon2-collapse">--}}
+                        {{--                                <i class="fa-solid fa-dashboard"></i>--}}
+                        {{--                                <span class="menu-title">Dashboard5</span>--}}
+                        {{--                                <i class="menu-arrow fa-lg fa-pull-right"></i>--}}
+                        {{--                            </a>--}}
+                        {{--                            <div class="collapse show" id="icon2-collapse">--}}
+                        {{--                                <ul class="nav flex-column sub-menu">--}}
+                        {{--                                    <li class="nav-item">--}}
+                        {{--                                        <a class="nav-link" href="#">--}}
+                        {{--                                            Mdi icons--}}
+                        {{--                                        </a>--}}
+                        {{--                                    </li>--}}
+                        {{--                                </ul>--}}
+                        {{--                            </div>--}}
+                        {{--                        </li>--}}
                     @endcan
                 </ul>
             </div>
@@ -156,6 +209,10 @@
             </div>
 
             <div class="content-wrapper">
+                @if ( !Request::routeIs('admin.home') )
+                    {{ Breadcrumbs::render(Route::currentRouteName(), $breadcrumbs ?? '') }}
+                @endif
+
                 @yield('content')
             </div>
         </main>

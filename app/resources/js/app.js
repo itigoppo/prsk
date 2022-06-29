@@ -18,4 +18,6 @@ $(function () {
     $('#page-bottom').on('click', function () {
         $('html, body').animate({scrollTop: $('body').get(0).scrollHeight}, 500);
     });
+
+    $('.crud-flash').fadeIn(1000).delay(1000).fadeOut(1000);
 });

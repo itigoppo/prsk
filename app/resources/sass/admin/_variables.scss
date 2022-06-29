@@ -39,5 +39,38 @@ $body-color: $gray-600;
 $headings-color: $gray-700;
 $dropdown-link-hover-color: $white;
 $dropdown-link-hover-bg: $secondary;
-$navbar-dark-color: rgba($white,.6);
+$navbar-dark-color: rgba($white, .6);
 $navbar-dark-hover-color: $white;
+
+
+//== Buttons
+//
+//## For each of Bootstrap's buttons, define text, background and border color.
+
+$btn-font-weight: normal !default;
+
+$btn-default-color: #333 !default;
+$btn-default-bg: $white !default;
+$btn-default-border: #ccc !default;
+
+$btn-primary-color: $white !default;
+$btn-primary-bg: $primary !default;
+$btn-primary-border: darken($btn-primary-bg, 5%) !default;
+
+$btn-success-color: $white !default;
+$btn-success-bg: $success !default;
+$btn-success-border: darken($btn-success-bg, 5%) !default;
+
+$btn-info-color: $white !default;
+$btn-info-bg: $info !default;
+$btn-info-border: darken($btn-info-bg, 5%) !default;
+
+$btn-warning-color: $white !default;
+$btn-warning-bg: $warning !default;
+$btn-warning-border: darken($btn-warning-bg, 5%) !default;
+
+$btn-danger-color: $white !default;
+$btn-danger-bg: $danger !default;
+$btn-danger-border: darken($btn-danger-bg, 5%) !default;
+
+$btn-link-disabled-color: $gray-300 !default;

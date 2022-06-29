@@ -15,6 +15,7 @@ mix.js('resources/js/app.js', 'public/js')
     .autoload({
         'jquery': ['$', 'window.jQuery'],
     })
+    .js('resources/js/dropzone.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
     .sourceMaps();

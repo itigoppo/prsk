@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\IconsService;
 use App\Services\MembersService;
+use App\Services\Route\UrlGenerator;
 use App\Services\UnitsService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -30,5 +31,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+
+        $url = $this->app['url'];
+        $this->app->singleton('url', function () use ($url) {
+            return new UrlGenerator($url);
+        });
     }
 }

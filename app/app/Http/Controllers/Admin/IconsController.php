@@ -73,11 +73,11 @@ class IconsController extends Controller
         $icon = $iconsService->findOne($id);
         $path = $icon->path . '/' . $icon->name;
 
-        if (!Storage::disk('ftp')->exists($path)) {
+        if (!Storage::disk('local')->exists($path)) {
             abort(404);
         }
 
-        return Storage::disk('ftp')->download($path);
+        return Storage::disk('local')->download($path);
     }
 
     /**

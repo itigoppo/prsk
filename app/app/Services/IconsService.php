@@ -65,7 +65,7 @@ class IconsService
             return false;
         }
 
-        $path = Storage::disk('ftp')->putFile(Icon::FILE_PATH, new File($file->getPathname()));
+        $path = Storage::disk('local')->putFile(Icon::FILE_PATH, new File($file->getPathname()));
         if (!$path) {
             return false;
         }
@@ -96,19 +96,19 @@ class IconsService
         ]);
 
         if ($validator->fails()) {
-            Storage::disk('ftp')->delete($path);
+            Storage::disk('local')->delete($path);
 
             return false;
         }
 
         try {
             if (!$this->iconsRepository->create(new IconCreate($validator->validated()))) {
-                Storage::disk('ftp')->delete($path);
+                Storage::disk('local')->delete($path);
 
                 return false;
             }
         } catch (ValidationException $e) {
-            Storage::disk('ftp')->delete($path);
+            Storage::disk('local')->delete($path);
 
             return false;
         }
@@ -130,8 +130,8 @@ class IconsService
 
         $path = $entity->path . '/' . $entity->name;
 
-        if (Storage::disk('ftp')->exists($path)) {
-            if (!Storage::disk('ftp')->delete($path)){
+        if (Storage::disk('local')->exists($path)) {
+            if (!Storage::disk('local')->delete($path)){
                 return false;
             }
         }

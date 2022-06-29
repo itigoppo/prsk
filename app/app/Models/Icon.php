@@ -27,7 +27,7 @@ class Icon extends Model
     use AuthorObservable;
     use UuidObservable;
 
-    const FILE_PATH = 'prsk/icons';
+    const FILE_PATH = 'icons';
 
     /**
      * The attributes that are mass assignable.

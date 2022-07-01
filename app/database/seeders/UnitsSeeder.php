@@ -29,7 +29,7 @@ class UnitsSeeder extends Seeder
             ],
             [
                 'name' => 'MORE MORE JUMP！',
-                'short' => 'mmj',
+                'short' => 'MMJ',
                 'bg_color' => '#88dd44',
                 'color' => '#000000',
             ],

@@ -31,6 +31,9 @@ class AuthServiceProvider extends ServiceProvider
         Passport::hashClientSecrets();
         if (!$this->app->routesAreCached()) {
             Passport::routes();
+            Passport::tokensExpireIn(now()->addHours(1));
+            Passport::refreshTokensExpireIn(now()->addDays(1));
+            Passport::personalAccessTokensExpireIn(now()->addMonths(6));
         }
 
         Gate::define('isAdmin', function (User $user) {

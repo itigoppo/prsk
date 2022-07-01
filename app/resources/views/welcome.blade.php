@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container-fluid py-4">
-
         <div id="play-image" class="carousel carousel-dark slide my-5 w-50 mx-auto" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -53,17 +52,29 @@
             </div>
         </div>
 
-
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Home') }}</div>
+                @if (Route::has('front.event-calc'))
+                    <h3><a href="{{ route('front.event-calc') }}">イベントボーナスポイント計算機</a></h3>
+                    <p>
+                        特効簡易計算機。
+                    </p>
+                @endif
 
-                    <div class="card-body">
+                @if (Route::has('front.character-sort'))
+                    <h3><a href="{{ route('front.character-sort') }}">キャラソート</a></h3>
+                    <p>
+                        よくあるやつ。
+                    </p>
+                @endif
 
-                        {{ __('You are welcome!') }}
-                    </div>
-                </div>
+                @if (Route::has('front.cutins'))
+                    <h3><a href="{{ route('front.cutins') }}">掛け合い一覧</a></h3>
+                    <p>
+                        わんわんーーーわんだほーーーい☆
+                    </p>
+                @endif
+
             </div>
         </div>
     </div>

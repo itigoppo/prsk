@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\IconsController;
 use App\Http\Controllers\Admin\MembersController;
 use App\Http\Controllers\Admin\UnitsController;
+use App\Http\Controllers\MediasController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -114,3 +115,20 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
     });
 });
 
+
+Route::group(['middleware' => 'protect.media', 'prefix' => 'medias', 'as' => 'medias.'], function () {
+    Route::get('icons/{icon_id}', [MediasController::class, 'icon'])
+        ->name('icons')
+        ->where('icon_id', '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
+
+});
+
+Route::group(['as' => 'front.'], function () {
+    Route::get('event-calc', function () {
+        return view('front.event-calc');
+    })->name('event-calc');
+
+    Route::get('character-sort', function () {
+        return view('front.character-sort');
+    })->name('character-sort');
+});

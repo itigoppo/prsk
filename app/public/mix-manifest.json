@@ -1,6 +1,9 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/dropzone.js": "/js/dropzone.js",
+    "/js/front.js": "/js/front.js",
+    "/js/character-sort.js": "/js/character-sort.js",
+    "/js/event-calc.js": "/js/event-calc.js",
     "/css/admin.css": "/css/admin.css",
     "/css/app.css": "/css/app.css"
 }

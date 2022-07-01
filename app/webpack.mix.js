@@ -16,6 +16,9 @@ mix.js('resources/js/app.js', 'public/js')
         'jquery': ['$', 'window.jQuery'],
     })
     .js('resources/js/dropzone.js', 'public/js')
+    .js('resources/js/front.js', 'public/js')
+    .js('resources/js/character-sort.js', 'public/js')
+    .js('resources/js/event-calc.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
     .sourceMaps();

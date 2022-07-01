@@ -4,6 +4,7 @@
      */
 @endphp
 @extends('layouts.admin')
+@section('title', 'アイコン管理')
 
 @section('head')
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>

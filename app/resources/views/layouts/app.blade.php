@@ -15,6 +15,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/front.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,6 +23,24 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MW8ES70LY8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-MW8ES70LY8');
+    </script>
+
+    @hasSection('head')
+        @yield('head')
+    @endif
 </head>
 <body>
 
@@ -38,41 +57,41 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
-                    @if (Route::has('event_calc'))
-                        @if ( Request::routeIs('event_calc') )
+                    @if (Route::has('front.event-calc'))
+                        @if ( Request::routeIs('front.event-calc') )
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">イベントボーナスポイント計算機 <i
                                         class="fa-solid fa-circle-chevron-left"></i></a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('event_calc') }}">イベントボーナスポイント計算機</a>
+                                <a class="nav-link" href="{{ route('front.event-calc') }}">イベントボーナスポイント計算機</a>
                             </li>
                         @endif
                     @endif
 
-                    @if (Route::has('character_sort'))
-                        @if ( Request::routeIs('character_sort') )
+                    @if (Route::has('front.character-sort'))
+                        @if ( Request::routeIs('front.character-sort') )
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">キャラソート <i
                                         class="fa-solid fa-circle-chevron-left"></i></a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('character_sort') }}">キャラソート</a>
+                                <a class="nav-link" href="{{ route('front.character-sort') }}">キャラソート</a>
                             </li>
                         @endif
                     @endif
 
-                    @if (Route::has('cutins'))
-                        @if ( Request::routeIs('cutins') )
+                    @if (Route::has('front.cutins'))
+                        @if ( Request::routeIs('front.cutins') )
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">掛け合い一覧 <i
                                         class="fa-solid fa-circle-chevron-left"></i></a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('cutins') }}">掛け合い一覧</a>
+                                <a class="nav-link" href="{{ route('front.cutins') }}">掛け合い一覧</a>
                             </li>
                         @endif
                     @endif
@@ -121,8 +140,22 @@
 </header>
 
 <main>
+    <div id="page-move">
+        <i id="page-top" class="fa-solid fa-circle-up"
+           style="font-size: 2rem; position: fixed; bottom: 14%; right: 3%; cursor: pointer; z-index: 100;"></i>
+
+        <i id="page-bottom" class="fa-solid fa-circle-down"
+           style="font-size: 2rem; position: fixed; bottom: 5%; right: 3%; cursor: pointer; z-index: 100;"></i>
+    </div>
+
     @yield('content')
 </main>
+
+<footer>
+    <ul class="list-unstyled">
+        <li>Twitter: @prsk_ts</li>
+    </ul>
+</footer>
 
 </body>
 </html>

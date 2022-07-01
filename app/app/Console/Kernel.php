@@ -16,6 +16,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        // APIトークンの掃除
+        $schedule->command('passport:purge')->hourly();
     }
 
     /**

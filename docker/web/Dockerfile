@@ -13,7 +13,20 @@ RUN dnf -y install epel-release
 # install dev tool
 RUN dnf -y groupinstall "Development Tools"
 RUN dnf -y install git vim zsh curl
-COPY .vimrc /root/.vimrc
+
+COPY ./.vimrc /root/.vimrc
+
+RUN curl -fsSL "https://github.com/peco/peco/releases/download/v0.5.10/peco_linux_amd64.tar.gz" | \
+    tar -xz --to-stdout peco_linux_amd64/peco > /usr/bin/peco
+RUN chmod +x /usr/bin/peco
+
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
+    && git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions \
+    && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+COPY ./zsh/.zshrc /root/.zshrc
+COPY ./zsh/custom/docker.zsh-theme /root/.oh-my-zsh/custom/themes/docker.zsh-theme
+COPY ./zsh/custom/*.zsh /root/.oh-my-zsh/custom/
 
 # install remi repo
 RUN dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm

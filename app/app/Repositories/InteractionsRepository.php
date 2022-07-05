@@ -6,10 +6,12 @@ use App\Http\Requests\Interactions\InteractionCreate;
 use App\Http\Requests\Interactions\InteractionUpdate;
 use App\Interfaces\InteractionsRepositoryInterface;
 use App\Models\Interaction;
-use Illuminate\Support\Str;
+use App\Traits\QueryBuilderTrait;
 
 class InteractionsRepository implements InteractionsRepositoryInterface
 {
+    use QueryBuilderTrait;
+
     public function findPaginate(array $conditions = [], array $order = [], int $limit = 20): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         $query = Interaction::query();
@@ -22,24 +24,7 @@ class InteractionsRepository implements InteractionsRepositoryInterface
         $query->leftJoin('members AS to_members', 'interactions.to_member_id', '=', 'to_members.id');
         $query->leftJoin('units AS to_units', 'to_members.unit_id', '=', 'to_units.id');
 
-        if (!empty($conditions)) {
-            foreach ($conditions as $condition) {
-                switch ($condition['type']) {
-                    case 'where':
-                        $query->where($condition['column'], $condition['operator'], $condition['value']);
-                        break;
-                    case 'whereIn':
-                        $query->whereIn($condition['column'], $condition['values']);
-                        break;
-                    case 'whereNotNull':
-                        $query->whereNotNull($condition['column']);
-                        break;
-                    case 'whereNull':
-                        $query->whereNull($condition['column']);
-                        break;
-                }
-            }
-        }
+        $this->addConditions($query, $conditions);
 
         if (empty($order)) {
             $order = [
@@ -50,45 +35,30 @@ class InteractionsRepository implements InteractionsRepositoryInterface
                 'interactions.id' => 'asc',
             ];
         }
-
-        foreach ($order as $key => $value) {
-            $query->orderBy($key, $value);
-        }
+        $this->addOrderBy($query, $order);
 
         return $query->paginate($limit);
     }
 
-    public function findAll(array $search = [], array $order = [])
+    public function findAll(array $conditions = [], array $order = [])
     {
         $query = Interaction::query();
 
-        if (!empty($search)) {
-            $query->where($search);
-        }
+        $this->addConditions($query, $conditions);
 
-        if (!empty($order)) {
-            foreach ($order as $key => $value)
-                $query->orderBy($key, $value);
-        } else {
-            $query->orderBy('id');
+        if (empty($order)) {
+            $order = [
+                'id' => 'asc',
+            ];
         }
+        $this->addOrderBy($query, $order);
 
         return $query->get();
     }
 
     public function findOne($id)
     {
-        $where = [
-            'id' => $id,
-        ];
-
-        if (Str::isUuid($id)) {
-            $where = [
-                'uuid' => $id,
-            ];
-        }
-
-        return Interaction::query()->where($where)->first();
+        return Interaction::query()->where($this->getFindOneCondition($id))->first();
     }
 
     public function create(InteractionCreate $request): bool

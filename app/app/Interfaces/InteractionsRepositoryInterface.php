@@ -16,11 +16,11 @@ interface InteractionsRepositoryInterface
     public function findPaginate(array $conditions = [], array $order = [], int $limit = 20): \Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
     /**
-     * @param array $search
+     * @param array $conditions
      * @param array $order
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function findAll(array $search = [], array $order = []);
+    public function findAll(array $conditions = [], array $order = []);
 
     /**
      * @param int|string $id

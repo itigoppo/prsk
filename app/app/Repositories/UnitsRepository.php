@@ -6,41 +6,31 @@ use App\Http\Requests\Units\UnitCreate;
 use App\Http\Requests\Units\UnitUpdate;
 use App\Interfaces\UnitsRepositoryInterface;
 use App\Models\Unit;
-use Illuminate\Support\Str;
+use App\Traits\QueryBuilderTrait;
 
 class UnitsRepository implements UnitsRepositoryInterface
 {
-    public function findAll(array $search = [], array $order = [])
+    use QueryBuilderTrait;
+
+    public function findAll(array $conditions = [], array $order = [])
     {
         $query = Unit::query();
 
-        if (!empty($search)) {
-            $query->where($search);
-        }
+        $this->addConditions($query, $conditions);
 
-        if (!empty($order)) {
-            foreach ($order as $key => $value)
-                $query->orderBy($key, $value);
-        } else {
-            $query->orderBy('id');
+        if (empty($order)) {
+            $order = [
+                'id' => 'asc',
+            ];
         }
+        $this->addOrderBy($query, $order);
 
         return $query->get();
     }
 
     public function findOne($id)
     {
-        $where = [
-            'id' => $id,
-        ];
-
-        if (Str::isUuid($id)) {
-            $where = [
-                'uuid' => $id,
-            ];
-        }
-
-        return Unit::query()->where($where)->first();
+        return Unit::query()->where($this->getFindOneCondition($id))->first();
     }
 
     public function create(UnitCreate $request): bool

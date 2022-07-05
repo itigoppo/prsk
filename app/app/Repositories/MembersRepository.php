@@ -6,41 +6,31 @@ use App\Http\Requests\Members\MemberCreate;
 use App\Http\Requests\Members\MemberUpdate;
 use App\Interfaces\MembersRepositoryInterface;
 use App\Models\Member;
-use Illuminate\Support\Str;
+use App\Traits\QueryBuilderTrait;
 
 class MembersRepository implements MembersRepositoryInterface
 {
-    public function findAll(array $search = [], array $order = [])
+    use QueryBuilderTrait;
+
+    public function findAll(array $conditions = [], array $order = [])
     {
         $query = Member::query();
 
-        if (!empty($search)) {
-            $query->where($search);
-        }
+        $this->addConditions($query, $conditions);
 
-        if (!empty($order)) {
-            foreach ($order as $key => $value)
-                $query->orderBy($key, $value);
-        } else {
-            $query->orderBy('id');
+        if (empty($order)) {
+            $order = [
+                'id' => 'asc',
+            ];
         }
+        $this->addOrderBy($query, $order);
 
         return $query->get();
     }
 
     public function findOne($id)
     {
-        $where = [
-            'id' => $id,
-        ];
-
-        if (Str::isUuid($id)) {
-            $where = [
-                'uuid' => $id,
-            ];
-        }
-
-        return Member::query()->where($where)->first();
+        return Member::query()->where($this->getFindOneCondition($id))->first();
     }
 
     public function create(MemberCreate $request): bool

@@ -30,7 +30,7 @@ class MembersService
 
     /**
      * @param int|string $id
-     * @return \App\Repositories\MembersRepository|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     * @return \App\Models\Member|MembersRepository|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
     public function findOne($id)
     {

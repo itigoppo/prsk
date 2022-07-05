@@ -5,59 +5,48 @@ namespace App\Repositories;
 use App\Http\Requests\Icons\IconCreate;
 use App\Interfaces\IconsRepositoryInterface;
 use App\Models\Icon;
+use App\Traits\QueryBuilderTrait;
 use Illuminate\Support\Str;
 
 class IconsRepository implements IconsRepositoryInterface
 {
-    public function findPaginate(array $search = [], array $order = [], int $limit = 20): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    use QueryBuilderTrait;
+
+    public function findPaginate(array $conditions = [], array $order = [], int $limit = 20): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         $query = Icon::query();
 
-        if (!empty($search)) {
-            $query->where($search);
-        }
+        $this->addConditions($query, $conditions);
 
-        if (!empty($order)) {
-            foreach ($order as $key => $value)
-                $query->orderBy($key, $value);
-        } else {
-            $query->orderBy('id');
+        if (empty($order)) {
+            $order = [
+                'id' => 'asc',
+            ];
         }
+        $this->addOrderBy($query, $order);
 
         return $query->paginate($limit);
     }
 
-    public function findAll(array $search = [], array $order = [])
+    public function findAll(array $conditions = [], array $order = [])
     {
         $query = Icon::query();
 
-        if (!empty($search)) {
-            $query->where($search);
-        }
+        $this->addConditions($query, $conditions);
 
-        if (!empty($order)) {
-            foreach ($order as $key => $value)
-                $query->orderBy($key, $value);
-        } else {
-            $query->orderBy('id');
+        if (empty($order)) {
+            $order = [
+                'id' => 'asc',
+            ];
         }
+        $this->addOrderBy($query, $order);
 
         return $query->get();
     }
 
     public function findOne($id)
     {
-        $where = [
-            'id' => $id,
-        ];
-
-        if (Str::isUuid($id)) {
-            $where = [
-                'uuid' => $id,
-            ];
-        }
-
-        return Icon::query()->where($where)->first();
+        return Icon::query()->where($this->getFindOneCondition($id))->first();
     }
 
     public function create(IconCreate $request): bool

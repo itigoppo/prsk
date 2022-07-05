@@ -8,11 +8,11 @@ use App\Models\Unit;
 interface UnitsRepositoryInterface
 {
     /**
-     * @param array $search
+     * @param array $conditions
      * @param array $order
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function findAll(array $search = [], array $order = []);
+    public function findAll(array $conditions = [], array $order = []);
 
     /**
      * @param int|string $id

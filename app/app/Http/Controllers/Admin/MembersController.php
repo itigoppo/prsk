@@ -24,8 +24,11 @@ class MembersController extends Controller
         $render = [];
         $search = [];
         if (!empty($unitId)) {
-            $search = [
-                ['unit_id', '=', (string) $unitId],
+            $search[] = [
+                'type' => 'where',
+                'column' => 'unit_id',
+                'operator' => '=',
+                'value' => (string) $unitId,
             ];
 
             $unit = $unitsService->findOne($unitId);

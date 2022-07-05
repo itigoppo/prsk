@@ -8,16 +8,15 @@ use App\Models\Member;
 interface MembersRepositoryInterface
 {
     /**
-     * @param array $search
+     * @param array $conditions
      * @param array $order
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function findAll(array $search = [], array $order = []);
+    public function findAll(array $conditions = [], array $order = []);
 
     /**
      * @param int|string $id
-     * @return \Illuminate\Database\Eloquent\Model|static
-     *
+     * @return \App\Models\Member|static
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function findOne($id);

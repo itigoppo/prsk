@@ -8,11 +8,13 @@
 
 <div class="row mb-3">
     <div class="form-group">
-        <label for="unit_id" class=" col-form-label text-md-end">ユニット</label>
-        <select id="unit_id" class="form-select @error('unit_id') is-invalid @enderror" name="unit_id"{{ empty($member->unit_id ) ? '' : ' disabled' }}>
+        <label for="unit_id" class="col-form-label text-md-end">ユニット</label>
+        <select id="unit_id" class="form-select @error('unit_id') is-invalid @enderror"
+                name="unit_id"{{ empty($member->unit_id ) ? '' : ' disabled' }}>
             <option>選択してください</option>
             @foreach($units as $unit)
-                <option value="{{ $unit->id }}"{{ old('unit_id', $member->unit_id ?? '') == $unit->id ? ' selected' : '' }}>
+                <option
+                    value="{{ $unit->id }}"{{ old('unit_id', $member->unit_id ?? '') == $unit->id ? ' selected' : '' }}>
                     {{ $unit->name }}
                 </option>
             @endforeach
@@ -31,11 +33,12 @@
 
 <div class="row mb-3">
     <div class="form-group">
-        <label for="icon_id" class=" col-form-label text-md-end">アイコン</label>
+        <label for="icon_id" class="col-form-label text-md-end">アイコン</label>
         <select id="icon_id" class="form-select @error('icon_id') is-invalid @enderror" name="icon_id">
             <option>選択してください</option>
             @foreach($icons as $icon)
-                <option value="{{ $icon->id }}"{{ old('icon_id', $member->icon_id ?? '') == $icon->id ? ' selected' : '' }}>
+                <option
+                    value="{{ $icon->id }}"{{ old('icon_id', $member->icon_id ?? '') == $icon->id ? ' selected' : '' }}>
                     {{ $icon->label }}
                 </option>
             @endforeach
@@ -51,7 +54,7 @@
 
 <div class="row mb-3">
     <div class="form-group">
-        <label for="code" class=" col-form-label text-md-end">メンバーコード</label>
+        <label for="code" class="col-form-label text-md-end">メンバーコード</label>
         <input id="code" type="text"
                class="form-control @error('code') is-invalid @enderror" name="code"
                value="{{ old('code', $member->code ?? '') }}" required>
@@ -65,7 +68,7 @@
 
 <div class="row mb-3">
     <div class="form-group">
-        <label for="name" class=" col-form-label text-md-end">メンバー名</label>
+        <label for="name" class="col-form-label text-md-end">メンバー名</label>
         <input id="name" type="text"
                class="form-control @error('name') is-invalid @enderror" name="name"
                value="{{ old('name', $member->name ?? '') }}" required>
@@ -79,7 +82,7 @@
 
 <div class="row mb-3">
     <div class="form-group">
-        <label for="short" class=" col-form-label text-md-end">短縮名</label>
+        <label for="short" class="col-form-label text-md-end">短縮名</label>
         <input id="short" type="text"
                class="form-control @error('short') is-invalid @enderror" name="short"
                value="{{ old('short', $member->short ?? '') }}" required>
@@ -94,9 +97,9 @@
 
 <div class="row mb-3">
     <div class="form-group">
-        <label for="bg_color" class=" col-form-label text-md-end">メンバーカラーコード</label>
-        <input id="bg_color" type="text"
-               class="form-control @error('bg_color') is-invalid @enderror" name="bg_color"
+        <label for="bg_color" class="col-form-label text-md-end">メンバーカラーコード</label>
+        <input id="bg_color" type="color"
+               class="form-control form-control-lg @error('bg_color') is-invalid @enderror" name="bg_color"
                value="{{ old('bg_color', $member->bg_color ?? '') }}" required>
 
         @error('bg_color')
@@ -109,9 +112,9 @@
 
 <div class="row mb-3">
     <div class="form-group">
-        <label for="color" class=" col-form-label text-md-end">テキストカラーコード</label>
-        <input id="color" type="text"
-               class="form-control @error('color') is-invalid @enderror" name="color"
+        <label for="color" class="col-form-label text-md-end">テキストカラーコード</label>
+        <input id="color" type="color"
+               class="form-control form-control-lg @error('color') is-invalid @enderror" name="color"
                value="{{ old('color', $member->color ?? '') }}" required>
 
         @error('color')
@@ -122,13 +125,13 @@
     </div>
 </div>
 
-
 <div class="row mb-3">
     <div class="form-group">
 
         <div class="form-check form-switch">
             <label class="form-check-label" for="is_active">有効か</label>
-            <input id="is_active" class="form-check-input @error('is_active') is-invalid @enderror" type="checkbox" name="is_active" value="1"{{ old('is_active', $member->is_active ?? '') ? ' checked' : '' }}>
+            <input id="is_active" class="form-check-input @error('is_active') is-invalid @enderror" type="checkbox"
+                   name="is_active" value="1"{{ old('is_active', $member->is_active ?? '') ? ' checked' : '' }}>
         </div>
 
         @error('is_active')

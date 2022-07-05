@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 /**
  * @property int $id
@@ -29,6 +30,8 @@ use Illuminate\Support\Carbon;
  * @property-read Unit $unit
  * @property-read Icon $icon
  * @property-read string $active_label
+ * @property-read string $display_name
+ * @property-read string $display_short
  */
 class Member extends Model
 {
@@ -68,7 +71,7 @@ class Member extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Unit
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Icon
      */
     public function icon()
     {
@@ -81,5 +84,33 @@ class Member extends Model
     public function getActiveLabelAttribute(): string
     {
         return $this->is_active ? '有効' : '無効';
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayNameAttribute(): string
+    {
+        $result = $this->name;
+
+        if (Str::endsWith($this->code, ['miku', 'rin', 'len', 'luka', 'meiko', 'kaito'])) {
+            $result .= '(' . $this->unit->short . ')';
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayShortAttribute(): string
+    {
+        $result = $this->short;
+
+        if (Str::endsWith($this->code, ['miku', 'rin', 'len', 'luka', 'meiko', 'kaito'])) {
+            $result .= '(' . $this->unit->short . ')';
+        }
+
+        return $result;
     }
 }

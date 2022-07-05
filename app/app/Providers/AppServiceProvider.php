@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\IconsService;
+use App\Services\InteractionsService;
 use App\Services\MembersService;
 use App\Services\UnitsService;
 use Illuminate\Pagination\Paginator;
@@ -20,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('UnitsService', UnitsService::class);
         $this->app->bind('MembersService', MembersService::class);
         $this->app->bind('IconsService', IconsService::class);
+        $this->app->bind('InteractionsService', InteractionsService::class);
     }
 
     /**
@@ -30,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+        Paginator::defaultView('pagination::customize-bootstrap-5');
     }
 }

@@ -12,24 +12,29 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $id
  * @property string $uuid
- * @property string $name
- * @property string $short
- * @property string $bg_color
- * @property string $color
+ * @property int $from_member_id
+ * @property string $from_line
+ * @property int $to_member_id
+ * @property string $to_line
+ * @property string $file
+ * @property string $note
  * @property Carbon $created_at
  * @property int $created_by
  * @property Carbon $updated_at
  * @property int $updated_by
  * @property Carbon $deleted_at
  * @property int $deleted_by
- * @property-read Member[] $members
+ * @property-read Member $fromMember
+ * @property-read Member $toMember
  */
-class Unit extends Model
+class Interaction extends Model
 {
     use HasFactory;
     use AuthorObservable;
     use SoftDeletes;
     use UuidObservable;
+
+    const FILE_PATH = 'interactions';
 
     /**
      * The attributes that are mass assignable.
@@ -38,10 +43,6 @@ class Unit extends Model
      */
     protected $fillable = [
         'uuid',
-        'name',
-        'short',
-        'bg_color',
-        'color',
     ];
 
     /**
@@ -54,10 +55,19 @@ class Unit extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany|Member[]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Member
      */
-    public function members(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function fromMember()
     {
-        return $this->hasMany(Member::class)->where('is_active', '=', true);
+        return $this->belongsTo(Member::class, 'from_member_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Member
+     */
+    public function toMember()
+    {
+        return $this->belongsTo(Member::class, 'to_member_id');
+    }
+
 }

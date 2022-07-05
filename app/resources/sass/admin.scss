@@ -13,6 +13,13 @@
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
+// iCheck
+@import '~icheck-bootstrap/icheck-bootstrap.css';
+
+// select2
+@import '~select2/dist/css/select2.css';
+@import '~select2-bootstrap-5-theme/src/include-all';
+
 // custom
 @import 'admin/theme-custom';
 @import 'admin/custom';

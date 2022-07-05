@@ -116,3 +116,41 @@ Breadcrumbs::for('admin.icons.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.home');
     $trail->push('アイコン管理', route('admin.icons.index'));
 });
+
+
+Breadcrumbs::for('admin.interactions.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('掛け合い管理', route('admin.interactions.index'));
+});
+
+Breadcrumbs::for('admin.interactions.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('掛け合い管理', route('admin.interactions.index'));
+    $trail->push('掛け合い作成', route('admin.interactions.create'));
+});
+
+Breadcrumbs::for('admin.interactions.view', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\Interaction $interaction */
+    $interaction = $breadcrumbs['interaction'];
+
+    $detail = (!empty($interaction->fromMember) ? $interaction->fromMember->name . '('. $interaction->fromMember->unit->short . ')' : 'anyone')
+    . ' + '
+    . (!empty($interaction->toMember) ? $interaction->toMember->name . '('. $interaction->toMember->unit->short . ')' : 'anyone');
+
+    $trail->parent('admin.home');
+    $trail->push('掛け合い管理', route('admin.interactions.index'));
+    $trail->push('掛け合い詳細: ' . $detail, route('admin.interactions.view', ['interaction_id' => $interaction->id]));
+});
+
+Breadcrumbs::for('admin.interactions.update', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\Interaction $interaction */
+    $interaction = $breadcrumbs['interaction'];
+    $detail = (!empty($interaction->fromMember) ? $interaction->fromMember->name . '('. $interaction->fromMember->unit->short . ')' : 'anyone')
+        . ' + '
+        . (!empty($interaction->toMember) ? $interaction->toMember->name . '('. $interaction->toMember->unit->short . ')' : 'anyone');
+
+    $trail->parent('admin.home');
+    $trail->push('掛け合い管理', route('admin.interactions.index'));
+    $trail->push($detail, route('admin.interactions.view', ['interaction_id' => $interaction->id]));
+    $trail->push('掛け合い編集', route('admin.interactions.update', ['interaction_id' => $interaction->id]));
+});

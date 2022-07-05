@@ -156,44 +156,46 @@
                             </li>
                         @endif
 
+                        @if ( Request::routeIs('admin.interactions.*') )
 
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" data-bs-toggle="collapse"
+                                   data-bs-target="#interactions-collapse"
+                                   aria-expanded="true" aria-controls="interactions-collapse">
+                                    <i class="fa-regular fa-comments"></i>
+                                    <span class="menu-title">掛け合い管理</span>
+                                    <i class="menu-arrow fa-lg fa-pull-right"></i>
+                                </a>
+                                <div class="collapse show" id="interactions-collapse">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.interactions.index') }}">
+                                                <i class="fa-solid fa-list"></i> 掛け合い一覧
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#interactions-collapse"
+                                   aria-expanded="false" aria-controls="interactions-collapse">
+                                    <i class="fa-regular fa-comments"></i>
+                                    <span class="menu-title">掛け合い管理</span>
+                                    <i class="menu-arrow fa-lg fa-pull-right"></i>
+                                </a>
+                                <div class="collapse" id="interactions-collapse">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.interactions.index') }}">
+                                                <i class="fa-solid fa-list"></i> 掛け合い一覧
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        @endif
 
-                        {{--                        <li class="nav-item">--}}
-                        {{--                            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#icon-collapse"--}}
-                        {{--                               aria-expanded="false" aria-controls="icon-collapse">--}}
-                        {{--                                <i class="fa-solid fa-dashboard"></i>--}}
-                        {{--                                <span class="menu-title">Dashboard3</span>--}}
-                        {{--                                <i class="menu-arrow fa-lg fa-pull-right"></i>--}}
-                        {{--                            </a>--}}
-                        {{--                            <div class="collapse" id="icon-collapse">--}}
-                        {{--                                <ul class="nav flex-column sub-menu">--}}
-                        {{--                                    <li class="nav-item">--}}
-                        {{--                                        <a class="nav-link" href="pages/icons/mdi.html">--}}
-                        {{--                                            Mdi icons--}}
-                        {{--                                        </a>--}}
-                        {{--                                    </li>--}}
-                        {{--                                </ul>--}}
-                        {{--                            </div>--}}
-                        {{--                        </li>--}}
-                        {{--                        --}}
-                        {{--                        <li class="nav-item">--}}
-                        {{--                            <a class="nav-link active" href="#" data-bs-toggle="collapse"--}}
-                        {{--                               data-bs-target="#icon2-collapse"--}}
-                        {{--                               aria-expanded="true" aria-controls="icon2-collapse">--}}
-                        {{--                                <i class="fa-solid fa-dashboard"></i>--}}
-                        {{--                                <span class="menu-title">Dashboard5</span>--}}
-                        {{--                                <i class="menu-arrow fa-lg fa-pull-right"></i>--}}
-                        {{--                            </a>--}}
-                        {{--                            <div class="collapse show" id="icon2-collapse">--}}
-                        {{--                                <ul class="nav flex-column sub-menu">--}}
-                        {{--                                    <li class="nav-item">--}}
-                        {{--                                        <a class="nav-link" href="#">--}}
-                        {{--                                            Mdi icons--}}
-                        {{--                                        </a>--}}
-                        {{--                                    </li>--}}
-                        {{--                                </ul>--}}
-                        {{--                            </div>--}}
-                        {{--                        </li>--}}
                     @endcan
                 </ul>
             </div>
@@ -209,9 +211,14 @@
             </div>
 
             <div class="content-wrapper">
-                @if ( !Request::routeIs('admin.home') )
-                    {{ Breadcrumbs::render(Route::currentRouteName(), $breadcrumbs ?? '') }}
-                @endif
+                <div class="page-title mb-3">
+                    @hasSection('pageTitle')
+                        <h2 class="h5">@yield('pageTitle')</h2>
+                    @endif
+                    @if ( !Request::routeIs('admin.home') )
+                        {{ Breadcrumbs::render(Route::currentRouteName(), $breadcrumbs ?? '') }}
+                    @endif
+                </div>
 
                 @yield('content')
             </div>

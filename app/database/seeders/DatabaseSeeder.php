@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UnitsSeeder::class);
         $this->call(MembersSeeder::class);
         $this->call(IconsSeeder::class);
+        $this->call(InteractionsSeeder::class);
     }
 }

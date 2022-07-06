@@ -131,6 +131,11 @@ class InteractionsService
             }
         }
 
+        // 変わらないなら元のファイル名
+        if (!empty($entity->file) && empty($request->file_path)) {
+            $request->file_path = $entity->file;
+        }
+
         return $this->interactionsRepository->update($entity, $request);
     }
 

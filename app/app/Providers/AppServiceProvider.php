@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\ChangeLogsService;
 use App\Services\IconsService;
 use App\Services\InteractionsService;
 use App\Services\MembersService;
@@ -22,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('MembersService', MembersService::class);
         $this->app->bind('IconsService', IconsService::class);
         $this->app->bind('InteractionsService', InteractionsService::class);
+        $this->app->bind('ChangeLogsService', ChangeLogsService::class);
     }
 
     /**

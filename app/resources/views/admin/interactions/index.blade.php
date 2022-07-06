@@ -123,7 +123,7 @@
                         <th>音</th>
                         <th>応</th>
                         <th>答</th>
-                        <th style="width: 200px"></th>
+                        <th style="width: 120px"></th>
                     </tr>
                     </thead>
                     <tbody>

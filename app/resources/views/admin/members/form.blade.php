@@ -99,7 +99,7 @@
     <div class="form-group">
         <label for="bg_color" class="col-form-label text-md-end">メンバーカラーコード</label>
         <input id="bg_color" type="color"
-               class="form-control form-control-lg @error('bg_color') is-invalid @enderror" name="bg_color"
+               class="form-control form-control-color @error('bg_color') is-invalid @enderror" name="bg_color"
                value="{{ old('bg_color', $member->bg_color ?? '') }}" required>
 
         @error('bg_color')
@@ -114,7 +114,7 @@
     <div class="form-group">
         <label for="color" class="col-form-label text-md-end">テキストカラーコード</label>
         <input id="color" type="color"
-               class="form-control form-control-lg @error('color') is-invalid @enderror" name="color"
+               class="form-control form-control-color @error('color') is-invalid @enderror" name="color"
                value="{{ old('color', $member->color ?? '') }}" required>
 
         @error('color')

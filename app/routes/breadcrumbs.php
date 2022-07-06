@@ -133,9 +133,9 @@ Breadcrumbs::for('admin.interactions.view', function (BreadcrumbTrail $trail, ar
     /** @var \App\Models\Interaction $interaction */
     $interaction = $breadcrumbs['interaction'];
 
-    $detail = (!empty($interaction->fromMember) ? $interaction->fromMember->name . '('. $interaction->fromMember->unit->short . ')' : 'anyone')
-    . ' + '
-    . (!empty($interaction->toMember) ? $interaction->toMember->name . '('. $interaction->toMember->unit->short . ')' : 'anyone');
+    $detail = (!empty($interaction->fromMember) ? $interaction->fromMember->display_short : 'anyone')
+        . ' + '
+        . (!empty($interaction->toMember) ? $interaction->toMember->display_short : 'anyone');
 
     $trail->parent('admin.home');
     $trail->push('掛け合い管理', route('admin.interactions.index'));
@@ -145,12 +145,49 @@ Breadcrumbs::for('admin.interactions.view', function (BreadcrumbTrail $trail, ar
 Breadcrumbs::for('admin.interactions.update', function (BreadcrumbTrail $trail, array $breadcrumbs) {
     /** @var \App\Models\Interaction $interaction */
     $interaction = $breadcrumbs['interaction'];
-    $detail = (!empty($interaction->fromMember) ? $interaction->fromMember->name . '('. $interaction->fromMember->unit->short . ')' : 'anyone')
+    $detail = (!empty($interaction->fromMember) ? $interaction->fromMember->display_short : 'anyone')
         . ' + '
-        . (!empty($interaction->toMember) ? $interaction->toMember->name . '('. $interaction->toMember->unit->short . ')' : 'anyone');
+        . (!empty($interaction->toMember) ? $interaction->toMember->display_short : 'anyone');
 
     $trail->parent('admin.home');
     $trail->push('掛け合い管理', route('admin.interactions.index'));
     $trail->push($detail, route('admin.interactions.view', ['interaction_id' => $interaction->id]));
     $trail->push('掛け合い編集', route('admin.interactions.update', ['interaction_id' => $interaction->id]));
+});
+
+Breadcrumbs::for('admin.interactions.logs.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('掛け合い管理', route('admin.interactions.index'));
+    $trail->push('更新履歴', route('admin.interactions.logs.index'));
+});
+
+Breadcrumbs::for('admin.interactions.logs.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('掛け合い管理', route('admin.interactions.index'));
+    $trail->push('更新履歴', route('admin.interactions.logs.index'));
+    $trail->push('更新履歴作成', route('admin.interactions.logs.create'));
+});
+
+Breadcrumbs::for('admin.interactions.logs.view', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\ChangeLog $changeLog */
+    $changeLog = $breadcrumbs['changeLog'];
+
+    $trail->parent('admin.home');
+    $trail->push('掛け合い管理', route('admin.interactions.index'));
+    $trail->push('更新履歴', route('admin.interactions.logs.index'));
+    $trail->push(
+        '更新履歴詳細: ' . $changeLog->released_at->format('Y/m/d'),
+        route('admin.interactions.logs.view', ['change_log_id' => $changeLog->id])
+    );
+});
+
+Breadcrumbs::for('admin.interactions.logs.update', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\ChangeLog $changeLog */
+    $changeLog = $breadcrumbs['changeLog'];
+
+    $trail->parent('admin.home');
+    $trail->push('掛け合い管理', route('admin.interactions.index'));
+    $trail->push('更新履歴', route('admin.interactions.logs.index'));
+    $trail->push($changeLog->released_at->format('Y/m/d'), route('admin.interactions.logs.view', ['change_log_id' => $changeLog->id]));
+    $trail->push('更新履歴編集', route('admin.interactions.logs.update', ['change_log_id' => $changeLog->id]));
 });

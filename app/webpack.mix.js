@@ -20,6 +20,7 @@ mix.autoload({
     .js('resources/js/character-sort.js', 'public/js')
     .js('resources/js/event-calc.js', 'public/js')
     .js('resources/js/interactions.js', 'public/js')
+    .js('resources/js/flatpickrs.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
     .sourceMaps();

@@ -173,6 +173,11 @@
                                                 <i class="fa-solid fa-list"></i> 掛け合い一覧
                                             </a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.interactions.logs.index') }}">
+                                                <i class="fa-solid fa-rss"></i> 更新履歴
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
@@ -189,6 +194,11 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('admin.interactions.index') }}">
                                                 <i class="fa-solid fa-list"></i> 掛け合い一覧
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.interactions.logs.index') }}">
+                                                <i class="fa-solid fa-rss"></i> 更新履歴
                                             </a>
                                         </li>
                                     </ul>

@@ -21,11 +21,11 @@
             <div class="col-md-10">
 
                 <div class="my-2">
-                    <button class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#change-logs-modal">
+                    <button class="btn btn-sm btn-outline-info rounded-pill" data-bs-toggle="modal" data-bs-target="#change-logs-modal">
                         <i class="fa-solid fa-clock-rotate-left"></i> 更新履歴
                     </button>
 
-                    <button class="btn btn-sm btn-outline-info" type="button" data-bs-toggle="collapse"
+                    <button class="btn btn-sm btn-outline-info rounded-pill" type="button" data-bs-toggle="collapse"
                             data-bs-target="#search-collapse" aria-expanded="false" aria-controls="search-collapse">
                         <i class="fa-solid fa-magnifying-glass"></i> 絞り込み
                     </button>

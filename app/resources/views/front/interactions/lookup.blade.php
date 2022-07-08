@@ -7,6 +7,13 @@
 @endphp
 
 <div class="row">
+    @if(!empty($interaction->note))
+        <span class="badge rounded-pill bg-success mb-2">
+            <i class="fa-regular fa-circle-question"></i>
+            {{ $interaction->note }}
+        </span>
+    @endif
+
     <div class="balloon left">
         @if(empty($interaction->fromMember))
             <div class="balloon-icon text-center">

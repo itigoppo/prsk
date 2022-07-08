@@ -60,7 +60,7 @@
                     @if (Route::has('front.event-calc'))
                         @if ( Request::routeIs('front.event-calc') )
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">イベントボーナスポイント計算機 <i
+                                <a class="nav-link active" aria-current="page" href="{{ route('front.event-calc') }}">イベントボーナスポイント計算機 <i
                                         class="fa-solid fa-circle-chevron-left"></i></a>
                             </li>
                         @else
@@ -73,7 +73,7 @@
                     @if (Route::has('front.character-sort'))
                         @if ( Request::routeIs('front.character-sort') )
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">キャラソート <i
+                                <a class="nav-link active" aria-current="page" href="{{ route('front.character-sort') }}">キャラソート <i
                                         class="fa-solid fa-circle-chevron-left"></i></a>
                             </li>
                         @else
@@ -83,15 +83,15 @@
                         @endif
                     @endif
 
-                    @if (Route::has('front.cutins'))
-                        @if ( Request::routeIs('front.cutins') )
+                    @if (Route::has('front.interactions.index'))
+                        @if ( Request::routeIs('front.interactions.*') )
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">掛け合い一覧 <i
+                                <a class="nav-link active" aria-current="page" href="{{ route('front.interactions.index') }}">掛け合い <i
                                         class="fa-solid fa-circle-chevron-left"></i></a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('front.cutins') }}">掛け合い一覧</a>
+                                <a class="nav-link" href="{{ route('front.interactions.index') }}">掛け合い</a>
                             </li>
                         @endif
                     @endif

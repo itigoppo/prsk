@@ -22283,6 +22283,94 @@ readers do not read off random characters that represent icons */
   content: "\f63f";
 }
 
+.icheck-primary > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-primary > input:first-child:not(:checked):not(:disabled):hover + input[type=hidden] + label::before {
+  border-color: #78C2AD;
+}
+
+.icheck-primary > input:first-child:checked + label::before,
+.icheck-primary > input:first-child:checked + input[type=hidden] + label::before {
+  background-color: #78C2AD;
+  border-color: #78C2AD;
+}
+
+.icheck-secondary > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-secondary > input:first-child:not(:checked):not(:disabled):hover + input[type=hidden] + label::before {
+  border-color: #F3969A;
+}
+
+.icheck-secondary > input:first-child:checked + label::before,
+.icheck-secondary > input:first-child:checked + input[type=hidden] + label::before {
+  background-color: #F3969A;
+  border-color: #F3969A;
+}
+
+.icheck-success > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-success > input:first-child:not(:checked):not(:disabled):hover + input[type=hidden] + label::before {
+  border-color: #56CC9D;
+}
+
+.icheck-success > input:first-child:checked + label::before,
+.icheck-success > input:first-child:checked + input[type=hidden] + label::before {
+  background-color: #56CC9D;
+  border-color: #56CC9D;
+}
+
+.icheck-danger > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-danger > input:first-child:not(:checked):not(:disabled):hover + input[type=hidden] + label::before {
+  border-color: #FF7851;
+}
+
+.icheck-danger > input:first-child:checked + label::before,
+.icheck-danger > input:first-child:checked + input[type=hidden] + label::before {
+  background-color: #FF7851;
+  border-color: #FF7851;
+}
+
+.icheck-warning > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-warning > input:first-child:not(:checked):not(:disabled):hover + input[type=hidden] + label::before {
+  border-color: #FFCE67;
+}
+
+.icheck-warning > input:first-child:checked + label::before,
+.icheck-warning > input:first-child:checked + input[type=hidden] + label::before {
+  background-color: #FFCE67;
+  border-color: #FFCE67;
+}
+
+.icheck-info > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-info > input:first-child:not(:checked):not(:disabled):hover + input[type=hidden] + label::before {
+  border-color: #6CC3D5;
+}
+
+.icheck-info > input:first-child:checked + label::before,
+.icheck-info > input:first-child:checked + input[type=hidden] + label::before {
+  background-color: #6CC3D5;
+  border-color: #6CC3D5;
+}
+
+.icheck-light > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-light > input:first-child:not(:checked):not(:disabled):hover + input[type=hidden] + label::before {
+  border-color: #f8f9fa;
+}
+
+.icheck-light > input:first-child:checked + label::before,
+.icheck-light > input:first-child:checked + input[type=hidden] + label::before {
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+
+.icheck-dark > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-dark > input:first-child:not(:checked):not(:disabled):hover + input[type=hidden] + label::before {
+  border-color: #343a40;
+}
+
+.icheck-dark > input:first-child:checked + label::before,
+.icheck-dark > input:first-child:checked + input[type=hidden] + label::before {
+  background-color: #343a40;
+  border-color: #343a40;
+}
+
 .select2-container--bootstrap-5 {
   display: block;
 }

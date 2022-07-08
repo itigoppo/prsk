@@ -160,7 +160,6 @@ class InteractionsController extends Controller
         return redirect()->route('admin.interactions.index')->with($messageKey, $flashMessage);
     }
 
-
     /**
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\StreamedResponse

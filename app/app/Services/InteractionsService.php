@@ -56,6 +56,25 @@ class InteractionsService
                 'column' => 'interactions.file',
             ];
         }
+        if (!empty($query['wdh'])) {
+            $search[] = [
+                'type' => 'where',
+                'closure' => [
+                    [
+                        'type' => 'orWhere',
+                        'column' => 'interactions.from_line',
+                        'operator' => 'like',
+                        'value' => '%わんだほ%',
+                    ],
+                    [
+                        'type' => 'orWhere',
+                        'column' => 'interactions.to_line',
+                        'operator' => 'like',
+                        'value' => '%わんだほ%',
+                    ],
+                ],
+            ];
+        }
 
         return $this->interactionsRepository->findPaginate($search, $order, $limit);
     }
@@ -107,7 +126,7 @@ class InteractionsService
         $entity = $this->interactionsRepository->findOne($id);
 
         if (!empty($request->is_file_delete) && Storage::disk('local')->exists($entity->file)) {
-            if (!Storage::disk('local')->delete($entity->file)){
+            if (!Storage::disk('local')->delete($entity->file)) {
                 return false;
             }
             $request->file_path = null;
@@ -122,7 +141,7 @@ class InteractionsService
             $request->file_path = $path;
 
             if (Storage::disk('local')->exists($entity->file)) {
-                if (!Storage::disk('local')->delete($entity->file)){
+                if (!Storage::disk('local')->delete($entity->file)) {
                     // 元ファイルの削除に失敗したなら新しいファイルも入れない
                     Storage::disk('local')->delete($path);
 

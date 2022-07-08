@@ -31,4 +31,27 @@ class MediasController extends Controller
 
         return Storage::disk('local')->download($path);
     }
+
+    /**
+     * @param string $uuid
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function interaction(string $uuid, Request $request): \Symfony\Component\HttpFoundation\StreamedResponse
+    {
+        if ((!$request->exists('token') || !$request->exists('expiration'))) {
+            abort(404);
+        }
+
+        /** @var \App\Services\InteractionsService $interactionsService */
+        $interactionsService = app()->make('InteractionsService');
+        $interaction = $interactionsService->findOne($uuid);
+
+        if (!Storage::disk('local')->exists($interaction->file)) {
+            abort(404);
+        }
+
+        return Storage::disk('local')->download($interaction->file);
+    }
 }

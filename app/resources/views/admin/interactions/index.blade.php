@@ -81,17 +81,17 @@
 
                         <div class="row mb-2">
                             <div>
-                                <div class="radio icheck-success icheck-inline">
+                                <div class="radio icheck-primary icheck-inline">
                                     <input type="radio" id="has-file-0" name="hasf"
                                            value="0"{{ empty($search['hasf']) ? ' checked' : '' }}>
                                     <label for="has-file-0">ファイルチェックなし</label>
                                 </div>
-                                <div class="radio icheck-success icheck-inline">
+                                <div class="radio icheck-primary icheck-inline">
                                     <input type="radio" id="has-file-1" name="hasf"
                                            value="1"{{ !empty($search['hasf']) && $search['hasf'] === '1' ? ' checked' : '' }}>
                                     <label for="has-file-1">ファイルあり</label>
                                 </div>
-                                <div class="radio icheck-success icheck-inline">
+                                <div class="radio icheck-primary icheck-inline">
                                     <input type="radio" id="has-file-2" name="hasf"
                                            value="2"{{ !empty($search['hasf']) && $search['hasf'] === '2' ? ' checked' : '' }}>
                                     <label for="has-file-2">ファイルなし</label>

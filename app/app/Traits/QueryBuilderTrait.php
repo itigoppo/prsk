@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
@@ -19,7 +18,24 @@ trait QueryBuilderTrait
             foreach ($conditions as $condition) {
                 switch ($condition['type']) {
                     case 'where':
-                        $query->where($condition['column'], $condition['operator'], $condition['value']);
+                        if (empty($condition['closure'])) {
+                            $query->where($condition['column'], $condition['operator'], $condition['value']);
+                        } else {
+                            $closure = $condition['closure'];
+                            $query->where(function ($q) use ($closure) {
+                                $q = $this->addConditions($q, $closure);
+                            });
+                        }
+                        break;
+                    case 'orWhere':
+                        if (empty($condition['closure'])) {
+                            $query->orWhere($condition['column'], $condition['operator'], $condition['value']);
+                        } else {
+                            $closure = $condition['closure'];
+                            $query->where(function ($q) use ($closure) {
+                                $q = $this->addConditions($q, $closure);
+                            });
+                        }
                         break;
                     case 'whereIn':
                         $query->whereIn($condition['column'], $condition['values']);

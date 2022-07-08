@@ -5,6 +5,9 @@
      */
 @endphp
 
+@section('head')
+    <script src="{{ asset('js/interactions.js') }}"></script>
+@endsection
 
 <div class="row mb-3">
     <div class="form-group">
@@ -93,13 +96,9 @@
                                 src="{{ route('admin.interactions.display', ['interaction_id' => $interaction->id]) }}"
                                 type="audio/mpeg">
                         </audio>
-                        <script>
-                            const audio = document.getElementById("audio-file");
-                            audio.volume = 0.2;
-                        </script>
                     </div>
                     <div class="col">
-                        <div class="icheck-turquoise">
+                        <div class="icheck-primary">
                             <input id="is_file_delete"
                                    class="form-check-input @error('is_file_delete') is-invalid @enderror"
                                    type="checkbox" name="is_file_delete"

@@ -68,8 +68,8 @@
                     </p>
                 @endif
 
-                @if (Route::has('front.cutins'))
-                    <h3><a href="{{ route('front.cutins') }}">掛け合い一覧</a></h3>
+                @if (Route::has('front.interactions.index'))
+                    <h3><a href="{{ route('front.interactions.index') }}">掛け合い</a></h3>
                     <p>
                         わんわんーーーわんだほーーーい☆
                     </p>

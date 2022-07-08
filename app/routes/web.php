@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\InteractionChangeLogsController;
 use App\Http\Controllers\Admin\InteractionsController;
 use App\Http\Controllers\Admin\MembersController;
 use App\Http\Controllers\Admin\UnitsController;
+use App\Http\Controllers\Front\InteractionsController as FrontInteractionsController;
 use App\Http\Controllers\MediasController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -103,8 +104,8 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
             Route::post('upload', [IconsController::class, 'upload'])
                 ->name('upload');
 
-            Route::get('show', [IconsController::class, 'show'])
-                ->name('show');
+            Route::get('lookup', [IconsController::class, 'lookup'])
+                ->name('lookup');
 
             Route::group(['prefix' => '{icon_id}', 'where' => ['icon_id' => '[0-9]+']], function () {
                 Route::get('display', [IconsController::class, 'display'])
@@ -177,12 +178,14 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
     });
 });
 
-
 Route::group(['middleware' => 'protect.media', 'prefix' => 'medias', 'as' => 'medias.'], function () {
     Route::get('icons/{icon_id}', [MediasController::class, 'icon'])
         ->name('icons')
         ->where('icon_id', '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
 
+    Route::get('interactions/{interaction_id}', [MediasController::class, 'interaction'])
+        ->name('interactions')
+        ->where('interaction_id', '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
 });
 
 Route::group(['as' => 'front.'], function () {
@@ -193,4 +196,21 @@ Route::group(['as' => 'front.'], function () {
     Route::get('character-sort', function () {
         return view('front.character-sort');
     })->name('character-sort');
+
+    Route::group(['prefix' => 'interactions', 'as' => 'interactions.'], function () {
+        Route::get('/', [FrontInteractionsController::class, 'index'])
+            ->name('index');
+
+
+        Route::group([
+            'prefix' => '{interaction_id}',
+            'where' => ['interaction_id' => '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'],
+        ], function () {
+            Route::get('view', [FrontInteractionsController::class, 'view'])
+                ->name('view');
+
+            Route::get('lookup', [FrontInteractionsController::class, 'lookup'])
+                ->name('lookup');
+        });
+    });
 });

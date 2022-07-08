@@ -27,13 +27,13 @@ class IconsController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function show()
+    public function lookup()
     {
         /** @var \App\Services\IconsService $iconsService */
         $iconsService = app()->make('IconsService');
         $icons = $iconsService->findPaginate([], ['id' => 'desc'])->withPath(route('admin.icons.index'));
 
-        return view('admin.icons.show', [
+        return view('admin.icons.lookup', [
             'icons' => $icons,
         ]);
     }

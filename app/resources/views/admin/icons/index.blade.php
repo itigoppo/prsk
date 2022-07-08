@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('admin.icons.upload') }}" class="dropzone" id="icon-dropzone"
-                          data-show-url="{{ route('admin.icons.show') }}">
+                          data-show-url="{{ route('admin.icons.lookup') }}">
                         @csrf
                     </form>
                 </div>
@@ -30,7 +30,7 @@
         </div>
 
         <div class="col-md-10 my-3" id="icon-show">
-            @include('admin.icons.show')
+            @include('admin.icons.lookup')
         </div>
 
     </div>

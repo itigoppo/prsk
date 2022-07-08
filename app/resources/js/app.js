@@ -24,7 +24,7 @@ $(function () {
 
     // 削除ボタン
     $('.delete-button').on('click', function () {
-        if (window.confirm('削除しますか？') ) {
+        if (window.confirm('削除しますか？')) {
             $('#' + $(this).data('deleteForm')).submit();
         }
 

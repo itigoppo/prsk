@@ -1,5 +1,5 @@
 
-const ajax = (url, method, headers, data) => {
+export const ajax = (url, method, headers, data) => {
     let def = $.Deferred();
 
     $.ajax({
@@ -15,6 +15,7 @@ const ajax = (url, method, headers, data) => {
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus)
             console.log(jqXHR)
+            console.log(errorThrown)
         },
     })
 
@@ -23,21 +24,6 @@ const ajax = (url, method, headers, data) => {
 
 const getApiSetting = () => {
     return ajax('/api/setting', 'POST', {}, {});
-
-    // let def = $.Deferred();
-    // $.ajax({
-    //     url: '/api/setting',
-    //     type: 'POST',
-    //     contentType: 'application/json',
-    //     dataType: 'json',
-    //     success: function (data, textStatus, jqXHR) {
-    //         def.resolve(data);
-    //     },
-    //     error: function (jqXHR, textStatus, errorThrown) {
-    //     },
-    // })
-    //
-    // return def.promise();
 }
 
 const createApiToken = () => {

@@ -46,6 +46,16 @@ class ChangeLogsService
      */
     public function findAll(array $search = [], array $order = [])
     {
+        $search = [];
+        if (!empty($query['tp'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'type',
+                'operator' => '=',
+                'value' => $query['tp'],
+            ];
+        }
+
         return $this->changeLogsRepository->findAll($search, $order);
     }
 

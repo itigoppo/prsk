@@ -70,4 +70,18 @@ class Interaction extends Model
         return $this->belongsTo(Member::class, 'to_member_id');
     }
 
+    /**
+     * @param string $path
+     * @param int $expire
+     * @return string
+     */
+    public static function url(string $path, int $expire = 5): string
+    {
+        $expiration = now()->addSeconds($expire)->format('U');
+        $token = encrypt($expiration);
+
+        return url($path) .
+            '?expiration='. $expiration .
+            '&token='. $token;
+    }
 }

@@ -11,6 +11,10 @@
 . (!empty($interaction->toMember) ? $interaction->toMember->display_name : 'anyone'))
 @section('pageTitle', '掛け合い詳細')
 
+@section('head')
+    <script src="{{ asset('js/interactions.js') }}"></script>
+@endsection
+
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -56,10 +60,6 @@
                                         src="{{ route('admin.interactions.display', ['interaction_id' => $interaction->id]) }}"
                                         type="audio/mpeg">
                                 </audio>
-                                <script>
-                                    const audio = document.getElementById("audio-file");
-                                    audio.volume = 0.2;
-                                </script>
                             @endif
                         </dd>
                     </dl>

@@ -1,0 +1,88 @@
+
+.icheck-primary > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-primary > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+  border-color: $primary;
+}
+
+.icheck-primary > input:first-child:checked + label::before,
+.icheck-primary > input:first-child:checked + input[type="hidden"] + label::before {
+  background-color: $primary;
+  border-color: $primary;
+}
+
+.icheck-secondary > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-secondary > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+  border-color: $secondary;
+}
+
+.icheck-secondary > input:first-child:checked + label::before,
+.icheck-secondary > input:first-child:checked + input[type="hidden"] + label::before {
+  background-color: $secondary;
+  border-color: $secondary;
+}
+
+.icheck-success > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-success > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+  border-color: $success;
+}
+
+.icheck-success > input:first-child:checked + label::before,
+.icheck-success > input:first-child:checked + input[type="hidden"] + label::before {
+  background-color: $success;
+  border-color: $success;
+}
+
+.icheck-danger > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-danger > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+  border-color: $danger;
+}
+
+.icheck-danger > input:first-child:checked + label::before,
+.icheck-danger > input:first-child:checked + input[type="hidden"] + label::before {
+  background-color: $danger;
+  border-color: $danger;
+}
+
+.icheck-warning > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-warning > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+  border-color: $warning;
+}
+
+.icheck-warning > input:first-child:checked + label::before,
+.icheck-warning > input:first-child:checked + input[type="hidden"] + label::before {
+  background-color: $warning;
+  border-color: $warning;
+}
+
+.icheck-info > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-info > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+  border-color: $info;
+}
+
+.icheck-info > input:first-child:checked + label::before,
+.icheck-info > input:first-child:checked + input[type="hidden"] + label::before {
+  background-color: $info;
+  border-color: $info;
+}
+
+.icheck-light > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-light > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+  border-color: $light;
+}
+
+.icheck-light > input:first-child:checked + label::before,
+.icheck-light > input:first-child:checked + input[type="hidden"] + label::before {
+  background-color: $light;
+  border-color: $light;
+}
+
+.icheck-dark > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-dark > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+  border-color: $dark;
+}
+
+.icheck-dark > input:first-child:checked + label::before,
+.icheck-dark > input:first-child:checked + input[type="hidden"] + label::before {
+  background-color: $dark;
+  border-color: $dark;
+}

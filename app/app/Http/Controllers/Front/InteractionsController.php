@@ -21,7 +21,7 @@ class InteractionsController extends Controller
         /** @var \App\Services\ChangeLogsService $changeLogsService */
         $changeLogsService = app()->make('ChangeLogsService');
 
-        $interactions = $interactionsService->findPaginate($request->query(), []);
+        $interactions = $interactionsService->findPaginate($request->query(), [])->withQueryString();
         $units = $unitsService->findAll();
         $logRequest = [
             'tp' => ChangeLogType::INTERACTION,

@@ -21,7 +21,7 @@ class InteractionsController extends Controller
         /** @var \App\Services\UnitsService $unitsService */
         $unitsService = app()->make('UnitsService');
 
-        $interactions = $interactionsService->findPaginate($request->query(), [], 50);
+        $interactions = $interactionsService->findPaginate($request->query(), [], 50)->withQueryString();
         $units = $unitsService->findAll();
 
         return view('admin.interactions.index', [

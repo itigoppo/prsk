@@ -75,6 +75,12 @@ class InteractionsService
                 ],
             ];
         }
+        if (!empty($query['bonds'])) {
+            $search[] = [
+                'type' => 'whereNotNull',
+                'column' => 'interactions.note',
+            ];
+        }
 
         return $this->interactionsRepository->findPaginate($search, $order, $limit);
     }

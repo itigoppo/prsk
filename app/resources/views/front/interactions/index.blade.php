@@ -21,7 +21,8 @@
             <div class="col-md-10">
 
                 <div class="my-2">
-                    <button class="btn btn-sm btn-outline-info rounded-pill" data-bs-toggle="modal" data-bs-target="#change-logs-modal">
+                    <button class="btn btn-sm btn-outline-info rounded-pill" data-bs-toggle="modal"
+                            data-bs-target="#change-logs-modal">
                         <i class="fa-solid fa-clock-rotate-left"></i> 更新履歴
                     </button>
 
@@ -37,12 +38,22 @@
 
                             <form method="GET" action="{{ route('front.interactions.index') }}">
                                 <div class="row mb-2">
-                                    <div class="icheck-primary">
-                                        <input id="wonder" class="form-check-input" type="checkbox" name="wdh"
-                                               value="1"{{ !empty($search['wdh']) ? ' checked' : '' }} />
-                                        <label for="wonder"><i
-                                                class="fa-solid fa-child-reaching fa-bounce text-warning"></i> わんだほーい <i
-                                                class="fa-solid fa-splotch fa-flip fa-2xs text-warning"></i></label>
+                                    <div>
+                                        <div class="icheck-primary icheck-inline">
+                                            <input id="wonder" class="form-check-input" type="checkbox" name="wdh"
+                                                   value="1"{{ !empty($search['wdh']) ? ' checked' : '' }} />
+                                            <label for="wonder"><i
+                                                    class="fa-solid fa-child-reaching fa-bounce text-warning"></i>
+                                                わんだほーい <i
+                                                    class="fa-solid fa-splotch fa-flip fa-2xs text-warning"></i></label>
+                                        </div>
+
+                                        <div class="icheck-primary icheck-inline">
+                                            <input id="bonds" class="form-check-input" type="checkbox" name="bonds"
+                                                   value="1"{{ !empty($search['bonds']) ? ' checked' : '' }} />
+                                            <label for="bonds"><i class="fa-regular fa-heart fa-beat-fade fa-2xs text-danger"></i>
+                                                キズナ掛け合い <i class="fa-regular fa-heart fa-beat-fade fa-2xs text-danger"></i></label>
+                                        </div>
                                     </div>
                                 </div>
 

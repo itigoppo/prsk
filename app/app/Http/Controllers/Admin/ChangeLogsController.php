@@ -6,26 +6,42 @@ use App\Enums\ChangeLogType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangeLogs\ChangeLogCreate;
 use App\Http\Requests\ChangeLogs\ChangeLogUpdate;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
-class InteractionChangeLogsController extends Controller
+class ChangeLogsController extends Controller
 {
+    /**
+     * @return ChangeLogType|\BenSampo\Enum\Enum
+     */
+    private function getType()
+    {
+        $route = Route::currentRouteName();
+        $type = Str::between($route, 'admin.', '.logs');
+
+        return ChangeLogType::fromValue(Str::singular($type));
+    }
+
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function index()
     {
+        $changeLogType = $this->getType();
+
         /** @var \App\Services\ChangeLogsService $changeLogsService */
         $changeLogsService = app()->make('ChangeLogsService');
 
         $request = [
-            'tp' => ChangeLogType::INTERACTION,
+            'tp' => $changeLogType->value,
         ];
         $changeLogs = $changeLogsService->findPaginate($request, []);
 
         return view('admin.change-logs.index', [
             'changeLogs' => $changeLogs,
-            'changeLogType' => ChangeLogType::INTERACTION(),
+            'changeLogType' => $changeLogType,
+            'route' => 'admin.' . Str::plural($changeLogType->value) . '.logs.',
         ]);
     }
 
@@ -35,8 +51,11 @@ class InteractionChangeLogsController extends Controller
      */
     public function showCreateForm()
     {
+        $changeLogType = $this->getType();
+
         return view('admin.change-logs.create', [
-            'changeLogType' => ChangeLogType::INTERACTION(),
+            'changeLogType' => $changeLogType,
+            'actionRoute' => 'admin.' . Str::plural($changeLogType->value) . '.logs.create',
         ]);
     }
 
@@ -47,6 +66,8 @@ class InteractionChangeLogsController extends Controller
      */
     public function create(ChangeLogCreate $request): \Illuminate\Http\RedirectResponse
     {
+        $changeLogType = $this->getType();
+
         /** @var \App\Services\ChangeLogsService $changeLogsService */
         $changeLogsService = app()->make('ChangeLogsService');
 
@@ -60,7 +81,7 @@ class InteractionChangeLogsController extends Controller
             $flashMessage = __('crud.create_failed');
         }
 
-        return redirect()->route('admin.interactions.logs.index')->with($messageKey, $flashMessage);
+        return redirect()->route('admin.' . Str::plural($changeLogType->value) . '.logs.index')->with($messageKey, $flashMessage);
     }
 
     /**
@@ -70,6 +91,8 @@ class InteractionChangeLogsController extends Controller
      */
     public function view(int $id)
     {
+        $changeLogType = $this->getType();
+
         /** @var \App\Services\ChangeLogsService $changeLogsService */
         $changeLogsService = app()->make('ChangeLogsService');
 
@@ -77,7 +100,8 @@ class InteractionChangeLogsController extends Controller
 
         return view('admin.change-logs.view', [
             'changeLog' => $changeLog,
-            'changeLogType' => ChangeLogType::INTERACTION(),
+            'changeLogType' => $changeLogType,
+            'route' => 'admin.' . Str::plural($changeLogType->value) . '.logs.',
             'breadcrumbs' => [
                 'changeLog' => $changeLog,
             ],
@@ -91,6 +115,8 @@ class InteractionChangeLogsController extends Controller
      */
     public function showUpdateForm(int $id)
     {
+        $changeLogType = $this->getType();
+
         /** @var \App\Services\ChangeLogsService $changeLogsService */
         $changeLogsService = app()->make('ChangeLogsService');
 
@@ -98,7 +124,8 @@ class InteractionChangeLogsController extends Controller
 
         return view('admin.change-logs.update', [
             'changeLog' => $changeLog,
-            'changeLogType' => ChangeLogType::INTERACTION(),
+            'changeLogType' => $changeLogType,
+            'actionRoute' => 'admin.' . Str::plural($changeLogType->value) . '.logs.update',
             'breadcrumbs' => [
                 'changeLog' => $changeLog,
             ],
@@ -113,6 +140,8 @@ class InteractionChangeLogsController extends Controller
      */
     public function update(int $id, ChangeLogUpdate $request): \Illuminate\Http\RedirectResponse
     {
+        $changeLogType = $this->getType();
+
         /** @var \App\Services\ChangeLogsService $changeLogsService */
         $changeLogsService = app()->make('ChangeLogsService');
 
@@ -126,7 +155,7 @@ class InteractionChangeLogsController extends Controller
             $flashMessage = __('crud.update_failed');
         }
 
-        return redirect()->route('admin.interactions.logs.view', ['change_log_id' => $id])->with($messageKey, $flashMessage);
+        return redirect()->route('admin.' . Str::plural($changeLogType->value) . '.logs.view', ['change_log_id' => $id])->with($messageKey, $flashMessage);
     }
 
     /**
@@ -136,6 +165,8 @@ class InteractionChangeLogsController extends Controller
      */
     public function delete(int $id): \Illuminate\Http\RedirectResponse
     {
+        $changeLogType = $this->getType();
+
         /** @var \App\Services\ChangeLogsService $changeLogsService */
         $changeLogsService = app()->make('ChangeLogsService');
 
@@ -149,6 +180,6 @@ class InteractionChangeLogsController extends Controller
             $flashMessage = __('crud.delete_failed');
         }
 
-        return redirect()->route('admin.interactions.logs.index')->with($messageKey, $flashMessage);
+        return redirect()->route('admin.' . Str::plural($changeLogType->value) . '.logs.index')->with($messageKey, $flashMessage);
     }
 }

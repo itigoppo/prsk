@@ -2,6 +2,7 @@
     /**
      * @var \App\Models\ChangeLog[]|\Illuminate\Contracts\Pagination\LengthAwarePaginator $changeLogs
      * @var \App\Enums\ChangeLogType $changeLogType
+     * @var string $route
      */
 @endphp
 
@@ -15,7 +16,7 @@
             @include('includes.crud-flash')
 
             <div class="text-end mb-2">
-                <a href="{{ route('admin.interactions.logs.create') }}"
+                <a href="{{ route($route . 'create') }}"
                    class="btn btn-sm btn-outline-primary">
                     <i class="fa-solid fa-pen-to-square"></i> 新規作成
                 </a>
@@ -41,9 +42,9 @@
                                 {!! nl2br(e($changeLog->note)) !!}
                             </td>
                             <td class="text-end">
-                                <a href="{{ route('admin.interactions.logs.view', ['change_log_id' => $changeLog->id]) }}"
+                                <a href="{{ route($route . 'view', ['change_log_id' => $changeLog->id]) }}"
                                    class="btn btn-sm btn-outline-dark">詳細</a>
-                                <a href="{{ route('admin.interactions.logs.update', ['change_log_id' => $changeLog->id]) }}"
+                                <a href="{{ route($route . 'update', ['change_log_id' => $changeLog->id]) }}"
                                    class="btn btn-sm btn-outline-primary">編集</a>
                             </td>
                         </tr>

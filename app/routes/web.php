@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\IconsController;
-use App\Http\Controllers\Admin\InteractionChangeLogsController;
+use App\Http\Controllers\Admin\ChangeLogsController;
 use App\Http\Controllers\Admin\InteractionsController;
 use App\Http\Controllers\Admin\MembersController;
 use App\Http\Controllers\Admin\TunesController;
@@ -149,28 +149,28 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
 
             // 掛け合い更新管理
             Route::group(['prefix' => 'logs', 'as' => 'logs.'], function () {
-                Route::get('/', [InteractionChangeLogsController::class, 'index'])
+                Route::get('/', [ChangeLogsController::class, 'index'])
                     ->name('index');
 
-                Route::get('create', [InteractionChangeLogsController::class, 'showCreateForm'])
+                Route::get('create', [ChangeLogsController::class, 'showCreateForm'])
                     ->name('create');
 
-                Route::post('create', [InteractionChangeLogsController::class, 'create']);
+                Route::post('create', [ChangeLogsController::class, 'create']);
 
                 Route::group([
                     'prefix' => '{change_log_id}',
                     'where' => ['change_log_id' => '[0-9]+'],
                 ], function () {
-                    Route::get('/', [InteractionChangeLogsController::class, 'view'])
+                    Route::get('/', [ChangeLogsController::class, 'view'])
                         ->name('view');
 
-                    Route::get('edit', [InteractionChangeLogsController::class, 'showUpdateForm'])
+                    Route::get('edit', [ChangeLogsController::class, 'showUpdateForm'])
                         ->name('update');
 
-                    Route::post('edit', [InteractionChangeLogsController::class, 'update'])
+                    Route::post('edit', [ChangeLogsController::class, 'update'])
                         ->name('update');
 
-                    Route::post('delete', [InteractionChangeLogsController::class, 'delete'])
+                    Route::post('delete', [ChangeLogsController::class, 'delete'])
                         ->name('delete');
                 });
             });
@@ -202,6 +202,34 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
 
                 Route::post('delete', [TunesController::class, 'delete'])
                     ->name('delete');
+            });
+
+            // 楽曲更新管理
+            Route::group(['prefix' => 'logs', 'as' => 'logs.'], function () {
+                Route::get('/', [ChangeLogsController::class, 'index'])
+                    ->name('index');
+
+                Route::get('create', [ChangeLogsController::class, 'showCreateForm'])
+                    ->name('create');
+
+                Route::post('create', [ChangeLogsController::class, 'create']);
+
+                Route::group([
+                    'prefix' => '{change_log_id}',
+                    'where' => ['change_log_id' => '[0-9]+'],
+                ], function () {
+                    Route::get('/', [ChangeLogsController::class, 'view'])
+                        ->name('view');
+
+                    Route::get('edit', [ChangeLogsController::class, 'showUpdateForm'])
+                        ->name('update');
+
+                    Route::post('edit', [ChangeLogsController::class, 'update'])
+                        ->name('update');
+
+                    Route::post('delete', [ChangeLogsController::class, 'delete'])
+                        ->name('delete');
+                });
             });
         });
     });

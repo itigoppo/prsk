@@ -6,10 +6,12 @@ use BenSampo\Enum\Enum;
 
 /**
  * @method static static INTERACTION()
+ * @method static static TUNE()
  */
 final class ChangeLogType extends Enum
 {
     const INTERACTION = 'interaction';
+    const TUNE = 'tune';
 
     /**
      * Get the description for an enum value.
@@ -21,6 +23,7 @@ final class ChangeLogType extends Enum
     {
         $descriptions = [
             self::INTERACTION => '掛け合い',
+            self::TUNE => '楽曲',
         ];
 
         foreach ($descriptions as $key => $description) {

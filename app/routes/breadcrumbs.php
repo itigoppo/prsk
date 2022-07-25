@@ -221,3 +221,40 @@ Breadcrumbs::for('admin.tunes.update', function (BreadcrumbTrail $trail, array $
     $trail->push($tune->name, route('admin.tunes.view', ['tune_id' => $tune->id]));
     $trail->push('楽曲編集', route('admin.tunes.update', ['tune_id' => $tune->id]));
 });
+
+Breadcrumbs::for('admin.tunes.logs.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('楽曲管理', route('admin.tunes.index'));
+    $trail->push('更新履歴', route('admin.tunes.logs.index'));
+});
+
+Breadcrumbs::for('admin.tunes.logs.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('楽曲管理', route('admin.tunes.index'));
+    $trail->push('更新履歴', route('admin.tunes.logs.index'));
+    $trail->push('更新履歴作成', route('admin.tunes.logs.create'));
+});
+
+Breadcrumbs::for('admin.tunes.logs.view', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\ChangeLog $changeLog */
+    $changeLog = $breadcrumbs['changeLog'];
+
+    $trail->parent('admin.home');
+    $trail->push('楽曲管理', route('admin.tunes.index'));
+    $trail->push('更新履歴', route('admin.tunes.logs.index'));
+    $trail->push(
+        '更新履歴詳細: ' . $changeLog->released_at->format('Y/m/d'),
+        route('admin.tunes.logs.view', ['change_log_id' => $changeLog->id])
+    );
+});
+
+Breadcrumbs::for('admin.tunes.logs.update', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\ChangeLog $changeLog */
+    $changeLog = $breadcrumbs['changeLog'];
+
+    $trail->parent('admin.home');
+    $trail->push('楽曲管理', route('admin.tunes.index'));
+    $trail->push('更新履歴', route('admin.tunes.logs.index'));
+    $trail->push($changeLog->released_at->format('Y/m/d'), route('admin.tunes.logs.view', ['change_log_id' => $changeLog->id]));
+    $trail->push('更新履歴編集', route('admin.tunes.logs.update', ['change_log_id' => $changeLog->id]));
+});

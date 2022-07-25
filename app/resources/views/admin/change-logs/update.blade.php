@@ -2,6 +2,7 @@
     /**
      * @var \App\Models\ChangeLog $changeLog
      * @var \App\Enums\ChangeLogType $changeLogType
+     * @var string $actionRoute
      */
 @endphp
 
@@ -14,7 +15,7 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.interactions.logs.update', ['change_log_id' => $changeLog->id]) }}">
+                    <form method="POST" action="{{ route($actionRoute, ['change_log_id' => $changeLog->id]) }}">
                         @csrf
                         @include('admin.change-logs.form')
 

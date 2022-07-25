@@ -2,6 +2,7 @@
     /**
      * @var \App\Models\ChangeLog $changeLog
      * @var \App\Enums\ChangeLogType $changeLogType
+     * @var string $route
      */
 @endphp
 
@@ -15,19 +16,19 @@
             @include('includes.crud-flash')
 
             <div class="text-end mb-2">
-                <a href="{{ route('admin.interactions.logs.view', ['change_log_id' => $changeLog->id]) }}"
+                <a href="{{ route($route . 'view', ['change_log_id' => $changeLog->id]) }}"
                    class="btn btn-sm btn-outline-danger delete-button"
                    data-delete-form="delete-form">
                     <i class="fa-solid fa-trash-can"></i> 削除
                 </a>
 
                 <form id="delete-form"
-                      action="{{ route('admin.interactions.logs.delete', ['change_log_id' => $changeLog->id]) }}"
+                      action="{{ route($route . 'delete', ['change_log_id' => $changeLog->id]) }}"
                       method="POST" class="d-none">
                     @csrf
                 </form>
 
-                <a href="{{ route('admin.interactions.logs.update', ['change_log_id' => $changeLog->id]) }}"
+                <a href="{{ route($route . 'update', ['change_log_id' => $changeLog->id]) }}"
                    class="btn btn-sm btn-outline-primary">
                     <i class="fa-solid fa-pen-to-square"></i> 編集
                 </a>

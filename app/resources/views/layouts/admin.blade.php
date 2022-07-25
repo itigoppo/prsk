@@ -208,17 +208,51 @@
 
                         @if ( Request::routeIs('admin.tunes.*') )
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ route('admin.tunes.index') }}">
+                                <a class="nav-link active" href="#" data-bs-toggle="collapse"
+                                   data-bs-target="#tunes-collapse"
+                                   aria-expanded="true" aria-controls="tunes-collapse">
                                     <i class="fa-solid fa-music"></i>
-                                    <span class="ml-2">楽曲管理</span>
+                                    <span class="menu-title">楽曲管理</span>
+                                    <i class="menu-arrow fa-lg fa-pull-right"></i>
                                 </a>
+                                <div class="collapse show" id="tunes-collapse">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.tunes.index') }}">
+                                                <i class="fa-solid fa-list"></i> 楽曲一覧
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.tunes.logs.index') }}">
+                                                <i class="fa-solid fa-rss"></i> 更新履歴
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.tunes.index') }}">
+                                <a class="nav-link" href="#" data-bs-toggle="collapse"
+                                   data-bs-target="#tunes-collapse"
+                                   aria-expanded="false" aria-controls="tunes-collapse">
                                     <i class="fa-solid fa-music"></i>
-                                    <span class="ml-2">楽曲管理</span>
+                                    <span class="menu-title">楽曲管理</span>
+                                    <i class="menu-arrow fa-lg fa-pull-right"></i>
                                 </a>
+                                <div class="collapse" id="tunes-collapse">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.tunes.index') }}">
+                                                <i class="fa-solid fa-list"></i> 楽曲一覧
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.tunes.logs.index') }}">
+                                                <i class="fa-solid fa-rss"></i> 更新履歴
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                         @endif
 

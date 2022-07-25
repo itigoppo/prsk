@@ -1,6 +1,7 @@
 @php
     /**
      * @var \App\Enums\ChangeLogType $changeLogType
+     * @var string $actionRoute
      */
 @endphp
 
@@ -14,7 +15,7 @@
             <div class="card">
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.interactions.logs.create') }}">
+                    <form method="POST" action="{{ route($actionRoute) }}">
                         @csrf
                         @include('admin.change-logs.form')
 

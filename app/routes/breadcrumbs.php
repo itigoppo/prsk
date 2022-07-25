@@ -191,3 +191,33 @@ Breadcrumbs::for('admin.interactions.logs.update', function (BreadcrumbTrail $tr
     $trail->push($changeLog->released_at->format('Y/m/d'), route('admin.interactions.logs.view', ['change_log_id' => $changeLog->id]));
     $trail->push('更新履歴編集', route('admin.interactions.logs.update', ['change_log_id' => $changeLog->id]));
 });
+
+Breadcrumbs::for('admin.tunes.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('楽曲管理', route('admin.tunes.index'));
+});
+
+Breadcrumbs::for('admin.tunes.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('楽曲管理', route('admin.tunes.index'));
+    $trail->push('楽曲作成', route('admin.tunes.create'));
+});
+
+Breadcrumbs::for('admin.tunes.view', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\Tune $tune */
+    $tune = $breadcrumbs['tune'];
+
+    $trail->parent('admin.home');
+    $trail->push('楽曲管理', route('admin.tunes.index'));
+    $trail->push('楽曲詳細: ' . $tune->name, route('admin.tunes.view', ['tune_id' => $tune->id]));
+});
+
+Breadcrumbs::for('admin.tunes.update', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\Tune $tune */
+    $tune = $breadcrumbs['tune'];
+
+    $trail->parent('admin.home');
+    $trail->push('楽曲管理', route('admin.tunes.index'));
+    $trail->push($tune->name, route('admin.tunes.view', ['tune_id' => $tune->id]));
+    $trail->push('楽曲編集', route('admin.tunes.update', ['tune_id' => $tune->id]));
+});

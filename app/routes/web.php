@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\IconsController;
 use App\Http\Controllers\Admin\InteractionChangeLogsController;
 use App\Http\Controllers\Admin\InteractionsController;
 use App\Http\Controllers\Admin\MembersController;
+use App\Http\Controllers\Admin\TunesController;
 use App\Http\Controllers\Admin\UnitsController;
 use App\Http\Controllers\Front\InteractionsController as FrontInteractionsController;
 use App\Http\Controllers\MediasController;
@@ -174,6 +175,34 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
                 });
             });
 
+        });
+
+        //　楽曲管理
+        Route::group(['prefix' => 'tunes', 'as' => 'tunes.'], function () {
+            Route::get('/', [TunesController::class, 'index'])
+                ->name('index');
+
+            Route::get('create', [TunesController::class, 'showCreateForm'])
+                ->name('create');
+
+            Route::post('create', [TunesController::class, 'create']);
+
+            Route::group([
+                'prefix' => '{tune_id}',
+                'where' => ['tune_id' => '[0-9]+'],
+            ], function () {
+                Route::get('/', [TunesController::class, 'view'])
+                    ->name('view');
+
+                Route::get('edit', [TunesController::class, 'showUpdateForm'])
+                    ->name('update');
+
+                Route::post('edit', [TunesController::class, 'update'])
+                    ->name('update');
+
+                Route::post('delete', [TunesController::class, 'delete'])
+                    ->name('delete');
+            });
         });
     });
 });

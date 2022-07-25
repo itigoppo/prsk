@@ -6,31 +6,24 @@ use App\Traits\AuthorObservable;
 use App\Traits\UuidObservable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property string $uuid
- * @property string $name
- * @property string $short
- * @property string $bg_color
- * @property string $color
- * @property boolean $is_active
+ * @property int $tune_id
+ * @property int $member_id
  * @property Carbon $created_at
  * @property int $created_by
  * @property Carbon $updated_at
  * @property int $updated_by
- * @property Carbon $deleted_at
- * @property int $deleted_by
- * @property-read Member[] $members
- * @property-read string $active_label
+ * @property-read Tune $tune
+ * @property-read Member $member
  */
-class Unit extends Model
+class Dancer extends Model
 {
     use HasFactory;
     use AuthorObservable;
-    use SoftDeletes;
     use UuidObservable;
 
     /**
@@ -40,10 +33,6 @@ class Unit extends Model
      */
     protected $fillable = [
         'uuid',
-        'name',
-        'short',
-        'bg_color',
-        'color',
     ];
 
     /**
@@ -56,18 +45,18 @@ class Unit extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany|Member[]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Tune
      */
-    public function members(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function tune()
     {
-        return $this->hasMany(Member::class)->where('is_active', '=', true);
+        return $this->belongsTo(Tune::class);
     }
 
     /**
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Member
      */
-    public function getActiveLabelAttribute(): string
+    public function member()
     {
-        return $this->is_active ? '有効' : '無効';
+        return $this->belongsTo(Member::class);
     }
 }

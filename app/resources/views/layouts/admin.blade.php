@@ -157,7 +157,6 @@
                         @endif
 
                         @if ( Request::routeIs('admin.interactions.*') )
-
                             <li class="nav-item">
                                 <a class="nav-link active" href="#" data-bs-toggle="collapse"
                                    data-bs-target="#interactions-collapse"
@@ -183,7 +182,8 @@
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#interactions-collapse"
+                                <a class="nav-link" href="#" data-bs-toggle="collapse"
+                                   data-bs-target="#interactions-collapse"
                                    aria-expanded="false" aria-controls="interactions-collapse">
                                     <i class="fa-regular fa-comments"></i>
                                     <span class="menu-title">掛け合い管理</span>
@@ -203,6 +203,22 @@
                                         </li>
                                     </ul>
                                 </div>
+                            </li>
+                        @endif
+
+                        @if ( Request::routeIs('admin.tunes.*') )
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ route('admin.tunes.index') }}">
+                                    <i class="fa-solid fa-music"></i>
+                                    <span class="ml-2">楽曲管理</span>
+                                </a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.tunes.index') }}">
+                                    <i class="fa-solid fa-music"></i>
+                                    <span class="ml-2">楽曲管理</span>
+                                </a>
                             </li>
                         @endif
 

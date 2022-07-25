@@ -19,12 +19,22 @@ class UnitsService
     }
 
     /**
-     * @param array $search
+     * @param array $query
      * @param array $order
      * @return \App\Models\Unit[]|UnitsRepository[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function findAll(array $search = [], array $order = [])
+    public function findAll(array $query = [], array $order = [])
     {
+        $search = [];
+        if (!empty($query['is_active'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'is_active',
+                'operator' => '=',
+                'value' => $query['is_active'],
+            ];
+        }
+
         return $this->unitsRepository->findAll($search, $order);
     }
 
@@ -43,6 +53,10 @@ class UnitsService
      */
     public function create(UnitCreate $request): bool
     {
+        if (empty($request->is_active)) {
+            $request->is_active = 0;
+        }
+
         return $this->unitsRepository->create($request);
     }
 
@@ -54,6 +68,10 @@ class UnitsService
     public function update($id, UnitUpdate $request): bool
     {
         $entity = $this->unitsRepository->findOne($id);
+        if (empty($request->is_active)) {
+            $request->is_active = 0;
+        }
+
         return $this->unitsRepository->update($entity, $request);
     }
 

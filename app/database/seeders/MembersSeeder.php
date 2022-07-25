@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Member;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MembersSeeder extends Seeder
 {
@@ -575,8 +576,89 @@ class MembersSeeder extends Seeder
                 'color' => '#ffffff',
                 'is_active' => 1,
             ],
+            [
+                'unit_id' => 7,
+                'icon_id' => NULL,
+                'code' => 'vo_gumi',
+                'name' => 'GUMI',
+                'short' => 'GUMI',
+                'bg_color' => '#e9ecef',
+                'color' => '#000000',
+                'is_active' => 1,
+            ],
+            [
+                'unit_id' => 7,
+                'icon_id' => NULL,
+                'code' => 'vo_flower',
+                'name' => 'flower',
+                'short' => 'flower',
+                'bg_color' => '#e9ecef',
+                'color' => '#000000',
+                'is_active' => 1,
+            ],
+            [
+                'unit_id' => 7,
+                'icon_id' => NULL,
+                'code' => 'vo_ia',
+                'name' => 'IA',
+                'short' => 'IA',
+                'bg_color' => '#e9ecef',
+                'color' => '#000000',
+                'is_active' => 1,
+            ],
+            [
+                'unit_id' => 7,
+                'icon_id' => NULL,
+                'code' => 'vo_vy2v3',
+                'name' => 'VY2V3',
+                'short' => 'VY2V3',
+                'bg_color' => '#e9ecef',
+                'color' => '#000000',
+                'is_active' => 1,
+            ],
+            [
+                'unit_id' => 7,
+                'icon_id' => NULL,
+                'code' => 'vo_una',
+                'name' => '音街ウナ',
+                'short' => 'ウナ',
+                'bg_color' => '#e9ecef',
+                'color' => '#000000',
+                'is_active' => 1,
+            ],
+            [
+                'unit_id' => 7,
+                'icon_id' => NULL,
+                'code' => 'vo_yuki',
+                'name' => '歌愛ユキ',
+                'short' => 'ユキ',
+                'bg_color' => '#e9ecef',
+                'color' => '#000000',
+                'is_active' => 1,
+            ],
+            [
+                'unit_id' => 7,
+                'icon_id' => NULL,
+                'code' => 'ro_miku_d',
+                'name' => 'ミクダヨー',
+                'short' => 'ミクダヨー',
+                'bg_color' => '#e9ecef',
+                'color' => '#000000',
+                'is_active' => 1,
+            ],
+            [
+                'unit_id' => 7,
+                'icon_id' => NULL,
+                'code' => 'ro_nene',
+                'name' => 'ネネロボ',
+                'short' => 'ネネロボ',
+                'bg_color' => '#e9ecef',
+                'color' => '#000000',
+                'is_active' => 1,
+            ],
         ];
 
+        DB::table('members')->truncate();
         foreach ($records as $record) {
             $entity = new Member();
             foreach ($record as $key => $value) {

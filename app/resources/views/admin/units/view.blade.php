@@ -43,6 +43,8 @@
                         <dd class="col-sm-9">{{ $unit->bg_color }}</dd>
                         <dt class="col-sm-3">テキストカラー</dt>
                         <dd class="col-sm-9">{{ $unit->color }}</dd>
+                        <dt class="col-sm-3">有効/無効</dt>
+                        <dd class="col-sm-9">{{ $unit->active_label }}</dd>
                     </dl>
                 </div>
             </div>

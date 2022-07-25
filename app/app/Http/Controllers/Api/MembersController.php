@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MemberResource;
-use Illuminate\Http\Request;
 
 class MembersController extends Controller
 {
@@ -19,6 +18,7 @@ class MembersController extends Controller
         $members = $membersService->findAll([
             'is_active' => true,
         ]);
+        $members = $members->where('unit.is_active', '=', true);
 
         return MemberResource::collection($members);
     }

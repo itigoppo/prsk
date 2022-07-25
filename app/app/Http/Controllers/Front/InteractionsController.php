@@ -22,11 +22,12 @@ class InteractionsController extends Controller
         $changeLogsService = app()->make('ChangeLogsService');
 
         $interactions = $interactionsService->findPaginate($request->query(), [])->withQueryString();
-        $units = $unitsService->findAll();
-        $logRequest = [
+        $units = $unitsService->findAll([
+            'is_active' => true,
+        ]);
+        $changeLogs = $changeLogsService->findAll([
             'tp' => ChangeLogType::INTERACTION,
-        ];
-        $changeLogs = $changeLogsService->findAll($logRequest, []);
+        ]);
 
         return view('front.interactions.index', [
             'interactions' => $interactions,

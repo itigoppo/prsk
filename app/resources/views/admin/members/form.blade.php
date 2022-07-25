@@ -11,7 +11,7 @@
         <label for="unit_id" class="col-form-label text-md-end">ユニット</label>
         <select id="unit_id" class="form-select @error('unit_id') is-invalid @enderror"
                 name="unit_id"{{ empty($member->unit_id ) ? '' : ' disabled' }}>
-            <option>選択してください</option>
+            <option value="">選択してください</option>
             @foreach($units as $unit)
                 <option
                     value="{{ $unit->id }}"{{ old('unit_id', $member->unit_id ?? '') == $unit->id ? ' selected' : '' }}>
@@ -35,7 +35,7 @@
     <div class="form-group">
         <label for="icon_id" class="col-form-label text-md-end">アイコン</label>
         <select id="icon_id" class="form-select @error('icon_id') is-invalid @enderror" name="icon_id">
-            <option>選択してください</option>
+            <option value="">選択してください</option>
             @foreach($icons as $icon)
                 <option
                     value="{{ $icon->id }}"{{ old('icon_id', $member->icon_id ?? '') == $icon->id ? ' selected' : '' }}>

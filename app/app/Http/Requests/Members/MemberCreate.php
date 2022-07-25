@@ -39,6 +39,8 @@ class MemberCreate extends FormRequest
                 'exists:units,id',
             ],
             'icon_id' => [
+                'sometimes',
+                'nullable',
                 'exists:icons,id',
             ],
             'code' => [

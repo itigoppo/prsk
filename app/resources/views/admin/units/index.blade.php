@@ -25,6 +25,7 @@
                 <table class="table table-hover table-striped">
                     <thead>
                     <tr>
+                        <th></th>
                         <th>ユニット名</th>
                         <th>短縮名</th>
                         <th>カラー</th>
@@ -34,6 +35,9 @@
                     <tbody>
                     @foreach($units as $unit)
                         <tr>
+                            <td class="text-center">
+                                <i class="fa-solid {{ $unit->is_active ? 'fa-microphone-lines' : 'fa-microphone-lines-slash' }}"></i>
+                            </td>
                             <td>
                                 {{ $unit->name }}
                             </td>

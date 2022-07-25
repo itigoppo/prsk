@@ -38,6 +38,11 @@ class MemberUpdate extends FormRequest
                 'required',
                 'exists:units,id',
             ],
+            'icon_id' => [
+                'sometimes',
+                'nullable',
+                'exists:icons,id',
+            ],
             'code' => [
                 'required',
                 'max:20',

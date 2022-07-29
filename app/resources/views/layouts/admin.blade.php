@@ -256,6 +256,22 @@
                             </li>
                         @endif
 
+                        @if ( Request::routeIs('admin.cards.*') && !Request::routeIs('admin.cards.members.*') )
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ route('admin.cards.index') }}">
+                                    <i class="fa-regular fa-address-card"></i>
+                                    <span class="ml-2">カード管理</span>
+                                </a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.cards.index') }}">
+                                    <i class="fa-regular fa-address-card"></i>
+                                    <span class="ml-2">カード管理</span>
+                                </a>
+                            </li>
+                        @endif
+
                     @endcan
                 </ul>
             </div>

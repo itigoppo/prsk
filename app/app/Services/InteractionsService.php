@@ -6,11 +6,12 @@ use App\Http\Requests\Interactions\InteractionCreate;
 use App\Http\Requests\Interactions\InteractionUpdate;
 use App\Models\Interaction;
 use App\Repositories\InteractionsRepository;
-use Illuminate\Http\File;
-use Illuminate\Support\Facades\Storage;
+use App\Traits\FileUploadTrait;
 
 class InteractionsService
 {
+    use FileUploadTrait;
+
     private $interactionsRepository;
 
     /**
@@ -110,14 +111,7 @@ class InteractionsService
      */
     public function create(InteractionCreate $request): bool
     {
-        $file = $request->file('file');
-        if (!empty($file)) {
-            $path = Storage::disk('local')->putFile(Interaction::FILE_PATH, new File($file->getPathname()));
-            if (!$path) {
-                return false;
-            }
-            $request->file_path = $path;
-        }
+        $request->file_path = $this->fileCreate($request, 'file', Interaction::FILE_PATH);
 
         return $this->interactionsRepository->create($request);
     }
@@ -131,35 +125,7 @@ class InteractionsService
     {
         $entity = $this->interactionsRepository->findOne($id);
 
-        if (!empty($request->is_file_delete) && Storage::disk('local')->exists($entity->file)) {
-            if (!Storage::disk('local')->delete($entity->file)) {
-                return false;
-            }
-            $request->file_path = null;
-        }
-
-        $file = $request->file('change_file');
-        if (!empty($file)) {
-            $path = Storage::disk('local')->putFile(Interaction::FILE_PATH, new File($file->getPathname()));
-            if (!$path) {
-                return false;
-            }
-            $request->file_path = $path;
-
-            if (Storage::disk('local')->exists($entity->file)) {
-                if (!Storage::disk('local')->delete($entity->file)) {
-                    // 元ファイルの削除に失敗したなら新しいファイルも入れない
-                    Storage::disk('local')->delete($path);
-
-                    return false;
-                }
-            }
-        }
-
-        // 変わらないなら元のファイル名
-        if (!empty($entity->file) && empty($request->file_path)) {
-            $request->file_path = $entity->file;
-        }
+        $request->file_path = $this->fileUpdate($request, $entity, 'file', Interaction::FILE_PATH);
 
         return $this->interactionsRepository->update($entity, $request);
     }

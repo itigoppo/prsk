@@ -40,6 +40,7 @@ class UnitsRepository implements UnitsRepositoryInterface
         $entity->short = $request->short;
         $entity->color = $request->color;
         $entity->bg_color = $request->bg_color;
+        $entity->is_active = $request->get('is_active', false);
         return $entity->save();
     }
 
@@ -49,6 +50,7 @@ class UnitsRepository implements UnitsRepositoryInterface
         $entity->short = $request->short;
         $entity->color = $request->color;
         $entity->bg_color = $request->bg_color;
+        $entity->is_active = $request->get('is_active', false);
         return $entity->save();
     }
 

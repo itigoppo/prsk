@@ -38,7 +38,7 @@
                 <div class="card-body">
                     <dl class="row">
                         <dt class="col-sm-3">更新日</dt>
-                        <dd class="col-sm-9">{{ $changeLog->released_at->format('Y/m/d') }}</dd>
+                        <dd class="col-sm-9">{{ $changeLog->released_at->format('Y/m/d H:i:s') }}</dd>
                         <dt class="col-sm-3">更新内容</dt>
                         <dd class="col-sm-9">{!! nl2br(e($changeLog->note)) !!}</dd>
                     </dl>

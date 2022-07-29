@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Interfaces\CardsRepositoryInterface;
 use App\Interfaces\ChangeLogsRepositoryInterface;
 use App\Interfaces\DancersRepositoryInterface;
 use App\Interfaces\IconsRepositoryInterface;
@@ -10,6 +11,7 @@ use App\Interfaces\MembersRepositoryInterface;
 use App\Interfaces\TunesRepositoryInterface;
 use App\Interfaces\UnitsRepositoryInterface;
 use App\Interfaces\SingersRepositoryInterface;
+use App\Repositories\CardsRepository;
 use App\Repositories\ChangeLogsRepository;
 use App\Repositories\DancersRepository;
 use App\Repositories\IconsRepository;
@@ -60,6 +62,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             DancersRepositoryInterface::class,
             DancersRepository::class
+        );
+        $this->app->bind(
+            CardsRepositoryInterface::class,
+            CardsRepository::class
         );
     }
 

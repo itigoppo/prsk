@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TunesSeeder::class);
         $this->call(DancersSeeder::class);
         $this->call(SingersSeeder::class);
+        $this->call(CardsSeeder::class);
     }
 }

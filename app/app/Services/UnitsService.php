@@ -53,10 +53,6 @@ class UnitsService
      */
     public function create(UnitCreate $request): bool
     {
-        if (empty($request->is_active)) {
-            $request->is_active = 0;
-        }
-
         return $this->unitsRepository->create($request);
     }
 
@@ -68,9 +64,6 @@ class UnitsService
     public function update($id, UnitUpdate $request): bool
     {
         $entity = $this->unitsRepository->findOne($id);
-        if (empty($request->is_active)) {
-            $request->is_active = 0;
-        }
 
         return $this->unitsRepository->update($entity, $request);
     }

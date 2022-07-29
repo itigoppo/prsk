@@ -42,7 +42,7 @@ class MembersRepository implements MembersRepositoryInterface
         $entity->short = $request->short;
         $entity->color = $request->color;
         $entity->bg_color = $request->bg_color;
-        $entity->is_active = $request->is_active;
+        $entity->is_active = $request->get('is_active', false);
 
         return $entity->save();
     }
@@ -55,7 +55,7 @@ class MembersRepository implements MembersRepositoryInterface
         $entity->short = $request->short;
         $entity->color = $request->color;
         $entity->bg_color = $request->bg_color;
-        $entity->is_active = $request->is_active;
+        $entity->is_active = $request->get('is_active', false);
 
         return $entity->save();
     }

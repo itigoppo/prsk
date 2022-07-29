@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CardsController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\IconsController;
 use App\Http\Controllers\Admin\ChangeLogsController;
@@ -230,6 +231,37 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
                     Route::post('delete', [ChangeLogsController::class, 'delete'])
                         ->name('delete');
                 });
+            });
+        });
+
+        //　カード管理
+        Route::group(['prefix' => 'cards', 'as' => 'cards.'], function () {
+            Route::get('/', [CardsController::class, 'index'])
+                ->name('index');
+
+            Route::get('create', [CardsController::class, 'showCreateForm'])
+                ->name('create');
+
+            Route::post('create', [CardsController::class, 'create']);
+
+            Route::group([
+                'prefix' => '{card_id}',
+                'where' => ['card_id' => '[0-9]+'],
+            ], function () {
+                Route::get('/', [CardsController::class, 'view'])
+                    ->name('view');
+
+                Route::get('edit', [CardsController::class, 'showUpdateForm'])
+                    ->name('update');
+
+                Route::post('edit', [CardsController::class, 'update'])
+                    ->name('update');
+
+                Route::post('delete', [CardsController::class, 'delete'])
+                    ->name('delete');
+
+                Route::get('display', [CardsController::class, 'display'])
+                    ->name('display');
             });
         });
     });

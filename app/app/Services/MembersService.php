@@ -19,12 +19,22 @@ class MembersService
     }
 
     /**
-     * @param array $search
+     * @param array $query
      * @param array $order
      * @return \App\Models\Member[]|MembersRepository[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function findAll(array $search = [], array $order = [])
+    public function findAll(array $query = [], array $order = [])
     {
+        $search = [];
+        if (!empty($query['is_active'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'is_active',
+                'operator' => '=',
+                'value' => $query['is_active'],
+            ];
+        }
+
         return $this->membersRepository->findAll($search, $order);
     }
 
@@ -43,9 +53,6 @@ class MembersService
      */
     public function create(MemberCreate $request): bool
     {
-        if (empty($request->is_active)) {
-            $request->is_active = 0;
-        }
         return $this->membersRepository->create($request);
     }
 
@@ -57,9 +64,7 @@ class MembersService
     public function update($id, MemberUpdate $request): bool
     {
         $entity = $this->membersRepository->findOne($id);
-        if (empty($request->is_active)) {
-            $request->is_active = 0;
-        }
+
         return $this->membersRepository->update($entity, $request);
     }
 

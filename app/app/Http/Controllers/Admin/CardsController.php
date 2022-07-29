@@ -2,32 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\Attribute;
+use App\Enums\Rarity;
+use App\Enums\SkillEffect;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Interactions\InteractionCreate;
-use App\Http\Requests\Interactions\InteractionUpdate;
+use App\Http\Requests\Cards\CardCreate;
+use App\Http\Requests\Cards\CardUpdate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class InteractionsController extends Controller
+class CardsController extends Controller
 {
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function index(Request $request)
+    public function index()
     {
-        /** @var \App\Services\InteractionsService $interactionsService */
-        $interactionsService = app()->make('InteractionsService');
-        /** @var \App\Services\UnitsService $unitsService */
-        $unitsService = app()->make('UnitsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
+        $cards = $cardsService->findPaginate();
 
-        $interactions = $interactionsService->findPaginate($request->query(), [], 50)->withQueryString();
-        $units = $unitsService->findAll();
-
-        return view('admin.interactions.index', [
-            'interactions' => $interactions,
-            'units' => $units,
-            'search' => $request->query(),
+        return view('admin.cards.index', [
+            'cards' => $cards,
         ]);
     }
 
@@ -44,22 +41,25 @@ class InteractionsController extends Controller
         ]);
         $members = $members->where('unit.is_active', '=', true);
 
-        return view('admin.interactions.create', [
+        return view('admin.cards.create', [
+            'rarities' => Rarity::asSelectArray(),
+            'attributes' => Attribute::asSelectArray(),
             'members' => $members,
+            'skillEffects' => SkillEffect::asSelectArray(),
         ]);
     }
 
     /**
-     * @param \App\Http\Requests\interactions\InteractionCreate $request
+     * @param \App\Http\Requests\cards\CardCreate $request
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function create(InteractionCreate $request): \Illuminate\Http\RedirectResponse
+    public function create(CardCreate $request): \Illuminate\Http\RedirectResponse
     {
-        /** @var \App\Services\InteractionsService $interactionsService */
-        $interactionsService = app()->make('InteractionsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
 
-        $result = $interactionsService->create($request);
+        $result = $cardsService->create($request);
 
         if ($result) {
             $messageKey = 'success';
@@ -69,7 +69,7 @@ class InteractionsController extends Controller
             $flashMessage = __('crud.create_failed');
         }
 
-        return redirect()->route('admin.interactions.index')->with($messageKey, $flashMessage);
+        return redirect()->route('admin.cards.index')->with($messageKey, $flashMessage);
     }
 
     /**
@@ -79,15 +79,15 @@ class InteractionsController extends Controller
      */
     public function view(int $id)
     {
-        /** @var \App\Services\InteractionsService $interactionsService */
-        $interactionsService = app()->make('InteractionsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
 
-        $interaction = $interactionsService->findOne($id);
+        $card = $cardsService->findOne($id);
 
-        return view('admin.interactions.view', [
-            'interaction' => $interaction,
+        return view('admin.cards.view', [
+            'card' => $card,
             'breadcrumbs' => [
-                'interaction' => $interaction,
+                'card' => $card,
             ],
         ]);
     }
@@ -99,35 +99,41 @@ class InteractionsController extends Controller
      */
     public function showUpdateForm(int $id)
     {
-        /** @var \App\Services\InteractionsService $interactionsService */
-        $interactionsService = app()->make('InteractionsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
         /** @var \App\Services\MembersService $membersService */
         $membersService = app()->make('MembersService');
 
-        $interaction = $interactionsService->findOne($id);
-        $members = $membersService->findAll();
+        $card = $cardsService->findOne($id);
+        $members = $membersService->findAll([
+            'is_active' => true,
+        ]);
+        $members = $members->where('unit.is_active', '=', true);
 
-        return view('admin.interactions.update', [
-            'interaction' => $interaction,
+        return view('admin.cards.update', [
+            'card' => $card,
+            'rarities' => Rarity::asSelectArray(),
+            'attributes' => Attribute::asSelectArray(),
             'members' => $members,
+            'skillEffects' => SkillEffect::asSelectArray(),
             'breadcrumbs' => [
-                'interaction' => $interaction,
+                'card' => $card,
             ],
         ]);
     }
 
     /**
      * @param int $id
-     * @param \App\Http\Requests\interactions\InteractionUpdate $request
+     * @param \App\Http\Requests\cards\CardUpdate $request
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function update(int $id, InteractionUpdate $request): \Illuminate\Http\RedirectResponse
+    public function update(int $id, CardUpdate $request): \Illuminate\Http\RedirectResponse
     {
-        /** @var \App\Services\InteractionsService $interactionsService */
-        $interactionsService = app()->make('InteractionsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
 
-        $result = $interactionsService->update($id, $request);
+        $result = $cardsService->update($id, $request);
 
         if ($result) {
             $messageKey = 'success';
@@ -137,7 +143,7 @@ class InteractionsController extends Controller
             $flashMessage = __('crud.update_failed');
         }
 
-        return redirect()->route('admin.interactions.view', ['interaction_id' => $id])->with($messageKey, $flashMessage);
+        return redirect()->route('admin.cards.view', ['card_id' => $id])->with($messageKey, $flashMessage);
     }
 
     /**
@@ -147,10 +153,10 @@ class InteractionsController extends Controller
      */
     public function delete(int $id): \Illuminate\Http\RedirectResponse
     {
-        /** @var \App\Services\InteractionsService $interactionsService */
-        $interactionsService = app()->make('InteractionsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
 
-        $result = $interactionsService->delete($id);
+        $result = $cardsService->delete($id);
 
         if ($result) {
             $messageKey = 'success';
@@ -160,24 +166,33 @@ class InteractionsController extends Controller
             $flashMessage = __('crud.delete_failed');
         }
 
-        return redirect()->route('admin.interactions.index')->with($messageKey, $flashMessage);
+        return redirect()->route('admin.cards.index')->with($messageKey, $flashMessage);
     }
 
     /**
      * @param int $id
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function display(int $id): \Symfony\Component\HttpFoundation\StreamedResponse
+    public function display(int $id, Request $request): \Symfony\Component\HttpFoundation\StreamedResponse
     {
-        /** @var \App\Services\InteractionsService $interactionsService */
-        $interactionsService = app()->make('InteractionsService');
-        $interaction = $interactionsService->findOne($id);
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
+        $card = $cardsService->findOne($id);
 
-        if (!Storage::disk('local')->exists($interaction->file)) {
+        $path = '';
+
+        if ($request->query('mode') === 'normal') {
+            $path = $card->normal_file;
+        }elseif ($request->query('mode') === 'after_training') {
+            $path = $card->after_training_file;
+        }
+
+        if (!Storage::disk('local')->exists($path)) {
             abort(404);
         }
 
-        return Storage::disk('local')->download($interaction->file);
+        return Storage::disk('local')->download($path);
     }
 }

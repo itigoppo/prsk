@@ -56,9 +56,9 @@ class TunesRepository implements TunesRepositoryInterface
         $entity->name = $request->name;
         $entity->type = $request->type;
         $entity->unit_id = $request->unit_id;
-        $entity->has_3d_mv = $request->has_3d_mv;
-        $entity->has_2d_mv = $request->has_2d_mv;
-        $entity->has_original_mv = $request->has_original_mv;
+        $entity->has_3d_mv = $request->get('has_3d_mv', false);
+        $entity->has_2d_mv = $request->get('has_2d_mv', false);
+        $entity->has_original_mv = $request->get('has_original_mv', false);
         $entity->easy_level = $request->easy_level;
         $entity->normal_level = $request->normal_level;
         $entity->hard_level = $request->hard_level;
@@ -78,9 +78,9 @@ class TunesRepository implements TunesRepositoryInterface
         $entity->name = $request->name;
         $entity->type = $request->type;
         $entity->unit_id = $request->unit_id;
-        $entity->has_3d_mv = $request->has_3d_mv;
-        $entity->has_2d_mv = $request->has_2d_mv;
-        $entity->has_original_mv = $request->has_original_mv;
+        $entity->has_3d_mv = $request->get('has_3d_mv', false);
+        $entity->has_2d_mv = $request->get('has_2d_mv', false);
+        $entity->has_original_mv = $request->get('has_original_mv', false);
         $entity->easy_level = $request->easy_level;
         $entity->normal_level = $request->normal_level;
         $entity->hard_level = $request->hard_level;

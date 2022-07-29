@@ -36,7 +36,7 @@
                 <div class="card-body">
                     <dl class="row">
                         <dt class="col-sm-3">配信日</dt>
-                        <dd class="col-sm-9">{{ $tune->released_at->format('Y/m/d') }}</dd>
+                        <dd class="col-sm-9">{{ $tune->released_at->format('Y/m/d H:i:s') }}</dd>
                         <dt class="col-sm-3">楽曲名</dt>
                         <dd class="col-sm-9">{{ $tune->name }}</dd>
                         <dt class="col-sm-3">種別</dt>

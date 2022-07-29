@@ -94,16 +94,6 @@ class TunesService
     public function create(TuneCreate $request): bool
     {
         DB::transaction(function () use ($request) {
-            if (empty($request->has_3d_mv)) {
-                $request->has_3d_mv = 0;
-            }
-            if (empty($request->has_2d_mv)) {
-                $request->has_2d_mv = 0;
-            }
-            if (empty($request->has_original_mv)) {
-                $request->has_original_mv = 0;
-            }
-
             if (!$entity = $this->tunesRepository->create($request)) {
                 throw new InvalidArgumentException('楽曲情報の保存に失敗しました');
             }
@@ -167,15 +157,6 @@ class TunesService
     {
         DB::transaction(function () use ($id, $request) {
             $entity = $this->tunesRepository->findOne($id);
-            if (empty($request->has_3d_mv)) {
-                $request->has_3d_mv = 0;
-            }
-            if (empty($request->has_2d_mv)) {
-                $request->has_2d_mv = 0;
-            }
-            if (empty($request->has_original_mv)) {
-                $request->has_original_mv = 0;
-            }
 
             if (!$this->tunesRepository->update($entity, $request)) {
                 throw new InvalidArgumentException('楽曲情報の保存に失敗しました');

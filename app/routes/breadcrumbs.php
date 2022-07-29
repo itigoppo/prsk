@@ -258,3 +258,39 @@ Breadcrumbs::for('admin.tunes.logs.update', function (BreadcrumbTrail $trail, ar
     $trail->push($changeLog->released_at->format('Y/m/d'), route('admin.tunes.logs.view', ['change_log_id' => $changeLog->id]));
     $trail->push('更新履歴編集', route('admin.tunes.logs.update', ['change_log_id' => $changeLog->id]));
 });
+
+Breadcrumbs::for('admin.cards.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('カード管理', route('admin.cards.index'));
+});
+
+Breadcrumbs::for('admin.cards.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('カード管理', route('admin.cards.index'));
+    $trail->push('カード作成', route('admin.cards.create'));
+});
+
+Breadcrumbs::for('admin.cards.view', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\Card $card */
+    $card = $breadcrumbs['card'];
+
+    $trail->parent('admin.home');
+    $trail->push('カード管理', route('admin.cards.index'));
+    $trail->push(
+        'カード詳細: [' . $card->name . ']' . $card->member->display_name,
+        route('admin.cards.view', ['card_id' => $card->id])
+    );
+});
+
+Breadcrumbs::for('admin.cards.update', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\Card $card */
+    $card = $breadcrumbs['card'];
+
+    $trail->parent('admin.home');
+    $trail->push('カード管理', route('admin.cards.index'));
+    $trail->push(
+        '[' . $card->name . ']' . $card->member->display_name,
+        route('admin.cards.view', ['card_id' => $card->id])
+    );
+    $trail->push('カード編集', route('admin.cards.update', ['card_id' => $card->id]));
+});

@@ -3696,6 +3696,12 @@ class SingersSeeder extends Seeder
                 'member_id' => 4,
             ],
             [
+                'type' => VocalType::ANOTHER,
+                'vocal_key' => '2',
+                'tune_id' => 108,
+                'member_id' => 5,
+            ],
+            [
                 'type' => VocalType::SEKAI,
                 'vocal_key' => '1',
                 'tune_id' => 109,
@@ -6180,6 +6186,18 @@ class SingersSeeder extends Seeder
                 'member_id' => 36,
             ],
             [
+                'type' => VocalType::VIRTUAL_SINGER,
+                'vocal_key' => '1',
+                'tune_id' => 194,
+                'member_id' => 1,
+            ],
+            [
+                'type' => VocalType::VIRTUAL_SINGER,
+                'vocal_key' => '1',
+                'tune_id' => 194,
+                'member_id' => 2,
+            ],
+            [
                 'type' => VocalType::SEKAI,
                 'vocal_key' => '1',
                 'tune_id' => 195,
@@ -6592,6 +6610,12 @@ class SingersSeeder extends Seeder
                 'vocal_key' => '1',
                 'tune_id' => 209,
                 'member_id' => 16,
+            ],
+            [
+                'type' => VocalType::VIRTUAL_SINGER,
+                'vocal_key' => '1',
+                'tune_id' => 210,
+                'member_id' => 5,
             ],
         ];
 

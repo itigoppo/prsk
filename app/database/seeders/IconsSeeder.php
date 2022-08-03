@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Icon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class IconsSeeder extends Seeder
 {
@@ -687,8 +688,219 @@ class IconsSeeder extends Seeder
                 'extension' => 'jpg',
                 'label' => 'unit_06_icon_05_miku_05.jpg',
             ],
+            [
+                'path' => 'icons',
+                'name' => '4ldlo7KKNAnE1zh3hpv7abmP4hVtyhw1wMtHZ4Rg.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_02_icon_05_miku_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'JErZOMcxsOWjxUKtcd3ar21GpUz7zesCnF99B5FQ.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_02_icon_06_rin_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'Fy0mjLklEluPrvGjm537NoEsv53Zfkl3SYOCG3Fo.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_02_icon_07_len_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'qU7srCEvRFtWsoykmooq8GdEGCNdWxgQV0Tbybdt.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_02_icon_08_luka_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'M1hDv1Jv8DZW2DLwJzFt2rcjgz4srwyubX9X4Mj0.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_02_icon_09_meiko_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'daXaxujHBBHEo9vIDewGFxQDi4tg56D5JoXNCdYF.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_02_icon_10_kaito_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'BpdULAj0JJGqLpA7dA7TJbFuFZmxS0TPtOo14R3Z.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_03_icon_05_miku_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'rStY0obyxrs4pGNxb5OWRRevui1YOvUlBjv4n3Qe.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_03_icon_06_rin_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'P3JgYeB8deT17cpRTnARHl5SOSPwGwhpLwRCCFoK.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_03_icon_07_len_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'J10TSDGYFQrCCJfkuOHVJ5xeD0fRG8rGkV0aDqik.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_03_icon_08_luka_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'qSExSbU2UaZkiF3NH077yjPE3bUVJIeKhyZSI91P.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_03_icon_09_meiko_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'aZuAk58BTfcYiI6y7M1Sjk8hxLsU6dCKvmzHxbd0.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_03_icon_10_kaito_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'a5MnCJthkGZtGszlCLStES5JDaT0xQqfIm67nodm.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_04_icon_05_miku_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => '69PWrmjj3lalW6uJesSG0jtTXzPcWqvby0Uqf735.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_04_icon_06_rin_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'WQB4z05CgHQfEMoQdIrUWxkdoMpkHz8xmL0EPiB2.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_04_icon_07_len_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'HC5OQAmLwvUvJuB7zTHs3s43O4Ik8tTdJ1DXvBQ9.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_04_icon_08_luka_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => '1fMqP326pG6Z9qODLKPklEFElniewqP7KjYeTWk9.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_04_icon_09_meiko_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'p5hTsrRYUNgQHzRDDoK8caudJnVwsxesGcLMkjgH.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_04_icon_10_kaito_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'MLc8jF2nc6EgTdyx2KCgpwmWWdN6jNkeYjFa2FbI.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_05_icon_05_miku_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'c0zL1CJTg4kq2SEBkJCwFBsnjyJexNYqsFZ87VlT.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_05_icon_06_rin_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'AeKsCwh0tK6FvZLhmQNbmCDHkHSOzrluzl5csehS.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_05_icon_07_len_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'RTNsuuLJ5JR2wCGSkv7GlOlElmcAx8ZJEVYeR0ks.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_05_icon_08_luka_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => '5WizlE7pM1FseKYNkW2wXHcwVXFFm1MEbrFKoAqM.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_05_icon_09_meiko_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'EiSZWkAoWjAYKByjTgj7isHUXDOU1WMfOg3syHPZ.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_05_icon_10_kaito_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'DkqVbEIn7lPtUUFqVhf22wbtWOx8z3midpQE69dd.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_06_icon_05_miku_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'vbC13lGWvC3RIO9xpcJ4RHGOBFMuyaWzjg9Y6Pph.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_06_icon_06_rin_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'qyxDBMcFgRJvth38hx2HxZCXmbRgWa0XSSkpQTDF.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_06_icon_07_len_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'UXL31GgE7LO5h5gvP4yQQWfktyiQJ5jLyGOphhRw.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_06_icon_08_luka_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'CWYyqBCcExZ3UgOBOyqlD80kUWRIV8P9qhG8ROmi.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_06_icon_09_meiko_04.png',
+            ],
+            [
+                'path' => 'icons',
+                'name' => 'CaMgNo80M1hYynARcgL2Rugto8epTbKPsMsE4kNH.png',
+                'mime_type' => 'image/png',
+                'extension' => 'png',
+                'label' => 'unit_06_icon_10_kaito_04.png',
+            ],
         ];
 
+        DB::table('icons')->truncate();
         foreach ($records as $record) {
             $entity = new Icon();
             foreach ($record as $key => $value) {

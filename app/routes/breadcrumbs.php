@@ -294,3 +294,39 @@ Breadcrumbs::for('admin.cards.update', function (BreadcrumbTrail $trail, array $
     );
     $trail->push('カード編集', route('admin.cards.update', ['card_id' => $card->id]));
 });
+
+Breadcrumbs::for('admin.events.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('イベント管理', route('admin.events.index'));
+});
+
+Breadcrumbs::for('admin.events.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('イベント管理', route('admin.events.index'));
+    $trail->push('イベント作成', route('admin.events.create'));
+});
+
+Breadcrumbs::for('admin.events.view', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\Event $event */
+    $event = $breadcrumbs['event'];
+
+    $trail->parent('admin.home');
+    $trail->push('イベント管理', route('admin.events.index'));
+    $trail->push(
+        'イベント詳細: ' . $event->name,
+        route('admin.events.view', ['event_id' => $event->id])
+    );
+});
+
+Breadcrumbs::for('admin.events.update', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\Event $event */
+    $event = $breadcrumbs['event'];
+
+    $trail->parent('admin.home');
+    $trail->push('イベント管理', route('admin.events.index'));
+    $trail->push(
+        $event->name,
+        route('admin.events.view', ['event_id' => $event->id])
+    );
+    $trail->push('イベント編集', route('admin.events.update', ['event_id' => $event->id]));
+});

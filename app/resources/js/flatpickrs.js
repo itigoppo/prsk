@@ -6,5 +6,13 @@ $(function () {
         locale: Japanese,
         enableTime: true,
     });
+    flatpickr('#starts-at', {
+        locale: Japanese,
+        enableTime: true,
+    });
+    flatpickr('#ends-at', {
+        locale: Japanese,
+        enableTime: true,
+    });
 });
 

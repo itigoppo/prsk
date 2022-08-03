@@ -36,6 +36,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon $deleted_at
  * @property int $deleted_by
  * @property-read Member $member
+ * @property-read string $display_name
  */
 class Card extends Model
 {
@@ -82,5 +83,13 @@ class Card extends Model
     public function member()
     {
         return $this->belongsTo(Member::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayNameAttribute(): string
+    {
+        return $this->rarity->description . ' [' . $this->name . '] ' . $this->member->display_name;
     }
 }

@@ -59,7 +59,7 @@ class TunesService
     }
 
     /**
-     * @param array $search
+     * @param array $query
      * @param array $order
      * @return \App\Models\Tune[]|TunesRepository[]|\Illuminate\Database\Eloquent\Collection
      */
@@ -72,6 +72,12 @@ class TunesService
                 'column' => 'type',
                 'operator' => '=',
                 'value' => $query['tp'],
+            ];
+        }
+        if (!empty($query['u']) && $query['u'] === 'exist') {
+            $search[] = [
+                'type' => 'whereNotNull',
+                'column' => 'unit_id',
             ];
         }
 

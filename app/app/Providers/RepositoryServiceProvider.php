@@ -5,6 +5,9 @@ namespace App\Providers;
 use App\Interfaces\CardsRepositoryInterface;
 use App\Interfaces\ChangeLogsRepositoryInterface;
 use App\Interfaces\DancersRepositoryInterface;
+use App\Interfaces\EventCardsRepositoryInterface;
+use App\Interfaces\EventMembersRepositoryInterface;
+use App\Interfaces\EventsRepositoryInterface;
 use App\Interfaces\IconsRepositoryInterface;
 use App\Interfaces\InteractionsRepositoryInterface;
 use App\Interfaces\MembersRepositoryInterface;
@@ -14,6 +17,9 @@ use App\Interfaces\SingersRepositoryInterface;
 use App\Repositories\CardsRepository;
 use App\Repositories\ChangeLogsRepository;
 use App\Repositories\DancersRepository;
+use App\Repositories\EventCardsRepository;
+use App\Repositories\EventMembersRepository;
+use App\Repositories\EventsRepository;
 use App\Repositories\IconsRepository;
 use App\Repositories\InteractionsRepository;
 use App\Repositories\MembersRepository;
@@ -66,6 +72,18 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             CardsRepositoryInterface::class,
             CardsRepository::class
+        );
+        $this->app->bind(
+            EventsRepositoryInterface::class,
+            EventsRepository::class
+        );
+        $this->app->bind(
+            EventCardsRepositoryInterface::class,
+            EventCardsRepository::class
+        );
+        $this->app->bind(
+            EventMembersRepositoryInterface::class,
+            EventMembersRepository::class
         );
     }
 

@@ -22,6 +22,7 @@ mix.autoload({
     .js('resources/js/interactions.js', 'public/js')
     .js('resources/js/flatpickrs.js', 'public/js')
     .js('resources/js/tunes.js', 'public/js')
+    .js('resources/js/events.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
     .sourceMaps();

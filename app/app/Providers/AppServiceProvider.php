@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\CardsService;
 use App\Services\ChangeLogsService;
+use App\Services\EventsService;
 use App\Services\IconsService;
 use App\Services\InteractionsService;
 use App\Services\MembersService;
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('ChangeLogsService', ChangeLogsService::class);
         $this->app->bind('TunesService', TunesService::class);
         $this->app->bind('CardsService', CardsService::class);
+        $this->app->bind('EventsService', EventsService::class);
     }
 
     /**

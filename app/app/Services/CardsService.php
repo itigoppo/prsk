@@ -44,6 +44,31 @@ class CardsService
     {
         $search = [];
 
+        if (!empty($query['mids'])) {
+            $search[] = [
+                'type' => 'whereIn',
+                'column' => 'member_id',
+                'values' => $query['mids'],
+            ];
+        }
+        // released_at before
+        if (!empty($query['ratb'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'released_at',
+                'operator' => '<=',
+                'value' => $query['ratb'],
+            ];
+        }
+        if (!empty($query['at'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'attribute',
+                'operator' => '=',
+                'value' => $query['at'],
+            ];
+        }
+
         return $this->cardsRepository->findAll($search, $order);
     }
 

@@ -54,6 +54,14 @@ class TunesService
                 'value' => $query['tp'],
             ];
         }
+        if (!empty($query['n'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'name',
+                'operator' => 'like BINARY',
+                'value' => '%' . $query['n'] . '%',
+            ];
+        }
 
         return $this->tunesRepository->findPaginate($search, $order, $limit);
     }

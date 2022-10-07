@@ -7,6 +7,7 @@ use App\Enums\VocalType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tunes\TuneCreate;
 use App\Http\Requests\Tunes\TuneUpdate;
+use Illuminate\Http\Request;
 
 class TunesController extends Controller
 {
@@ -14,15 +15,16 @@ class TunesController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function index()
+    public function index(Request $request)
     {
         /** @var \App\Services\TunesService $tunesService */
         $tunesService = app()->make('TunesService');
 
-        $tunes = $tunesService->findPaginate([], ['id' => 'desc']);
+        $tunes = $tunesService->findPaginate($request->query(), ['id' => 'desc']);
 
         return view('admin.tunes.index', [
             'tunes' => $tunes,
+            'search' => $request->query(),
         ]);
     }
 

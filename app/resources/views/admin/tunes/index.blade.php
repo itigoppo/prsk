@@ -1,6 +1,7 @@
 @php
     /**
      * @var \App\Models\Tune[]|\Illuminate\Contracts\Pagination\LengthAwarePaginator $tunes
+     * @var array $search
      */
 @endphp
 
@@ -18,6 +19,39 @@
                    class="btn btn-sm btn-outline-primary">
                     <i class="fa-solid fa-pen-to-square"></i> 新規作成
                 </a>
+            </div>
+
+            <div class="card mb-3">
+                <div
+                    class="card-header d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-0 border-bottom">
+                    <h3 class="h6">検索</h3>
+                </div>
+                <div class="card-body search">
+                    <form method="GET" action="{{ route('admin.tunes.index') }}">
+                        <div class="row mb-2">
+                            <div class="form-group">
+                                <label for="name" class="col-form-label text-md-end">楽曲名</label>
+                                <input id="name" type="text"
+                                       class="form-control" name="n"
+                                       value="{{ !empty($search['n']) ? $search['n'] : '' }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-0 mx-5">
+                            <div class="col">
+                                <a href="{{ route('admin.tunes.index') }}"
+                                   class="btn btn-sm btn-outline-dark w-100">
+                                    <i class="fa-solid fa-rotate"></i> リセット
+                                </a>
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary btn-sm w-100">
+                                    <i class="fa-solid fa-magnifying-glass"></i> 検索
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <div class="row">

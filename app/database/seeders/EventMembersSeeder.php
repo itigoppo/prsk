@@ -1700,7 +1700,198 @@ class EventMembersSeeder extends Seeder
                 'event_id' => 66,
                 'member_id' =>  45,
             ],
-
+            [
+                'event_id' => 67,
+                'member_id' => 17,
+            ],
+            [
+                'event_id' => 67,
+                'member_id' =>  18,
+            ],
+            [
+                'event_id' => 67,
+                'member_id' =>  19,
+            ],
+            [
+                'event_id' => 67,
+                'member_id' =>  20,
+            ],
+            [
+                'event_id' => 67,
+                'member_id' =>  21,
+            ],
+            [
+                'event_id' => 67,
+                'member_id' =>  22,
+            ],
+            [
+                'event_id' => 67,
+                'member_id' =>  23,
+            ],
+            [
+                'event_id' => 67,
+                'member_id' =>  24,
+            ],
+            [
+                'event_id' => 67,
+                'member_id' =>  26,
+            ],
+            [
+                'event_id' => 68,
+                'member_id' => 47,
+            ],
+            [
+                'event_id' => 68,
+                'member_id' =>  48,
+            ],
+            [
+                'event_id' => 68,
+                'member_id' =>  49,
+            ],
+            [
+                'event_id' => 68,
+                'member_id' =>  50,
+            ],
+            [
+                'event_id' => 68,
+                'member_id' =>  51,
+            ],
+            [
+                'event_id' => 68,
+                'member_id' =>  53,
+            ],
+            [
+                'event_id' => 68,
+                'member_id' =>  54,
+            ],
+            [
+                'event_id' => 68,
+                'member_id' =>  55,
+            ],
+            [
+                'event_id' => 68,
+                'member_id' =>  56,
+            ],
+            [
+                'event_id' => 69,
+                'member_id' => 7,
+            ],
+            [
+                'event_id' => 69,
+                'member_id' =>  8,
+            ],
+            [
+                'event_id' => 69,
+                'member_id' =>  9,
+            ],
+            [
+                'event_id' => 69,
+                'member_id' =>  10,
+            ],
+            [
+                'event_id' => 69,
+                'member_id' =>  11,
+            ],
+            [
+                'event_id' => 69,
+                'member_id' =>  12,
+            ],
+            [
+                'event_id' => 69,
+                'member_id' =>  13,
+            ],
+            [
+                'event_id' => 69,
+                'member_id' =>  14,
+            ],
+            [
+                'event_id' => 69,
+                'member_id' =>  15,
+            ],
+            [
+                'event_id' => 69,
+                'member_id' =>  16,
+            ],
+            [
+                'event_id' => 70,
+                'member_id' => 9,
+            ],
+            [
+                'event_id' => 70,
+                'member_id' =>  15,
+            ],
+            [
+                'event_id' => 70,
+                'member_id' =>  44,
+            ],
+            [
+                'event_id' => 70,
+                'member_id' =>  53,
+            ],
+            [
+                'event_id' => 70,
+                'member_id' =>  55,
+            ],
+            [
+                'event_id' => 71,
+                'member_id' => 27,
+            ],
+            [
+                'event_id' => 71,
+                'member_id' =>  28,
+            ],
+            [
+                'event_id' => 71,
+                'member_id' =>  29,
+            ],
+            [
+                'event_id' => 71,
+                'member_id' =>  30,
+            ],
+            [
+                'event_id' => 71,
+                'member_id' =>  31,
+            ],
+            [
+                'event_id' => 71,
+                'member_id' =>  32,
+            ],
+            [
+                'event_id' => 71,
+                'member_id' =>  33,
+            ],
+            [
+                'event_id' => 71,
+                'member_id' =>  34,
+            ],
+            [
+                'event_id' => 71,
+                'member_id' =>  35,
+            ],
+            [
+                'event_id' => 71,
+                'member_id' =>  36,
+            ],
+            [
+                'event_id' => 72,
+                'member_id' => 15,
+            ],
+            [
+                'event_id' => 72,
+                'member_id' =>  26,
+            ],
+            [
+                'event_id' => 72,
+                'member_id' =>  35,
+            ],
+            [
+                'event_id' => 72,
+                'member_id' =>  46,
+            ],
+            [
+                'event_id' => 72,
+                'member_id' =>  54,
+            ],
 
         ];
 

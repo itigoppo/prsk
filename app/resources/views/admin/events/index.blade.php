@@ -50,6 +50,7 @@
                             </td>
                             <td>
                                 {{ $event->starts_at->format('Y/m/d') }} 〜 {{ $event->ends_at->format('Y/m/d') }}
+                                ({{ $event->starts_at->diffInDays($event->ends_at) }})
                             </td>
                             <td>
                                 @if($event->unit_count === 1)

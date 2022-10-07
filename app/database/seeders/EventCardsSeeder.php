@@ -1671,6 +1671,156 @@ class EventCardsSeeder extends Seeder
                 'is_banner' => false,
                 'card_id' => 457,
             ],
+            [
+                'event_id' => 67,
+                'is_banner' => true,
+                'card_id' => 458,
+            ],
+            [
+                'event_id' => 67,
+                'is_banner' => false,
+                'card_id' => 459,
+            ],
+            [
+                'event_id' => 67,
+                'is_banner' => false,
+                'card_id' => 460,
+            ],
+            [
+                'event_id' => 67,
+                'is_banner' => false,
+                'card_id' => 461,
+            ],
+            [
+                'event_id' => 67,
+                'is_banner' => false,
+                'card_id' => 462,
+            ],
+            [
+                'event_id' => 68,
+                'is_banner' => true,
+                'card_id' => 464,
+            ],
+            [
+                'event_id' => 68,
+                'is_banner' => false,
+                'card_id' => 465,
+            ],
+            [
+                'event_id' => 68,
+                'is_banner' => false,
+                'card_id' => 466,
+            ],
+            [
+                'event_id' => 68,
+                'is_banner' => false,
+                'card_id' => 467,
+            ],
+            [
+                'event_id' => 68,
+                'is_banner' => false,
+                'card_id' => 468,
+            ],
+            [
+                'event_id' => 69,
+                'is_banner' => true,
+                'card_id' => 471,
+            ],
+            [
+                'event_id' => 69,
+                'is_banner' => false,
+                'card_id' => 472,
+            ],
+            [
+                'event_id' => 69,
+                'is_banner' => false,
+                'card_id' => 473,
+            ],
+            [
+                'event_id' => 69,
+                'is_banner' => false,
+                'card_id' => 474,
+            ],
+            [
+                'event_id' => 69,
+                'is_banner' => false,
+                'card_id' => 475,
+            ],
+            [
+                'event_id' => 70,
+                'is_banner' => true,
+                'card_id' => 477,
+            ],
+            [
+                'event_id' => 70,
+                'is_banner' => false,
+                'card_id' => 478,
+            ],
+            [
+                'event_id' => 70,
+                'is_banner' => false,
+                'card_id' => 479,
+            ],
+            [
+                'event_id' => 70,
+                'is_banner' => false,
+                'card_id' => 480,
+            ],
+            [
+                'event_id' => 70,
+                'is_banner' => false,
+                'card_id' => 481,
+            ],
+            [
+                'event_id' => 71,
+                'is_banner' => true,
+                'card_id' => 482,
+            ],
+            [
+                'event_id' => 71,
+                'is_banner' => false,
+                'card_id' => 483,
+            ],
+            [
+                'event_id' => 71,
+                'is_banner' => false,
+                'card_id' => 484,
+            ],
+            [
+                'event_id' => 71,
+                'is_banner' => false,
+                'card_id' => 485,
+            ],
+            [
+                'event_id' => 71,
+                'is_banner' => false,
+                'card_id' => 486,
+            ],
+            [
+                'event_id' => 72,
+                'is_banner' => true,
+                'card_id' => 489,
+            ],
+            [
+                'event_id' => 72,
+                'is_banner' => false,
+                'card_id' => 490,
+            ],
+            [
+                'event_id' => 72,
+                'is_banner' => false,
+                'card_id' => 491,
+            ],
+            [
+                'event_id' => 72,
+                'is_banner' => false,
+                'card_id' => 492,
+            ],
+            [
+                'event_id' => 72,
+                'is_banner' => false,
+                'card_id' => 493,
+            ],
 
         ];
 

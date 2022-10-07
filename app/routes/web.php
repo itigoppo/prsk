@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\InteractionsController;
 use App\Http\Controllers\Admin\MembersController;
 use App\Http\Controllers\Admin\TunesController;
 use App\Http\Controllers\Admin\UnitsController;
+use App\Http\Controllers\Admin\VirtualLivesController;
 use App\Http\Controllers\Front\InteractionsController as FrontInteractionsController;
 use App\Http\Controllers\MediasController;
 use Illuminate\Support\Facades\Auth;
@@ -291,6 +292,36 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
 
                 Route::post('delete', [EventsController::class, 'delete'])
                     ->name('delete');
+            });
+        });
+
+        Route::group(['prefix' => 'lives', 'as' => 'lives.'], function () {
+            //　バーチャルライブ管理
+            Route::group(['prefix' => 'virtual', 'as' => 'virtual.'], function () {
+                Route::get('/', [VirtualLivesController::class, 'index'])
+                    ->name('index');
+
+                Route::get('create', [VirtualLivesController::class, 'showCreateForm'])
+                    ->name('create');
+
+                Route::post('create', [VirtualLivesController::class, 'create']);
+
+                Route::group([
+                    'prefix' => '{virtual_live_id}',
+                    'where' => ['virtual_live_id' => '[0-9]+'],
+                ], function () {
+                    Route::get('/', [VirtualLivesController::class, 'view'])
+                        ->name('view');
+
+                    Route::get('edit', [VirtualLivesController::class, 'showUpdateForm'])
+                        ->name('update');
+
+                    Route::post('edit', [VirtualLivesController::class, 'update'])
+                        ->name('update');
+
+                    Route::post('delete', [VirtualLivesController::class, 'delete'])
+                        ->name('delete');
+                });
             });
         });
     });

@@ -14,6 +14,9 @@ use App\Interfaces\MembersRepositoryInterface;
 use App\Interfaces\TunesRepositoryInterface;
 use App\Interfaces\UnitsRepositoryInterface;
 use App\Interfaces\SingersRepositoryInterface;
+use App\Interfaces\VirtualLiveMembersRepositoryInterface;
+use App\Interfaces\VirtualLivesRepositoryInterface;
+use App\Interfaces\VirtualLiveTunesRepositoryInterface;
 use App\Repositories\CardsRepository;
 use App\Repositories\ChangeLogsRepository;
 use App\Repositories\DancersRepository;
@@ -26,6 +29,9 @@ use App\Repositories\MembersRepository;
 use App\Repositories\TunesRepository;
 use App\Repositories\UnitsRepository;
 use App\Repositories\SingersRepository;
+use App\Repositories\VirtualLiveMembersRepository;
+use App\Repositories\VirtualLivesRepository;
+use App\Repositories\VirtualLiveTunesRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -84,6 +90,18 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             EventMembersRepositoryInterface::class,
             EventMembersRepository::class
+        );
+        $this->app->bind(
+            VirtualLivesRepositoryInterface::class,
+            VirtualLivesRepository::class
+        );
+        $this->app->bind(
+            VirtualLiveMembersRepositoryInterface::class,
+            VirtualLiveMembersRepository::class
+        );
+        $this->app->bind(
+            VirtualLiveTunesRepositoryInterface::class,
+            VirtualLiveTunesRepository::class
         );
     }
 

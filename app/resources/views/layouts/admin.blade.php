@@ -87,7 +87,7 @@
 
 <div id="page-body-wrapper" class="container-fluid">
     <div class="row">
-        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse pt-3">
+        <nav id="sidebar" class="col-lg-2 d-md-block bg-light sidebar collapse pt-3">
             <div class="position-sticky">
                 <ul class="nav nav-pills flex-column mb-auto">
                     @if ( Request::routeIs('admin.home') )
@@ -288,12 +288,28 @@
                             </li>
                         @endif
 
+                        @if ( Request::routeIs('admin.lives.virtual.*') )
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ route('admin.lives.virtual.index') }}">
+                                    <i class="fa-solid fa-film"></i>
+                                    <span class="ml-2">バーチャルライブ管理</span>
+                                </a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.lives.virtual.index') }}">
+                                    <i class="fa-solid fa-film"></i>
+                                    <span class="ml-2">バーチャルライブ管理</span>
+                                </a>
+                            </li>
+                        @endif
+
                     @endcan
                 </ul>
             </div>
         </nav>
 
-        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+        <main class="ml-sm-auto col-lg-9 px-md-4 py-4">
             <div id="page-move">
                 <i id="page-top" class="fa-solid fa-circle-up"
                    style="font-size: 2rem; position: fixed; bottom: 14%; right: 3%; cursor: pointer; z-index: 100;"></i>

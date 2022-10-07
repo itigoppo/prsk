@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300&display=swap');
+
+body {
+  font-family: 'M PLUS 1p', sans-serif;
+}
+
 #auth-form {
   width: 350px;
 }
@@ -28,6 +34,7 @@
 .sidebar {
   box-shadow: 5px 0 3px -2px var(--bs-gray-300);
   min-height: calc(100vh - 55px);
+  width: 230px;
 
   .nav {
     overflow: hidden;
@@ -99,7 +106,8 @@
     }
   }
 }
-@media screen and (max-width: 991px) {
+
+@media screen and (max-width: 767px) {
   .sidebar {
     position: fixed;
     top: 55px;
@@ -112,4 +120,12 @@
 
 main {
   min-height: calc(100vh - 55px);
+}
+
+@media screen and (min-width: 768px) {
+  #page-body-wrapper {
+    main {
+      width: calc(100vw - 230px) !important;
+    }
+  }
 }

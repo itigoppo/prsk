@@ -330,3 +330,39 @@ Breadcrumbs::for('admin.events.update', function (BreadcrumbTrail $trail, array 
     );
     $trail->push('イベント編集', route('admin.events.update', ['event_id' => $event->id]));
 });
+
+Breadcrumbs::for('admin.lives.virtual.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('バーチャルライブ管理', route('admin.lives.virtual.index'));
+});
+
+Breadcrumbs::for('admin.lives.virtual.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('バーチャルライブ管理', route('admin.lives.virtual.index'));
+    $trail->push('バーチャルライブ作成', route('admin.lives.virtual.create'));
+});
+
+Breadcrumbs::for('admin.lives.virtual.view', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\VirtualLive $virtualLive */
+    $virtualLive = $breadcrumbs['virtualLive'];
+
+    $trail->parent('admin.home');
+    $trail->push('バーチャルライブ管理', route('admin.lives.virtual.index'));
+    $trail->push(
+        'バーチャルライブ詳細: ' . $virtualLive->name,
+        route('admin.lives.virtual.view', ['virtual_live_id' => $virtualLive->id])
+    );
+});
+
+Breadcrumbs::for('admin.lives.virtual.update', function (BreadcrumbTrail $trail, array $breadcrumbs) {
+    /** @var \App\Models\VirtualLive $virtualLive */
+    $virtualLive = $breadcrumbs['virtualLive'];
+
+    $trail->parent('admin.home');
+    $trail->push('バーチャルライブ管理', route('admin.lives.virtual.index'));
+    $trail->push(
+        $virtualLive->name,
+        route('admin.lives.virtual.view', ['virtual_live_id' => $virtualLive->id])
+    );
+    $trail->push('バーチャルライブ編集', route('admin.lives.virtual.update', ['virtual_live_id' => $virtualLive->id]));
+});

@@ -10,6 +10,7 @@ use App\Services\InteractionsService;
 use App\Services\MembersService;
 use App\Services\TunesService;
 use App\Services\UnitsService;
+use App\Services\VirtualLivesService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('TunesService', TunesService::class);
         $this->app->bind('CardsService', CardsService::class);
         $this->app->bind('EventsService', EventsService::class);
+        $this->app->bind('VirtualLivesService', VirtualLivesService::class);
     }
 
     /**

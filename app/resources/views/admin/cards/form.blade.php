@@ -172,7 +172,33 @@
             <label class="form-check-label" for="has-hair-style">ヘアスタイルあり</label>
         </div>
 
+        <div class="checkbox icheck-primary icheck-inline">
+            <input id="is-limited" class="form-check-input @error('is_limited') is-invalid @enderror"
+                   type="checkbox"
+                   name="is_limited"
+                   value="1"{{ old('is_limited', $card->is_limited ?? '') ? ' checked' : '' }}>
+            <label class="form-check-label" for="is-limited">限定</label>
+        </div>
+
+        <div class="checkbox icheck-primary icheck-inline">
+            <input id="is-fes" class="form-check-input @error('is_fes') is-invalid @enderror"
+                   type="checkbox"
+                   name="is_fes"
+                   value="1"{{ old('is_fes', $card->is_fes ?? '') ? ' checked' : '' }}>
+            <label class="form-check-label" for="is-fes">フェス限</label>
+        </div>
+
         @error('has_hair_style')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+        @error('is_limited')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+        @error('is_fes')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>

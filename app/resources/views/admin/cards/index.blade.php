@@ -25,7 +25,7 @@
                 <table class="table table-hover table-striped">
                     <thead>
                     <tr>
-                        <th style="width: 120px">イラスト</th>
+                        <th style="width: 130px">イラスト</th>
                         <th>レア</th>
                         <th>属性</th>
                         <th>カード名</th>

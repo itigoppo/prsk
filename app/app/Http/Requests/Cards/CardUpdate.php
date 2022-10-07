@@ -18,6 +18,8 @@ use Illuminate\Foundation\Http\FormRequest;
  * @property string $skill_name
  * @property string $costume
  * @property bool $has_hair_style
+ * @property bool $is_limited
+ * @property bool $is_fes
  * @property int $performance
  * @property int $technique
  * @property int $stamina
@@ -79,6 +81,12 @@ class CardUpdate extends FormRequest
             'has_hair_style' => [
                 'boolean',
             ],
+            'is_limited' => [
+                'boolean',
+            ],
+            'is_fes' => [
+                'boolean',
+            ],
             'performance' => [
                 'nullable',
                 'numeric',
@@ -121,6 +129,8 @@ class CardUpdate extends FormRequest
             'skill_name' => 'スキル名',
             'costume' => '衣装名',
             'has_hair_style' => 'ヘアスタイル',
+            'is_limited' => '限定',
+            'is_fes' => 'フェス限',
             'performance' => 'パフォーマンス',
             'technique' => 'テクニック',
             'stamina' => 'スタミナ',

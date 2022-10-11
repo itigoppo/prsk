@@ -656,6 +656,26 @@ class MembersSeeder extends Seeder
                 'color' => '#000000',
                 'is_active' => 1,
             ],
+            [
+                'unit_id' => 7,
+                'icon_id' => NULL,
+                'code' => 'vo_kafu',
+                'name' => '可不',
+                'short' => '可不',
+                'bg_color' => '#e9ecef',
+                'color' => '#000000',
+                'is_active' => 1,
+            ],
+            [
+                'unit_id' => 7,
+                'icon_id' => NULL,
+                'code' => 'vo_gackpo',
+                'name' => '神威がくぽ',
+                'short' => 'がくぽ',
+                'bg_color' => '#e9ecef',
+                'color' => '#000000',
+                'is_active' => 1,
+            ],
         ];
 
         DB::table('members')->truncate();

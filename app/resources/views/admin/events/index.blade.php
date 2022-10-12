@@ -38,11 +38,13 @@
                     @foreach($events as $event)
                         <tr>
                             <td>
-                                @if(!empty($event->bannerCard->card->member->icon))
-                                    <img src="{{ route('admin.icons.display', ['icon_id' => $event->bannerCard->card->member->icon->id]) }}"
-                                         class="rounded-circle" style="width: 40px;">
-                                @else
-                                    {{ $event->bannerCard->card->member->display_short }}
+                                @if(!empty($event->bannerCard))
+                                    @if(!empty($event->bannerCard->card->member->icon))
+                                        <img src="{{ route('admin.icons.display', ['icon_id' => $event->bannerCard->card->member->icon->id]) }}"
+                                             class="rounded-circle" style="width: 40px;">
+                                    @else
+                                        {{ $event->bannerCard->card->member->display_short }}
+                                    @endif
                                 @endif
                             </td>
                             <td>

@@ -66,8 +66,8 @@ class CardsRepository implements CardsRepositoryInterface
         $entity->performance = $request->get('performance', 0);
         $entity->technique = $request->get('technique', 0);
         $entity->stamina = $request->get('stamina', 0);
-        $entity->normal_file = $request->normal_file_path;
-        $entity->after_training_file = $request->after_training_file_path;
+        $entity->normal_file = empty($request->normal_file_path) ? null : $request->normal_file_path;
+        $entity->after_training_file = empty($request->after_training_file_path) ? null : $request->after_training_file_path;
 
         return $entity->save();
     }
@@ -88,8 +88,8 @@ class CardsRepository implements CardsRepositoryInterface
         $entity->performance = $request->get('performance', 0);
         $entity->technique = $request->get('technique', 0);
         $entity->stamina = $request->get('stamina', 0);
-        $entity->normal_file = $request->normal_file_path;
-        $entity->after_training_file = $request->after_training_file_path;
+        $entity->normal_file = empty($request->normal_file_path) ? null : $request->normal_file_path;
+        $entity->after_training_file = empty($request->after_training_file_path) ? null : $request->after_training_file_path;
 
         return $entity->save();
     }

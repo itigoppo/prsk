@@ -270,6 +270,12 @@ Breadcrumbs::for('admin.cards.create', function (BreadcrumbTrail $trail) {
     $trail->push('カード作成', route('admin.cards.create'));
 });
 
+Breadcrumbs::for('admin.cards.bulk', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('カード管理', route('admin.cards.index'));
+    $trail->push('カード作成(一括)', route('admin.cards.bulk'));
+});
+
 Breadcrumbs::for('admin.cards.view', function (BreadcrumbTrail $trail, array $breadcrumbs) {
     /** @var \App\Models\Card $card */
     $card = $breadcrumbs['card'];

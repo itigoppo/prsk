@@ -10,6 +10,7 @@ use App\Http\Requests\Cards\CardCreate;
 use App\Http\Requests\Cards\CardUpdate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class CardsController extends Controller
 {
@@ -194,5 +195,44 @@ class CardsController extends Controller
         }
 
         return Storage::disk('local')->download($path);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function showBulkInsert()
+    {
+        return view('admin.cards.bulk', [
+        ]);
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function bulkInsert(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
+
+        $validator = Validator::make($request->toArray(), ['import_csv' => 'required|mimes:csv,txt']);
+
+        if ($validator->fails()) {
+            $result = false;
+        } else {
+            $result = $cardsService->bulk($request);
+        }
+
+        if ($result) {
+            $messageKey = 'success';
+            $flashMessage = __('crud.create_success');
+        } else {
+            $messageKey = 'error';
+            $flashMessage = __('crud.create_failed');
+        }
+
+        return redirect()->route('admin.cards.index')->with($messageKey, $flashMessage);
     }
 }

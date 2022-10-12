@@ -18,6 +18,10 @@
                    class="btn btn-sm btn-outline-primary">
                     <i class="fa-solid fa-pen-to-square"></i> 新規作成
                 </a>
+                <a href="{{ route('admin.cards.bulk') }}"
+                   class="btn btn-sm btn-outline-primary">
+                    <i class="fa-solid fa-file-csv"></i> CSVインポート
+                </a>
             </div>
 
             <div class="row">

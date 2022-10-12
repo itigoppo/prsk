@@ -246,6 +246,11 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
 
             Route::post('create', [CardsController::class, 'create']);
 
+            Route::get('bulk', [CardsController::class, 'showBulkInsert'])
+                ->name('bulk');
+
+            Route::post('bulk', [CardsController::class, 'bulkInsert']);
+
             Route::group([
                 'prefix' => '{card_id}',
                 'where' => ['card_id' => '[0-9]+'],

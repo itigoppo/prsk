@@ -42,7 +42,11 @@
                             {{ $event->starts_at->format('Y/m/d') }} 〜 {{ $event->ends_at->format('Y/m/d') }}
                         </dd>
                         <dt class="col-sm-3">バナー</dt>
-                        <dd class="col-sm-9">{{ $event->bannerCard->card->member->display_name }}</dd>
+                        <dd class="col-sm-9">
+                            @if(!empty($event->bannerCard))
+                                {{ $event->bannerCard->card->member->display_name }}
+                            @endif
+                        </dd>
                         <dt class="col-sm-3">ユニット</dt>
                         <dd class="col-sm-9">
                             @if($event->unit_count === 1)

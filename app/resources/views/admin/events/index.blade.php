@@ -57,7 +57,7 @@
                             <td>
                                 @if($event->unit_count === 1)
                                     <span class="badge"
-                                          style="background-color: {{ $event->eventMembers->first()->member->unit->bg_color }}; color: {{ $event->eventMembers->first()->member->unit->color }}">{{ $event->eventMembers->first()->member->unit->short }}</span>
+                                          style="background-color: {{ $event->bannerCard->card->member->unit->bg_color }}; color: {{ $event->bannerCard->card->member->unit->color }}">{{ $event->bannerCard->card->member->unit->short }}</span>
                                 @elseif($event->unit_count > 1)
                                     混合
                                 @else

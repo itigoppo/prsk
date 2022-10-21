@@ -8,6 +8,7 @@ use App\Services\EventsService;
 use App\Services\IconsService;
 use App\Services\InteractionsService;
 use App\Services\MembersService;
+use App\Services\ReportsService;
 use App\Services\TunesService;
 use App\Services\UnitsService;
 use App\Services\VirtualLivesService;
@@ -32,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('CardsService', CardsService::class);
         $this->app->bind('EventsService', EventsService::class);
         $this->app->bind('VirtualLivesService', VirtualLivesService::class);
+        $this->app->bind('ReportsService', ReportsService::class);
     }
 
     /**

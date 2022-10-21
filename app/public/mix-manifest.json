@@ -9,6 +9,7 @@
     "/js/tunes.js": "/js/tunes.js",
     "/js/events.js": "/js/events.js",
     "/js/virtual-lives.js": "/js/virtual-lives.js",
+    "/js/sortable-tables.js": "/js/sortable-tables.js",
     "/css/admin.css": "/css/admin.css",
     "/css/app.css": "/css/app.css"
 }

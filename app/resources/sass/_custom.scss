@@ -170,3 +170,36 @@
   right: 0;
   z-index: 1040;
 }
+
+table {
+  &.table-sort {
+    thead {
+      th {
+        &.sort-arrow {
+          cursor: pointer;
+          &:after {
+            font: var(--fa-font-solid);
+            content: " \f0dc";
+            color: var(--bs-gray-700);
+          }
+        }
+        &.sort-arrow-up {
+          cursor: pointer;
+          &:after {
+            font: var(--fa-font-solid);
+            content: " \f0de";
+            color: var(--bs-gray-700);
+          }
+        }
+        &.sort-arrow-down {
+          cursor: pointer;
+          &:after {
+            font: var(--fa-font-solid);
+            content: " \f0dd";
+            color: var(--bs-gray-700);
+          }
+        }
+      }
+    }
+  }
+}

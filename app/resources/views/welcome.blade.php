@@ -75,6 +75,13 @@
                     </p>
                 @endif
 
+                @if (Route::has('front.reports.index'))
+                    <h3><a href="{{ route('front.reports.index') }}">集計</a></h3>
+                    <p>
+                        カード枚数とかイベント最終日とかの集計。
+                    </p>
+                @endif
+
             </div>
         </div>
     </div>

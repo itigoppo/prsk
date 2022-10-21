@@ -95,6 +95,19 @@
                             </li>
                         @endif
                     @endif
+
+                    @if (Route::has('front.reports.index'))
+                        @if ( Request::routeIs('front.reports.*') )
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ route('front.reports.index') }}">集計 <i
+                                        class="fa-solid fa-circle-chevron-left"></i></a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('front.reports.index') }}">集計</a>
+                            </li>
+                        @endif
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->

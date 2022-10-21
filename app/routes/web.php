@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\TunesController;
 use App\Http\Controllers\Admin\UnitsController;
 use App\Http\Controllers\Admin\VirtualLivesController;
 use App\Http\Controllers\Front\InteractionsController as FrontInteractionsController;
+use App\Http\Controllers\Front\ReportsController;
 use App\Http\Controllers\MediasController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -366,5 +367,10 @@ Route::group(['as' => 'front.'], function () {
             Route::get('lookup', [FrontInteractionsController::class, 'lookup'])
                 ->name('lookup');
         });
+    });
+
+    Route::group(['prefix' => 'reports', 'as' => 'reports.'], function () {
+        Route::get('/', [ReportsController::class, 'index'])
+            ->name('index');
     });
 });

@@ -3,7 +3,7 @@
      * @var \App\Models\Interaction[]|\Illuminate\Contracts\Pagination\LengthAwarePaginator $interactions
      * @var \App\Models\Unit[] $units
      * @var array $search
-     * @var @var \App\Models\ChangeLog[] $changeLogs
+     * @var \App\Models\ChangeLog[] $changeLogs
      */
 @endphp
 

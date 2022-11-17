@@ -40,11 +40,11 @@ class ChangeLogsService
     }
 
     /**
-     * @param array $search
+     * @param array $query
      * @param array $order
      * @return \App\Models\ChangeLog[]|ChangeLogsRepository[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function findAll(array $search = [], array $order = [])
+    public function findAll(array $query = [], array $order = [])
     {
         $search = [];
         if (!empty($query['tp'])) {

@@ -28,17 +28,19 @@ class ReportsController extends Controller
 
         $card = $cardsService->findAll()->first();
 
-        $eventMembers = $reportsService->eventAggregationByMembers();
-        $eventUnits = $reportsService->eventAggregationByUnits();
-        $cards = $reportsService->cardAggregation();
+        $eventsByMember = $reportsService->eventAggregationByMembers();
+        $eventsByUnit = $reportsService->eventAggregationByUnits();
+        $cardsByRarity = $reportsService->cardAggregationByRarity();
+        $cardsByAttribute = $reportsService->cardAggregationByAttribute();
 
         return view('front.reports.index', [
             'units' => $units,
             'members' => $members,
             'card' => $card,
-            'eventUnits' => $eventUnits,
-            'eventMembers' => $eventMembers,
-            'cardMembers' => $cards,
+            'eventsByUnit' => $eventsByUnit,
+            'eventsByMember' => $eventsByMember,
+            'cardsByRarity' => $cardsByRarity,
+            'cardsByAttribute' => $cardsByAttribute,
         ]);
     }
 }

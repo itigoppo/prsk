@@ -165,9 +165,10 @@ class ReportsService
     /**
      * @return array
      */
-    public function cardAggregation(): array
+    public function cardAggregationByRarity(): array
     {
         $cards = $this->cardsRepository->findAll([], ['released_at' => 'asc']);
+        $virtualSingers = ['miku', 'rin', 'len', 'luka', 'meiko', 'kaito'];
 
         $members = [];
         foreach ($cards as $card) {
@@ -202,6 +203,7 @@ class ReportsService
                 $members[$card->member_id]['fes']['count']++;
                 $members[$card->member_id]['fes']['date'] = $card->released_at;
             }
+
             // 通常限
             if ($card->is_limited && !$card->is_fes) {
                 if (!isset($members[$card->member_id]['limited']['count'])) {
@@ -210,6 +212,7 @@ class ReportsService
                 $members[$card->member_id]['limited']['count']++;
                 $members[$card->member_id]['limited']['date'] = $card->released_at;
             }
+
             // 限定合計
             if ($card->is_limited) {
                 if (!isset($members[$card->member_id]['hair_style']['count'])) {
@@ -217,7 +220,91 @@ class ReportsService
                 }
                 $members[$card->member_id]['hair_style']['count']++;
             }
+
+            // バチャはまとめる
+            foreach ($virtualSingers as $key => $virtualSinger) {
+                if (Str::endsWith($card->member->code, $virtualSinger)) {
+                    // 合計
+                    if (!isset($members['vs'][$key]['total']['count'])) {
+                        $members['vs'][$key]['total']['count'] = 0;
+                    }
+                    $members['vs'][$key]['total']['count']++;
+
+                    // レアリティ毎
+                    if (!isset($members['vs'][$key][$card->rarity->value]['count'])) {
+                        $members['vs'][$key][$card->rarity->value]['count'] = 0;
+                    }
+                    $members['vs'][$key][$card->rarity->value]['count']++;
+
+                    // 恒常星4
+                    if ($card->rarity->value === Rarity::STAR_FOUR && !$card->is_limited) {
+                        if (!isset($members['vs'][$key]['regular']['count'])) {
+                            $members['vs'][$key]['regular']['count'] = 0;
+                        }
+                        $members['vs'][$key]['regular']['count']++;
+                    }
+
+                    // フェス限
+                    if ($card->is_fes) {
+                        if (!isset($members['vs'][$key]['fes']['count'])) {
+                            $members['vs'][$key]['fes']['count'] = 0;
+                        }
+                        $members['vs'][$key]['fes']['count']++;
+                    }
+
+                    // 通常限
+                    if ($card->is_limited && !$card->is_fes) {
+                        if (!isset($members['vs'][$key]['limited']['count'])) {
+                            $members['vs'][$key]['limited']['count'] = 0;
+                        }
+                        $members['vs'][$key]['limited']['count']++;
+                    }
+
+                    // 限定合計
+                    if ($card->is_limited) {
+                        if (!isset($members['vs'][$key]['hair_style']['count'])) {
+                            $members['vs'][$key]['hair_style']['count'] = 0;
+                        }
+                        $members['vs'][$key]['hair_style']['count']++;
+                    }
+                }
+            }
         }
+
+        $members['vs'] = collect($members['vs']);
+
+        return $members;
+    }
+
+    /**
+     * @return array
+     */
+    public function cardAggregationByAttribute(): array
+    {
+        $cards = $this->cardsRepository->findAll([], ['released_at' => 'asc']);
+        $virtualSingers = ['miku', 'rin', 'len', 'luka', 'meiko', 'kaito'];
+
+        $members = [];
+        foreach ($cards as $card) {
+            /** @var \App\Models\Card $card */
+
+            if (!isset($members[$card->member_id][$card->rarity->value][$card->attribute->value])) {
+                $members[$card->member_id][$card->rarity->value][$card->attribute->value] = 0;
+            }
+            $members[$card->member_id][$card->rarity->value][$card->attribute->value]++;
+
+            // バチャはまとめる
+            foreach ($virtualSingers as $key => $virtualSinger) {
+                if (Str::endsWith($card->member->code, $virtualSinger)) {
+                    if (!isset($members['vs'][$key][$card->rarity->value][$card->attribute->value])) {
+                        $members['vs'][$key][$card->rarity->value][$card->attribute->value] = 0;
+                    }
+                    $members['vs'][$key][$card->rarity->value][$card->attribute->value]++;
+                }
+            }
+        }
+
+        $members['vs'] = collect($members['vs']);
 
         return $members;
     }

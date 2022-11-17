@@ -23,6 +23,9 @@
             <li class="nav-item">
                 <a href="#card-released-at" class="nav-link{{ $current === 'card-released-at' ? ' active' : '' }}">カード実装日集計</a>
             </li>
+            <li class="nav-item">
+                <a href="#card-attribute" class="nav-link{{ $current === 'card-attribute' ? ' active' : '' }}">タイプ別カード集計</a>
+            </li>
             <p class="mt-2 h6 text-danger">
                 <i class="fa-solid fa-circle-exclamation"></i> 集計データはカード「{{ $card->display_name }}」実装分まで({{ $card->released_at->format('Y/m/d') }})
             </p>

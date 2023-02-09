@@ -174,7 +174,7 @@
     </div>
 </div>
 @php
-    $cardIndex = old('card_index', empty($event->eventCards) ? 0 : $event->eventCards->count());
+    $cardIndex = old('card_index', empty($event->eventCards) ? 4 : $event->eventCards->count());
 @endphp
 
 @for ($i = 0; $i <= $cardIndex; $i++)

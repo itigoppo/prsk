@@ -40,8 +40,9 @@
                             <td>
                                 @if(!empty($event->bannerCard))
                                     @if(!empty($event->bannerCard->card->member->icon))
-                                        <img src="{{ route('admin.icons.display', ['icon_id' => $event->bannerCard->card->member->icon->id]) }}"
-                                             class="rounded-circle" style="width: 40px;">
+                                        <img
+                                            src="{{ route('admin.icons.display', ['icon_id' => $event->bannerCard->card->member->icon->id]) }}"
+                                            class="rounded-circle" style="width: 40px;">
                                     @else
                                         {{ $event->bannerCard->card->member->display_short }}
                                     @endif
@@ -55,11 +56,13 @@
                                 ({{ $event->starts_at->diffInDays($event->ends_at) }})
                             </td>
                             <td>
-                                @if($event->unit_count === 1)
-                                    <span class="badge"
-                                          style="background-color: {{ $event->bannerCard->card->member->unit->bg_color }}; color: {{ $event->bannerCard->card->member->unit->color }}">{{ $event->bannerCard->card->member->unit->short }}</span>
-                                @elseif($event->unit_count > 1)
-                                    混合
+                                @if(!empty($event->bannerCard))
+                                    @if($event->unit_count === 1)
+                                        <span class="badge"
+                                              style="background-color: {{ $event->bannerCard->card->member->unit->bg_color }}; color: {{ $event->bannerCard->card->member->unit->color }}">{{ $event->bannerCard->card->member->unit->short }}</span>
+                                    @elseif($event->unit_count > 1)
+                                        混合
+                                    @endif
                                 @else
                                     未設定
                                 @endif

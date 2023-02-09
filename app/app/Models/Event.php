@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\Attribute;
 use App\Enums\EventType;
+use App\Enums\Rarity;
 use App\Traits\AuthorObservable;
 use App\Traits\UuidObservable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -128,8 +129,23 @@ class Event extends Model
         $order = [
             'rarity' => 'asc',
             'member_id' => 'asc',
+            'id' => 'asc',
         ];
 
-        return $cardsService->findAll($request, $order);
+        $sorted = [Rarity::STAR_FOUR, Rarity::STAR_THREE, Rarity::STAR_TWO, Rarity::STAR_ONE, Rarity::BIRTHDAY];
+        return $cardsService->findAll($request, $order)->sort(function ($first, $second) use ($sorted) {
+            /** @var Card $first */
+            /** @var Card $second */
+
+            if ($first->rarity->value === $second->rarity->value) {
+                if ($first->member_id === $second->member_id) {
+                    return $first->id > $second->id;
+                }
+
+                return $first->member_id > $second->member_id;
+            }
+
+            return array_search($first->rarity->value, $sorted) > array_search($second->rarity->value, $sorted);
+        });
     }
 }

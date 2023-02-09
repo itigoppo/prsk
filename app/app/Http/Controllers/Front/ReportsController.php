@@ -8,39 +8,145 @@ class ReportsController extends Controller
 {
     public function index()
     {
-        /** @var \App\Services\UnitsService $unitsService */
-        $unitsService = app()->make('UnitsService');
-        /** @var \App\Services\MembersService $membersService */
-        $membersService = app()->make('MembersService');
-        /** @var \App\Services\CardsService $cardsService */
-        $cardsService = app()->make('CardsService');
+        return view('front.reports.index', [
+        ]);
+    }
+
+    public function eventCount()
+    {
         /** @var \App\Services\ReportsService $reportsService */
         $reportsService = app()->make('ReportsService');
-
-        $units = $unitsService->findAll([
-            'is_active' => true,
-        ]);
-
-        $members = $membersService->findAll([
-            'is_active' => true,
-        ]);
-        $members = $members->where('unit.is_active', '=', true);
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
 
         $card = $cardsService->findAll()->first();
+        $units = $reportsService->aggregateTheNumberOfEventsByUnit();
+        $members = $reportsService->aggregateTheNumberOfEventsByMember();
 
-        $eventsByMember = $reportsService->eventAggregationByMembers();
-        $eventsByUnit = $reportsService->eventAggregationByUnits();
-        $cardsByRarity = $reportsService->cardAggregationByRarity();
-        $cardsByAttribute = $reportsService->cardAggregationByAttribute();
-
-        return view('front.reports.index', [
+        return view('front.reports.event-count', [
+            'card' => $card,
             'units' => $units,
             'members' => $members,
+        ]);
+    }
+
+    public function eventCycles()
+    {
+        /** @var \App\Services\ReportsService $reportsService */
+        $reportsService = app()->make('ReportsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
+
+        $card = $cardsService->findAll()->first();
+        $units = $reportsService->aggregateEventCyclesByUnit();
+
+        return view('front.reports.event-cycles', [
             'card' => $card,
-            'eventsByUnit' => $eventsByUnit,
-            'eventsByMember' => $eventsByMember,
-            'cardsByRarity' => $cardsByRarity,
-            'cardsByAttribute' => $cardsByAttribute,
+            'units' => $units,
+        ]);
+    }
+
+    public function eventAttributes()
+    {
+        /** @var \App\Services\ReportsService $reportsService */
+        $reportsService = app()->make('ReportsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
+
+        $card = $cardsService->findAll()->first();
+        $units = $reportsService->aggregateEventAttributesByUnit();
+        $members = $reportsService->aggregateEventAttributesByMember();
+
+        return view('front.reports.event-attributes', [
+            'card' => $card,
+            'units' => $units,
+            'members' => $members,
+        ]);
+    }
+
+    public function eventTunes()
+    {
+        /** @var \App\Services\ReportsService $reportsService */
+        $reportsService = app()->make('ReportsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
+
+        $card = $cardsService->findAll()->first();
+        $units = $reportsService->aggregateEventTunesByUnit();
+        $members = $reportsService->aggregateEventTunesByMember();
+
+        return view('front.reports.event-tunes', [
+            'card' => $card,
+            'units' => $units,
+            'members' => $members,
+        ]);
+    }
+
+    public function eventHistories()
+    {
+        /** @var \App\Services\EventsService $eventsService */
+        $eventsService = app()->make('EventsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
+
+        $card = $cardsService->findAll()->first();
+        $events = $eventsService->findAll();
+
+        return view('front.reports.event-histories', [
+            'card' => $card,
+            'events' => $events,
+        ]);
+    }
+
+    public function cardCount()
+    {
+        /** @var \App\Services\ReportsService $reportsService */
+        $reportsService = app()->make('ReportsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
+
+        $card = $cardsService->findAll()->first();
+        $members = $reportsService->aggregateNumberOfCardsByMember();
+        $virtualSingers = $reportsService->aggregateNumberOfCardsByVirtualSinger();
+
+        return view('front.reports.card-count', [
+            'card' => $card,
+            'members' => $members,
+            'virtualSingers' => $virtualSingers,
+        ]);
+    }
+
+    public function cardReleased()
+    {
+        /** @var \App\Services\ReportsService $reportsService */
+        $reportsService = app()->make('ReportsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
+
+        $card = $cardsService->findAll()->first();
+        $members = $reportsService->aggregateNumberOfCardsByMember();
+
+        return view('front.reports.card-released', [
+            'card' => $card,
+            'members' => $members,
+        ]);
+    }
+
+    public function cardAttributes()
+    {
+        /** @var \App\Services\ReportsService $reportsService */
+        $reportsService = app()->make('ReportsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
+
+        $card = $cardsService->findAll()->first();
+        $members = $reportsService->aggregateCardAttributesByMember();
+        $virtualSingers = $reportsService->aggregateCardAttributesByVirtualSinger();
+
+        return view('front.reports.card-attributes', [
+            'card' => $card,
+            'members' => $members,
+            'virtualSingers' => $virtualSingers,
         ]);
     }
 }

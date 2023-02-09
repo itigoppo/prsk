@@ -10,6 +10,7 @@
     "/js/events.js": "/js/events.js",
     "/js/virtual-lives.js": "/js/virtual-lives.js",
     "/js/sortable-tables.js": "/js/sortable-tables.js",
+    "/js/reports.js": "/js/reports.js",
     "/css/admin.css": "/css/admin.css",
     "/css/app.css": "/css/app.css"
 }

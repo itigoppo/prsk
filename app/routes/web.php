@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\MembersController;
 use App\Http\Controllers\Admin\TunesController;
 use App\Http\Controllers\Admin\UnitsController;
 use App\Http\Controllers\Admin\VirtualLivesController;
+use App\Http\Controllers\Front\EventsController as FrontEventsController;
 use App\Http\Controllers\Front\InteractionsController as FrontInteractionsController;
 use App\Http\Controllers\Front\ReportsController;
 use App\Http\Controllers\MediasController;
@@ -336,11 +337,16 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
 Route::group(['middleware' => 'protect.media', 'prefix' => 'medias', 'as' => 'medias.'], function () {
     Route::get('icons/{icon_id}', [MediasController::class, 'icon'])
         ->name('icons')
-        ->where('icon_id', '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
+        ->whereUuid('icon_id');
 
     Route::get('interactions/{interaction_id}', [MediasController::class, 'interaction'])
         ->name('interactions')
-        ->where('interaction_id', '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
+        ->whereUuid('interaction_id');
+
+    Route::get('cards/{mode}/{card_id}', [MediasController::class, 'card'])
+        ->name('cards')
+        ->whereAlpha('mode')
+        ->whereUuid('card_id');
 });
 
 Route::group(['as' => 'front.'], function () {
@@ -355,7 +361,6 @@ Route::group(['as' => 'front.'], function () {
     Route::group(['prefix' => 'interactions', 'as' => 'interactions.'], function () {
         Route::get('/', [FrontInteractionsController::class, 'index'])
             ->name('index');
-
 
         Route::group([
             'prefix' => '{interaction_id}',
@@ -372,5 +377,41 @@ Route::group(['as' => 'front.'], function () {
     Route::group(['prefix' => 'reports', 'as' => 'reports.'], function () {
         Route::get('/', [ReportsController::class, 'index'])
             ->name('index');
+
+        Route::get('/event-count', [ReportsController::class, 'eventCount'])
+            ->name('event-count');
+
+        Route::get('/event-cycles', [ReportsController::class, 'eventCycles'])
+            ->name('event-cycles');
+
+        Route::get('/event-attributes', [ReportsController::class, 'eventAttributes'])
+            ->name('event-attributes');
+
+        Route::get('/event-tunes', [ReportsController::class, 'eventTunes'])
+            ->name('event-tunes');
+
+        Route::get('/event-histories', [ReportsController::class, 'eventHistories'])
+            ->name('event-histories');
+
+        Route::get('/card-count', [ReportsController::class, 'cardCount'])
+            ->name('card-count');
+
+        Route::get('/card-released', [ReportsController::class, 'cardReleased'])
+            ->name('card-released');
+
+        Route::get('/card-attributes', [ReportsController::class, 'cardAttributes'])
+            ->name('card-attributes');
+    });
+
+    Route::group(['prefix' => 'events', 'as' => 'events.'], function () {
+        Route::group([
+            'prefix' => '{event_id}',
+            'where' => ['event_id' => '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'],
+        ], function () {
+            Route::get('event-members', [FrontEventsController::class, 'lookupEventMembers'])
+                ->name('event-members');
+            Route::get('bonus-cards', [FrontEventsController::class, 'lookupBonusCards'])
+                ->name('bonus-cards');
+        });
     });
 });

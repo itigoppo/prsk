@@ -927,12 +927,6 @@
   border-color: #5897fb; }
 
 @charset "UTF-8";
-/*!
- * Bootstrap v5.1.3 (https://getbootstrap.com/)
- * Copyright 2011-2021 The Bootstrap Authors
- * Copyright 2011-2021 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
 :root {
   --bs-blue: #325d88;
   --bs-indigo: #6610f2;
@@ -8314,6 +8308,22 @@ textarea.form-control-lg {
 
 .fs-6 {
   font-size: 0.9rem !important;
+}
+
+.fs-7 {
+  font-size: 0.72rem !important;
+}
+
+.fs-8 {
+  font-size: 0.6rem !important;
+}
+
+.fs-9 {
+  font-size: 0.5142857143rem !important;
+}
+
+.fs-10 {
+  font-size: 0.45rem !important;
 }
 
 .fst-italic {
@@ -22265,6 +22275,36 @@ select + .select2-container--bootstrap-5 {
   color: #3e3f3a;
 }
 
+.badge-pill {
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+}
+.badge-primary {
+  background-color: #325d88;
+}
+.badge-secondary {
+  background-color: #8e8c84;
+}
+.badge-success {
+  background-color: #93c54b;
+}
+.badge-danger {
+  background-color: #d9534f;
+}
+.badge-warning {
+  background-color: #f47c3c;
+}
+.badge-info {
+  background-color: #29abe0;
+}
+.badge-dark {
+  background-color: #3e3f3a;
+}
+.badge-light {
+  color: #3e3f3a;
+  background-color: #f8f5f0;
+}
 .badge.bg-light {
   color: #3e3f3a;
 }

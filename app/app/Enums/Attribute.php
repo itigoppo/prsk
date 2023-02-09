@@ -43,4 +43,23 @@ final class Attribute extends Enum
 
         return parent::getDescription($value);
     }
+
+    public static function getColor($value): string
+    {
+        $colors = [
+            self::CUTE => '#FF6CAA',
+            self::COOL => '#3B53F9',
+            self::PURE => '#02BB44',
+            self::HAPPY => '#FC9011',
+            self::MYSTERIOUS => '#7D62C6',
+        ];
+
+        foreach ($colors as $key => $color) {
+            if ($value === $key) {
+                return $color;
+            }
+        }
+
+        return "#eee";
+    }
 }

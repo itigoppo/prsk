@@ -36,6 +36,7 @@ use Illuminate\Support\Carbon;
  * @property-read \Illuminate\Database\Eloquent\Relations\HasMany|EventMember[] $eventMembers
  * @property-read \Illuminate\Database\Eloquent\Relations\hasOne|EventCard $bannerCard
  * @property-read \App\Models\Card[] $bonus_cards
+ * @property-read \App\Models\Card[] $virtual_singer_bonus_cards
  */
 class Event extends Model
 {
@@ -117,6 +118,49 @@ class Event extends Model
         if (empty($memberIds)) {
             return null;
         }
+
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
+
+        $request = [
+            'mids' => $memberIds,
+            'ratb' => $this->starts_at,
+            'at' => $this->attribute,
+        ];
+        $order = [
+            'rarity' => 'asc',
+            'member_id' => 'asc',
+            'id' => 'asc',
+        ];
+
+        $sorted = [Rarity::STAR_FOUR, Rarity::STAR_THREE, Rarity::STAR_TWO, Rarity::STAR_ONE, Rarity::BIRTHDAY];
+        return $cardsService->findAll($request, $order)->sort(function ($first, $second) use ($sorted) {
+            /** @var Card $first */
+            /** @var Card $second */
+
+            if ($first->rarity->value === $second->rarity->value) {
+                if ($first->member_id === $second->member_id) {
+                    return $first->id > $second->id;
+                }
+
+                return $first->member_id > $second->member_id;
+            }
+
+            return array_search($first->rarity->value, $sorted) > array_search($second->rarity->value, $sorted);
+        });
+    }
+
+    /**
+     * @return \App\Models\Card[]|\App\Repositories\CardsRepository[]|\Illuminate\Database\Eloquent\Collection|null
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function getVirtualSingerBonusCardsAttribute()
+    {
+        if ($this->unit_count !== 1) {
+            return null;
+        }
+
+        $memberIds = [1, 2, 3, 4, 5, 6];
 
         /** @var \App\Services\CardsService $cardsService */
         $cardsService = app()->make('CardsService');

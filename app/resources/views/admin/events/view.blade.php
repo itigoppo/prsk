@@ -72,7 +72,9 @@
                         <dd class="col-sm-9">
                             @foreach($event->eventCards as $eventCard)
                                 @if($eventCard->card->normal_file)
-                                    <img src="{{ route('admin.cards.display', ['card_id' => $eventCard->card->id, 'mode' => 'normal']) }}" width="50">
+                                    <img
+                                        src="{{ route('admin.cards.display', ['card_id' => $eventCard->card->id, 'mode' => 'normal']) }}"
+                                        width="50">
                                 @else
                                     {{ $eventCard->card->display_name }}
                                 @endif
@@ -82,8 +84,9 @@
                         <dd class="col-sm-9">
                             @foreach($event->eventMembers as $eventMember)
                                 @if(!empty($eventMember->member->icon))
-                                    <img src="{{ route('admin.icons.display', ['icon_id' => $eventMember->member->icon->id]) }}"
-                                         class="rounded-circle" style="width: 50px;">
+                                    <img
+                                        src="{{ route('admin.icons.display', ['icon_id' => $eventMember->member->icon->id]) }}"
+                                        class="rounded-circle" style="width: 50px;">
                                 @else
                                     {{ $eventMember->member->display_short }}
                                 @endif
@@ -93,11 +96,24 @@
                         <dd class="col-sm-9">
                             @foreach($event->bonus_cards as $bonusCard)
                                 @if($bonusCard->normal_file)
-                                    <img src="{{ route('admin.cards.display', ['card_id' => $bonusCard->id, 'mode' => 'normal']) }}" width="50">
+                                    <img
+                                        src="{{ route('admin.cards.display', ['card_id' => $bonusCard->id, 'mode' => 'normal']) }}"
+                                        alt="{{ $bonusCard->display_name }}" width="50">
                                 @else
                                     {{ $bonusCard->display_name }}
                                 @endif
                             @endforeach
+                            @if(!empty($event->virtual_singer_bonus_cards))
+                                @foreach($event->virtual_singer_bonus_cards as $bonusCard)
+                                    @if($bonusCard->normal_file)
+                                        <img
+                                            src="{{ route('admin.cards.display', ['card_id' => $bonusCard->id, 'mode' => 'normal']) }}"
+                                            alt="{{ $bonusCard->display_name }}" width="50">
+                                    @else
+                                        {{ $bonusCard->display_name }}
+                                    @endif
+                                @endforeach
+                            @endif
                         </dd>
 
 

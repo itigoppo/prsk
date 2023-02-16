@@ -534,6 +534,128 @@ class ReportsService
     }
 
     /**
+     * メンバーごとのイベント楽曲(バチャ)
+     *
+     * @return \App\Models\Member[]|MembersRepository[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function aggregateEventTunesByVirtualSinger()
+    {
+        $events = $this->eventsRepository->findAll([], ['starts_at' => 'asc']);
+        $virtualSingers = ['miku', 'rin', 'len', 'luka', 'meiko', 'kaito'];
+
+        $results = [];
+        foreach ($events as $event) {
+            /** @var \App\Models\Event $event */
+            if (empty($event->bannerCard)) {
+                continue;
+            }
+
+            if (empty($event->tune)) {
+                continue;
+            }
+
+            if (empty($event->tune->singers_by_type['sekai-1'])) {
+                continue;
+            }
+
+            foreach ($event->tune->singers_by_type['sekai-1'] as $singer) {
+                /** @var \App\Models\Singer $singer */
+
+                if (!Str::endsWith($singer->member->code, $virtualSingers)) {
+                    continue;
+                }
+
+                foreach ($virtualSingers as $key => $virtualSinger) {
+                    if (!Str::endsWith($singer->member->code, $virtualSinger)) {
+                        continue;
+                    }
+
+                    $memberId = $key + 1;
+
+                    if (!isset($results[$memberId]['tunes']['all'])) {
+                        $results[$memberId]['tunes']['all'] = [];
+                    }
+                    $results[$memberId]['tunes']['all'][] = $event->tune;
+
+                    if (!isset($results[$memberId]['total'])) {
+                        $results[$memberId]['total'] = 0;
+                    }
+                    $results[$memberId]['total']++;
+
+                    if ($event->tune->has_3d_mv) {
+                        if (!isset($results[$memberId]['has_3d_mv_count'])) {
+                            $results[$memberId]['has_3d_mv_count'] = 0;
+                        }
+                        $results[$memberId]['has_3d_mv_count']++;
+
+                        if (!isset($results[$memberId]['tunes']['3dmv'])) {
+                            $results[$memberId]['tunes']['3dmv'] = [];
+                        }
+                        $results[$memberId]['tunes']['3dmv'][] = $event->tune;
+                    } else {
+                        if (!isset($results[$memberId]['has_2d_mv_count'])) {
+                            $results[$memberId]['has_2d_mv_count'] = 0;
+                        }
+                        $results[$memberId]['has_2d_mv_count']++;
+
+                        if (!isset($results[$memberId]['tunes']['2dmv'])) {
+                            $results[$memberId]['tunes']['2dmv'] = [];
+                        }
+                        $results[$memberId]['tunes']['2dmv'][] = $event->tune;
+                    }
+                }
+            }
+        }
+
+        $members = $this->membersRepository->findAll([
+            [
+                'type' => 'where',
+                'column' => 'is_active',
+                'operator' => '=',
+                'value' => true,
+            ],
+            [
+                'type' => 'whereIn',
+                'column' => 'id',
+                'values' => [1, 2, 3, 4, 5, 6],
+            ],
+        ]);
+
+        foreach ($members as $member) {
+            /** @var \App\Models\Member|\Illuminate\Database\Eloquent\Model $member */
+            $member->setAttribute(
+                'report_tunes',
+                empty($results[$member->id]['tunes']['all']) ? null : $results[$member->id]['tunes']['all']
+            );
+            $member->setAttribute(
+                'report_2dmv_tunes',
+                empty($results[$member->id]['tunes']['2dmv']) ? null : $results[$member->id]['tunes']['2dmv']
+            );
+            $member->setAttribute(
+                'report_3dmv_tunes',
+                empty($results[$member->id]['tunes']['3dmv']) ? null : $results[$member->id]['tunes']['3dmv']
+            );
+
+            $member->setAttribute(
+                'report_total_count',
+                empty($results[$member->id]['total']) ? 0 : $results[$member->id]['total']['count']
+            );
+
+            $member->setAttribute(
+                'report_has_2d_mv_count',
+                empty($results[$member->id]['has_2d_mv_count']) ? 0 : $results[$member->id]['has_2d_mv_count']
+            );
+
+            $member->setAttribute(
+                'report_has_3d_mv_count',
+                empty($results[$member->id]['has_3d_mv_count']) ? 0 : $results[$member->id]['has_3d_mv_count']
+            );
+        }
+
+        return $members;
+    }
+
+    /**
      * メンバーごとのカード枚数
      *
      * @return \App\Models\Member[]|MembersRepository[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection

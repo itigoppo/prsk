@@ -74,11 +74,13 @@ class ReportsController extends Controller
         $card = $cardsService->findAll()->first();
         $units = $reportsService->aggregateEventTunesByUnit();
         $members = $reportsService->aggregateEventTunesByMember();
+        $virtualSingers = $reportsService->aggregateEventTunesByVirtualSinger();
 
         return view('front.reports.event-tunes', [
             'card' => $card,
             'units' => $units,
             'members' => $members,
+            'virtualSingers' => $virtualSingers,
         ]);
     }
 

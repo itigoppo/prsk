@@ -27,7 +27,7 @@
             </li>
             <li class="nav-item me-1 mb-1">
                 <a href="{{ route('front.reports.event-tunes') }}"
-                   class="nav-link{{ Request::routeIs('front.reports.event-tunes') ? ' active' : '' }}">イベント曲のMVタイプ</a>
+                   class="nav-link{{ Request::routeIs('front.reports.event-tunes') ? ' active' : '' }}">イベント書き下ろし曲</a>
             </li>
             <li class="nav-item me-1 mb-1">
                 <a href="{{ route('front.reports.card-count') }}"

@@ -38,10 +38,12 @@ class ReportsController extends Controller
         $cardsService = app()->make('CardsService');
 
         $card = $cardsService->findAll()->first();
+        $cycles = $reportsService->aggregateEventCycles();
         $units = $reportsService->aggregateEventCyclesByUnit();
 
         return view('front.reports.event-cycles', [
             'card' => $card,
+            'cycles' => $cycles,
             'units' => $units,
         ]);
     }

@@ -198,6 +198,67 @@ class ReportsService
     }
 
     /**
+     * イベントサイクル
+     *
+     * @return array
+     */
+    public function aggregateEventCycles(): array
+    {
+        $events = $this->eventsRepository->findAll([], ['starts_at' => 'asc']);
+
+        $results = [];
+        $cycle = 1;
+        $units = [];
+        $attributes = [];
+        foreach ($events as $event) {
+            /** @var \App\Models\Event $event */
+            if (empty($event->bannerCard)) {
+                continue;
+            }
+
+            $unitId = $event->bannerCard->card->member->unit_id;
+            if (Str::endsWith($event->bannerCard->card->member->code, ['miku', 'rin', 'len', 'luka', 'meiko', 'kaito'])) {
+                $unitId = 1;
+            }
+
+            $results[$cycle]['events'][] = $event;
+            if ($event->unit_count === 1) {
+                // 箱イベ
+                $units[] = $unitId;
+                $units = array_values(array_unique($units));
+                $attributes[] = $event->attribute->value;
+
+                if (count($units) === 5) {
+                    // 重複属性
+                    $duplicated = array_keys(array_filter(array_count_values($attributes), function ($v) {
+                        return ($v-1 !== 0);
+                    }));
+                    $results[$cycle]['duplicate_attributes'] = [];
+                    if (!empty($duplicated)) {
+                        $results[$cycle]['duplicate_attributes'] = $duplicated;
+                    }
+
+                    // 不足属性
+                    $results[$cycle]['shortage_attributes'] = [];
+                    foreach (Attribute::getValues() as $attribute) {
+                        if (in_array($attribute, $attributes)) {
+                            continue;
+                        }
+                        $results[$cycle]['shortage_attributes'][] = $attribute;
+                    }
+
+                    // 初期化＆サイクルカウント
+                    $units = [];
+                    $attributes = [];
+                    $cycle++;
+                }
+            }
+        }
+
+        return $results;
+    }
+
+    /**
      * ユニットごとのイベントサイクル
      *
      * @return \App\Models\Unit[]|UnitsRepository[]|\Illuminate\Database\Eloquent\Collection
@@ -691,11 +752,11 @@ class ReportsService
 
             foreach (Rarity::getValues() as $rarity) {
                 $member->setAttribute(
-                    'report_'. $rarity . '_count',
+                    'report_' . $rarity . '_count',
                     empty($results[$member->id][$rarity]) ? 0 : $results[$member->id][$rarity]['count']
                 );
                 $member->setAttribute(
-                    'report_'. $rarity . '_date',
+                    'report_' . $rarity . '_date',
                     empty($results[$member->id][$rarity]) ? null : $results[$member->id][$rarity]['date']
                 );
             }
@@ -784,11 +845,11 @@ class ReportsService
 
             foreach (Rarity::getValues() as $rarity) {
                 $member->setAttribute(
-                    'report_'. $rarity . '_count',
+                    'report_' . $rarity . '_count',
                     empty($results[$member->id][$rarity]) ? 0 : $results[$member->id][$rarity]['count']
                 );
                 $member->setAttribute(
-                    'report_'. $rarity . '_date',
+                    'report_' . $rarity . '_date',
                     empty($results[$member->id][$rarity]) ? null : $results[$member->id][$rarity]['date']
                 );
             }

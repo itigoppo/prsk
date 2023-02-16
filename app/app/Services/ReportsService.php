@@ -738,7 +738,7 @@ class ReportsService
 
             $member->setAttribute(
                 'report_total_count',
-                empty($results[$member->id]['total']) ? 0 : $results[$member->id]['total']['count']
+                empty($results[$member->id]['total']) ? 0 : $results[$member->id]['total']
             );
 
             $member->setAttribute(

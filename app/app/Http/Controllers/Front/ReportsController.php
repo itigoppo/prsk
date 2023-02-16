@@ -56,11 +56,13 @@ class ReportsController extends Controller
         $cardsService = app()->make('CardsService');
 
         $card = $cardsService->findAll()->first();
+        $attributes = $reportsService->aggregateEventAttributes();
         $units = $reportsService->aggregateEventAttributesByUnit();
         $members = $reportsService->aggregateEventAttributesByMember();
 
         return view('front.reports.event-attributes', [
             'card' => $card,
+            'attributes' => $attributes,
             'units' => $units,
             'members' => $members,
         ]);

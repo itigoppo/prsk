@@ -321,6 +321,45 @@ class ReportsService
     }
 
     /**
+     * イベント属性
+     *
+     * @return array
+     */
+    public function aggregateEventAttributes(): array
+    {
+        $events = $this->eventsRepository->findAll([], ['starts_at' => 'asc']);
+
+        $results = [];
+        foreach ($events as $event) {
+            /** @var \App\Models\Event $event */
+            if (empty($event->bannerCard)) {
+                continue;
+            }
+
+            if ($event->unit_count === 1) {
+                // 箱イベ
+                if (!isset($results[$event->attribute->value]['unit'])) {
+                    $results[$event->attribute->value]['unit'] = 0;
+                }
+                $results[$event->attribute->value]['unit']++;
+            } elseif ($event->unit_count > 1) {
+                // 混合イベ
+                if (!isset($results[$event->attribute->value]['mixed'])) {
+                    $results[$event->attribute->value]['mixed'] = 0;
+                }
+                $results[$event->attribute->value]['mixed']++;
+            }
+            // 合計
+            if (!isset($results[$event->attribute->value]['total'])) {
+                $results[$event->attribute->value]['total'] = 0;
+            }
+            $results[$event->attribute->value]['total']++;
+        }
+
+        return $results;
+    }
+
+    /**
      * ユニットごとのイベント属性
      *
      * @return \App\Models\Unit[]|UnitsRepository[]|\Illuminate\Database\Eloquent\Collection

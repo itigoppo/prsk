@@ -1,5 +1,6 @@
 @php
     /**
+     * @var array $attributes
      * @var \App\Models\Unit[] $units
      * @var \App\Models\Member[] $members
      */
@@ -15,6 +16,47 @@
         @include('front.reports.menu', ['current' => 'event-attributes'])
         <div class="row justify-content-center mt-2">
             <div class="col-md-8">
+                <div>
+                    <table class="table table-sm table-striped table-hover">
+                        <thead class="table-light text-center">
+                        <tr>
+                            <th>-</th>
+                            @foreach(Attribute::getValues() as $attribute)
+                                <th>
+                                    <span class="badge"
+                                          style="background-color: {{ Attribute::getColor($attribute) }};">{{ Attribute::getDescription($attribute) }}</span>
+                                </th>
+                            @endforeach
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>箱イベ</td>
+                            @foreach(Attribute::getValues() as $attribute)
+                                <td class="text-end">
+                                    {{ empty($attributes[$attribute]['unit']) ? 0 : $attributes[$attribute]['unit'] }}
+                                </td>
+                            @endforeach
+                        </tr>
+                        <tr>
+                            <td>混合イベ</td>
+                            @foreach(Attribute::getValues() as $attribute)
+                                <td class="text-end">
+                                    {{ empty($attributes[$attribute]['mixed']) ? 0 : $attributes[$attribute]['mixed'] }}
+                                </td>
+                            @endforeach
+                        </tr>
+                        <tr>
+                            <td>合計</td>
+                            @foreach(Attribute::getValues() as $attribute)
+                                <td class="text-end">
+                                    {{ empty($attributes[$attribute]['total']) ? 0 : $attributes[$attribute]['total'] }}
+                                </td>
+                            @endforeach
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <div>
                     <table class="table table-sm table-striped table-hover">

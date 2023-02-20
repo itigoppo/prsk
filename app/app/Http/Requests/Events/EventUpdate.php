@@ -17,6 +17,8 @@ use Illuminate\Foundation\Http\FormRequest;
  * @property string $is_key_story
  * @property string $story_chapter
  * @property array $event_cards
+ * @property string $stamp_member_id
+ * @property string $stamp_text
  */
 class EventUpdate extends FormRequest
 {
@@ -75,6 +77,13 @@ class EventUpdate extends FormRequest
                 'nullable',
                 'array',
             ],
+            'stamp_member_id' => [
+                'nullable',
+                'exists:members,id',
+            ],
+            'stamp_text' => [
+                'nullable',
+            ],
         ];
     }
 
@@ -92,6 +101,8 @@ class EventUpdate extends FormRequest
             'tune_id' => '書き下ろし楽曲',
             'is_key_story' => 'キーストーリーか',
             'story_chapter' => '第何章',
+            'stamp_member_id' => 'スタンプメンバー',
+            'stamp_text' => 'スタンプテキスト',
         ];
     }
 }

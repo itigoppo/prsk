@@ -18,6 +18,8 @@ use Illuminate\Foundation\Http\FormRequest;
  * @property string $story_chapter
  * @property array $event_cards
  * @property array $event_members
+ * @property string $stamp_member_id
+ * @property string $stamp_text
  */
 class EventCreate extends FormRequest
 {
@@ -75,6 +77,13 @@ class EventCreate extends FormRequest
             'event_members' => [
                 'nullable',
                 'array',
+            ],
+            'stamp_member_id' => [
+                'nullable',
+                'exists:members,id',
+            ],
+            'stamp_text' => [
+                'nullable',
             ],
         ];
     }

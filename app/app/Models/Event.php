@@ -24,6 +24,8 @@ use Illuminate\Support\Carbon;
  * @property int $tune_id
  * @property bool $is_key_story
  * @property int $story_chapter
+ * @property int $stamp_member_id
+ * @property string $stamp_text
  * @property Carbon $created_at
  * @property int $created_by
  * @property Carbon $updated_at
@@ -35,6 +37,7 @@ use Illuminate\Support\Carbon;
  * @property-read \Illuminate\Database\Eloquent\Relations\HasMany|EventCard[] $eventCards
  * @property-read \Illuminate\Database\Eloquent\Relations\HasMany|EventMember[] $eventMembers
  * @property-read \Illuminate\Database\Eloquent\Relations\hasOne|EventCard $bannerCard
+ * @property-read \Illuminate\Database\Eloquent\Relations\BelongsTo|Member $stampMember
  * @property-read \App\Models\Card[] $bonus_cards
  * @property-read \App\Models\Card[] $virtual_singer_bonus_cards
  */
@@ -105,6 +108,14 @@ class Event extends Model
     public function bannerCard()
     {
         return $this->hasOne(EventCard::class)->where('is_banner', '=', true);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Member
+     */
+    public function stampMember()
+    {
+        return $this->belongsTo(Member::class, 'stamp_member_id');
     }
 
     /**

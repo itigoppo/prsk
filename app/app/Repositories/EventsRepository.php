@@ -95,6 +95,8 @@ class EventsRepository implements EventsRepositoryInterface
         $entity->tune_id = $request->tune_id;
         $entity->is_key_story = $request->get('is_key_story', false);
         $entity->story_chapter = $request->story_chapter;
+        $entity->stamp_member_id = $request->stamp_member_id;
+        $entity->stamp_text = $request->stamp_text;
 
         if (!$entity->save()) {
             return false;
@@ -113,6 +115,8 @@ class EventsRepository implements EventsRepositoryInterface
         $entity->tune_id = $request->tune_id;
         $entity->is_key_story = $request->get('is_key_story', false);
         $entity->story_chapter = $request->story_chapter;
+        $entity->stamp_member_id = $request->stamp_member_id;
+        $entity->stamp_text = $request->stamp_text;
 
         if (!$entity->save()) {
             return false;

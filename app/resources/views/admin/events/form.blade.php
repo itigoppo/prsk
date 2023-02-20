@@ -264,3 +264,42 @@
         @enderror
     </div>
 </div>
+
+<div class="row mb-3">
+    <div class="form-group">
+        <label for="stamp_member_id" class=" col-form-label text-md-end">スタンプメンバー</label>
+
+        <select id="stamp_member_id" class="form-select @error('stamp_member_id') is-invalid @enderror"
+                name="stamp_member_id">
+            <option value="">選択してください</option>
+            @foreach($members as $member)
+                <option
+                    value="{{ $member->id }}"{{ old('stamp_member_id', $event->stamp_member_id ?? '') == $member->id ? ' selected' : '' }}>
+                    {{ $member->display_short }}
+                </option>
+            @endforeach
+        </select>
+
+        @error('stamp_member_id')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
+</div>
+
+
+<div class="row mb-3">
+    <div class="form-group">
+        <label for="stamp_text" class="col-form-label text-md-end">スタンプテキスト</label>
+        <input id="stamp_text" type="text"
+               class="form-control @error('stamp_text') is-invalid @enderror" name="stamp_text"
+               value="{{ old('stamp_text', $event->stamp_text ?? '') }}">
+
+        @error('stamp_text')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
+</div>

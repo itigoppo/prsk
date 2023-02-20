@@ -68,6 +68,15 @@
                                 {{ $event->tune->name}}
                             @endif
                         </dd>
+                        <dt class="col-sm-3">スタンプ</dt>
+                        <dd class="col-sm-9">
+                            @if(!empty($event->stamp_member_id))
+                                {{ $event->stampMember->display_short }}
+                            @endif
+                            @if(!empty($event->stamp_text))
+                                「{{ $event->stamp_text }}」
+                            @endif
+                        </dd>
                         <dt class="col-sm-3">イベントカード</dt>
                         <dd class="col-sm-9">
                             @foreach($event->eventCards as $eventCard)

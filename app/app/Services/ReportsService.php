@@ -756,6 +756,87 @@ class ReportsService
     }
 
     /**
+     * メンバーごとのイベントスタンプ
+     *
+     * @return \App\Models\Member[]|MembersRepository[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function aggregateEventStampsByMember()
+    {
+        $events = $this->eventsRepository->findAll([], ['starts_at' => 'asc']);
+
+        $results = [];
+        foreach ($events as $event) {
+            /** @var \App\Models\Event $event */
+            if (empty($event->bannerCard)) {
+                continue;
+            }
+
+            $memberId = $event->bannerCard->card->member_id;
+
+            if (!empty($event->stamp_member_id)) {
+                if (!isset($results[$memberId]['stamps'])) {
+                    $results[$memberId]['stamps'] = [];
+                }
+                $results[$memberId]['stamps'][] = $event;
+
+                if (!isset($results[$memberId]['total'])) {
+                    $results[$memberId]['total'] = 0;
+                }
+                $results[$memberId]['total']++;
+
+                if ($event->unit_count === 1) {
+                    // 箱イベ
+                    if (!isset($results[$memberId]['unit'])) {
+                        $results[$memberId]['unit'] = 0;
+                    }
+                    $results[$memberId]['unit']++;
+                } elseif ($event->unit_count > 1) {
+                    // 混合イベ
+                    if (!isset($results[$memberId]['mixed'])) {
+                        $results[$memberId]['mixed'] = 0;
+                    }
+                    $results[$memberId]['mixed']++;
+                }
+            }
+        }
+
+        $members = $this->membersRepository->findAll([
+            [
+                'type' => 'where',
+                'column' => 'is_active',
+                'operator' => '=',
+                'value' => true,
+            ],
+        ]);
+        $members = $members->where('unit.is_active', '=', true);
+
+        foreach ($members as $member) {
+            /** @var \App\Models\Member|\Illuminate\Database\Eloquent\Model $member */
+            $member->setAttribute(
+                'report_stamps',
+                empty($results[$member->id]['stamps']) ? null : $results[$member->id]['stamps']
+            );
+
+            $member->setAttribute(
+                'report_total_count',
+                empty($results[$member->id]['total']) ? 0 : $results[$member->id]['total']
+            );
+
+            $member->setAttribute(
+                'report_unit_count',
+                empty($results[$member->id]['unit']) ? 0 : $results[$member->id]['unit']
+            );
+
+            $member->setAttribute(
+                'report_mixed_count',
+                empty($results[$member->id]['mixed']) ? 0 : $results[$member->id]['mixed']
+            );
+        }
+
+        return $members;
+    }
+
+    /**
      * メンバーごとのカード枚数
      *
      * @return \App\Models\Member[]|MembersRepository[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection

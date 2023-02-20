@@ -30,6 +30,10 @@
                    class="nav-link{{ Request::routeIs('front.reports.event-tunes') ? ' active' : '' }}">イベント書き下ろし曲</a>
             </li>
             <li class="nav-item me-1 mb-1">
+                <a href="{{ route('front.reports.event-stamps') }}"
+                   class="nav-link{{ Request::routeIs('front.reports.event-stamps') ? ' active' : '' }}">イベントスタンプ</a>
+            </li>
+            <li class="nav-item me-1 mb-1">
                 <a href="{{ route('front.reports.card-count') }}"
                    class="nav-link{{ Request::routeIs('front.reports.card-count') ? ' active' : '' }}">カード枚数</a>
             </li>

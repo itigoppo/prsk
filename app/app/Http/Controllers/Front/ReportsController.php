@@ -88,6 +88,22 @@ class ReportsController extends Controller
         ]);
     }
 
+    public function eventStamps()
+    {
+        /** @var \App\Services\ReportsService $reportsService */
+        $reportsService = app()->make('ReportsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
+
+        $card = $cardsService->findAll()->first();
+        $members = $reportsService->aggregateEventStampsByMember();
+
+        return view('front.reports.event-stamps', [
+            'card' => $card,
+            'members' => $members,
+        ]);
+    }
+
     public function eventHistories()
     {
         /** @var \App\Services\EventsService $eventsService */

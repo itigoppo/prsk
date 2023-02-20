@@ -390,6 +390,9 @@ Route::group(['as' => 'front.'], function () {
         Route::get('/event-tunes', [ReportsController::class, 'eventTunes'])
             ->name('event-tunes');
 
+        Route::get('/event-stamps', [ReportsController::class, 'eventStamps'])
+            ->name('event-stamps');
+
         Route::get('/event-histories', [ReportsController::class, 'eventHistories'])
             ->name('event-histories');
 

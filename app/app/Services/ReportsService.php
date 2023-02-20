@@ -771,32 +771,33 @@ class ReportsService
                 continue;
             }
 
-            $memberId = $event->bannerCard->card->member_id;
+            if (empty($event->stamp_member_id)) {
+                continue;
+            }
+            $memberId = $event->stamp_member_id;
 
-            if (!empty($event->stamp_member_id)) {
-                if (!isset($results[$memberId]['stamps'])) {
-                    $results[$memberId]['stamps'] = [];
-                }
-                $results[$memberId]['stamps'][] = $event;
+            if (!isset($results[$memberId]['stamps'])) {
+                $results[$memberId]['stamps'] = [];
+            }
+            $results[$memberId]['stamps'][] = $event;
 
-                if (!isset($results[$memberId]['total'])) {
-                    $results[$memberId]['total'] = 0;
-                }
-                $results[$memberId]['total']++;
+            if (!isset($results[$memberId]['total'])) {
+                $results[$memberId]['total'] = 0;
+            }
+            $results[$memberId]['total']++;
 
-                if ($event->unit_count === 1) {
-                    // 箱イベ
-                    if (!isset($results[$memberId]['unit'])) {
-                        $results[$memberId]['unit'] = 0;
-                    }
-                    $results[$memberId]['unit']++;
-                } elseif ($event->unit_count > 1) {
-                    // 混合イベ
-                    if (!isset($results[$memberId]['mixed'])) {
-                        $results[$memberId]['mixed'] = 0;
-                    }
-                    $results[$memberId]['mixed']++;
+            if ($event->unit_count === 1) {
+                // 箱イベ
+                if (!isset($results[$memberId]['unit'])) {
+                    $results[$memberId]['unit'] = 0;
                 }
+                $results[$memberId]['unit']++;
+            } elseif ($event->unit_count > 1) {
+                // 混合イベ
+                if (!isset($results[$memberId]['mixed'])) {
+                    $results[$memberId]['mixed'] = 0;
+                }
+                $results[$memberId]['mixed']++;
             }
         }
 

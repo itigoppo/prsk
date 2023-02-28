@@ -59,9 +59,9 @@
                                 <div class="mt-2">
                                     <i class="fa-solid fa-music"></i>
                                     @if($event->tune->has_3d_mv)
-                                        <span class="badge bg-secondary">3D</span>
+                                        <span class="badge bg-warning">3D</span>
                                     @elseif($event->tune->has_2d_mv)
-                                        <span class="badge bg-warning">2D</span>
+                                        <span class="badge bg-success">2D</span>
                                     @endif
                                     {{ $event->tune->name }}
                                 </div>

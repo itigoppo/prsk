@@ -323,6 +323,46 @@ legend {
     color: $gray-700;
     background-color: $light;
   }
+
+  &-outline-primary {
+    color: $primary;
+    border: 1px solid $primary;
+  }
+
+  &-outline-secondary {
+    color: $secondary;
+    border: 1px solid $secondary;
+  }
+
+  &-outline-success {
+    color: $success;
+    border: 1px solid $success;
+  }
+
+  &-outline-info {
+    color: $info;
+    border: 1px solid $info;
+  }
+
+  &-outline-warning {
+    color: $warning;
+    border: 1px solid $warning;
+  }
+
+  &-outline-danger {
+    color: $danger;
+    border: 1px solid $danger;
+  }
+
+  &-outline-dark {
+    color: $dark;
+    border: 1px solid $dark;
+  }
+
+  &-outline-light {
+    color: $light;
+    border: 1px solid $light;
+  }
 }
 
 // Progress bars ===============================================================

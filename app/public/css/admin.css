@@ -23136,6 +23136,38 @@ select + .select2-container--bootstrap-5 {
   color: #5a5a5a;
   background-color: #f8f9fa;
 }
+.badge-outline-primary {
+  color: #78C2AD;
+  border: 1px solid #78C2AD;
+}
+.badge-outline-secondary {
+  color: #F3969A;
+  border: 1px solid #F3969A;
+}
+.badge-outline-success {
+  color: #56CC9D;
+  border: 1px solid #56CC9D;
+}
+.badge-outline-info {
+  color: #6CC3D5;
+  border: 1px solid #6CC3D5;
+}
+.badge-outline-warning {
+  color: #FFCE67;
+  border: 1px solid #FFCE67;
+}
+.badge-outline-danger {
+  color: #FF7851;
+  border: 1px solid #FF7851;
+}
+.badge-outline-dark {
+  color: #343a40;
+  border: 1px solid #343a40;
+}
+.badge-outline-light {
+  color: #f8f9fa;
+  border: 1px solid #f8f9fa;
+}
 
 .card h1, .card .h1, .card h2, .card .h2, .card h3, .card .h3, .card h4, .card .h4, .card h5, .card .h5, .card h6, .card .h6,
 .list-group-item h1,

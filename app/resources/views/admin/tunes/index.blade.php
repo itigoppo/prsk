@@ -89,13 +89,13 @@
                             </td>
                             <td>
                                 @if($tune->has_3d_mv)
-                                    <span class="badge bg-secondary">3D</span>
+                                    <span class="badge badge-warning">3D</span>
                                 @endif
                                 @if($tune->has_2d_mv)
-                                    <span class="badge bg-warning">2D</span>
+                                    <span class="badge badge-success">2D</span>
                                 @endif
                                 @if($tune->has_original_mv)
-                                    <span class="badge bg-danger">原曲</span>
+                                    <span class="badge badge-info">原曲</span>
                                 @endif
                             </td>
                             <td class="text-end">

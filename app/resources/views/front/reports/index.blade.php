@@ -46,6 +46,11 @@
                            class="rounded d-block p-3 text-white text-center"
                            style="background: linear-gradient(90deg, #93c54b 0%, #a8e063 100%); border-color: #93c54b;">カード属性</a>
                     </div>
+                    <div class="col-lg-4 col-md-2 mb-2">
+                        <a href="{{ route('front.reports.card-skills') }}"
+                           class="rounded d-block p-3 text-white text-center"
+                           style="background: linear-gradient(90deg, #93c54b 0%, #a8e063 100%); border-color: #93c54b;">カードスキル</a>
+                    </div>
 
                 </div>
             </div>

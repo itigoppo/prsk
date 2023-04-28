@@ -404,6 +404,9 @@ Route::group(['as' => 'front.'], function () {
 
         Route::get('/card-attributes', [ReportsController::class, 'cardAttributes'])
             ->name('card-attributes');
+
+        Route::get('/card-skills', [ReportsController::class, 'cardSkills'])
+            ->name('card-skills');
     });
 
     Route::group(['prefix' => 'events', 'as' => 'events.'], function () {

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\Attribute;
 use App\Enums\Rarity;
+use App\Enums\SkillEffect;
 use App\Models\Card;
 use App\Repositories\CardsRepository;
 use App\Repositories\EventsRepository;
@@ -1178,6 +1179,119 @@ class ReportsService
             $results[$id][$card->rarity->value][$card->attribute->value] = 0;
         }
         $results[$id][$card->rarity->value][$card->attribute->value]++;
+
+        return $results;
+    }
+
+    /**
+     * メンバーごとのカードスキル
+     *
+     * @return \App\Models\Member[]|MembersRepository[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function aggregateCardSkillsByMember()
+    {
+        $cards = $this->cardsRepository->findAll([], ['released_at' => 'asc']);
+
+        $results = [];
+        foreach ($cards as $card) {
+            /** @var \App\Models\Card $card */
+
+            $memberId = $card->member_id;
+            $results = $this->setCardSkill($results, $memberId, $card);
+        }
+
+        $members = $this->membersRepository->findAll([
+            [
+                'type' => 'where',
+                'column' => 'is_active',
+                'operator' => '=',
+                'value' => true,
+            ],
+        ]);
+        $members = $members->where('unit.is_active', '=', true);
+
+        foreach ($members as $member) {
+            /** @var \App\Models\Member|\Illuminate\Database\Eloquent\Model $member */
+
+            foreach (Rarity::getValues() as $rarity) {
+                foreach (SkillEffect::getValues() as $skill) {
+                    $member->setAttribute(
+                        'report_' . $rarity . '_' . $skill . '_count',
+                        empty($results[$member->id][$rarity][$skill]) ? 0 : $results[$member->id][$rarity][$skill]
+                    );
+                }
+            }
+        }
+
+        return $members;
+    }
+
+    /**
+     * メンバーごとのカードスキル(バチャ)
+     *
+     * @return \App\Models\Member[]|MembersRepository[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function aggregateCardSkillsByVirtualSinger()
+    {
+        $cards = $this->cardsRepository->findAll([], ['released_at' => 'asc']);
+        $virtualSingers = ['miku', 'rin', 'len', 'luka', 'meiko', 'kaito'];
+
+        $results = [];
+        foreach ($cards as $card) {
+            /** @var \App\Models\Card $card */
+            if (!Str::endsWith($card->member->code, $virtualSingers)) {
+                continue;
+            }
+
+            foreach ($virtualSingers as $key => $virtualSinger) {
+                if (Str::endsWith($card->member->code, $virtualSinger)) {
+                    $memberId = $key + 1;
+                    $results = $this->setCardSkill($results, $memberId, $card);
+                }
+            }
+        }
+
+        $members = $this->membersRepository->findAll([
+            [
+                'type' => 'where',
+                'column' => 'is_active',
+                'operator' => '=',
+                'value' => true,
+            ],
+            [
+                'type' => 'whereIn',
+                'column' => 'id',
+                'values' => [1, 2, 3, 4, 5, 6],
+            ],
+        ]);
+
+        foreach ($members as $member) {
+            /** @var \App\Models\Member|\Illuminate\Database\Eloquent\Model $member */
+            foreach (Rarity::getValues() as $rarity) {
+                foreach (SkillEffect::getValues() as $skill) {
+                    $member->setAttribute(
+                        'report_' . $rarity . '_' . $skill . '_count',
+                        empty($results[$member->id][$rarity][$skill]) ? 0 : $results[$member->id][$rarity][$skill]
+                    );
+                }
+            }
+        }
+
+        return $members;
+    }
+
+    /**
+     * @param array $results
+     * @param int $id
+     * @param Card $card
+     * @return array
+     */
+    private function setCardSkill(array $results, int $id, Card $card): array
+    {
+        if (!isset($results[$id][$card->rarity->value][$card->skill_effect->value])) {
+            $results[$id][$card->rarity->value][$card->skill_effect->value] = 0;
+        }
+        $results[$id][$card->rarity->value][$card->skill_effect->value]++;
 
         return $results;
     }

@@ -171,4 +171,21 @@ class ReportsController extends Controller
             'virtualSingers' => $virtualSingers,
         ]);
     }
+    public function cardSkills()
+    {
+        /** @var \App\Services\ReportsService $reportsService */
+        $reportsService = app()->make('ReportsService');
+        /** @var \App\Services\CardsService $cardsService */
+        $cardsService = app()->make('CardsService');
+
+        $card = $cardsService->findAll()->first();
+        $members = $reportsService->aggregateCardSkillsByMember();
+        $virtualSingers = $reportsService->aggregateCardSkillsByVirtualSinger();
+
+        return view('front.reports.card-skills', [
+            'card' => $card,
+            'members' => $members,
+            'virtualSingers' => $virtualSingers,
+        ]);
+    }
 }

@@ -16,14 +16,14 @@ use BenSampo\Enum\Enum;
  */
 final class SkillEffect extends Enum
 {
+    const SPECIAL_SCORE = 'special score';
+    const UNIT_SCORE_BOOST = 'unit score boost';
+    const DEPENDS_ON_ACCURACY = 'depends on accuracy';
+    const DEPENDS_ON_LIFE = 'depends on life';
     const SCORE_BOOST = 'score boost';
+    const SPECIAL_LIFE = 'special life';
     const LIFE_RECOVER = 'life recovery';
     const JUDGMENT = 'judgment';
-    const SPECIAL_SCORE = 'special score';
-    const DEPENDS_ON_LIFE = 'depends on life';
-    const DEPENDS_ON_ACCURACY = 'depends on accuracy';
-    const SPECIAL_LIFE = 'special life';
-    const UNIT_SCORE_BOOST = 'unit score boost';
 
     /**
      * Get the description for an enum value.
@@ -34,14 +34,14 @@ final class SkillEffect extends Enum
     public static function getDescription($value): string
     {
         $descriptions = [
+            self::SPECIAL_SCORE => 'スペスキ',
+            self::UNIT_SCORE_BOOST => 'スコアアップ(ユニット)',
+            self::DEPENDS_ON_ACCURACY => 'スコアアップ(精度依存)',
+            self::DEPENDS_ON_LIFE => 'スコアアップ(ライフ依存)',
             self::SCORE_BOOST => 'スコアアップ',
+            self::SPECIAL_LIFE => 'ライフ回復(大)',
             self::LIFE_RECOVER => 'ライフ回復',
             self::JUDGMENT => '判定強化',
-            self::SPECIAL_SCORE => 'スペスキ',
-            self::DEPENDS_ON_LIFE => 'スコアアップ(ライフ依存)',
-            self::DEPENDS_ON_ACCURACY => 'スコアアップ(精度依存)',
-            self::SPECIAL_LIFE => 'ライフ回復(大)',
-            self::UNIT_SCORE_BOOST => 'スコアアップ(ユニット)',
         ];
 
         foreach ($descriptions as $key => $description) {
@@ -51,5 +51,26 @@ final class SkillEffect extends Enum
         }
 
         return parent::getDescription($value);
+    }
+    public static function getColor($value): string
+    {
+        $colors = [
+            self::SCORE_BOOST => '#DB4D6D',
+            self::LIFE_RECOVER => '#90B44B',
+            self::JUDGMENT => '#6A4C9C',
+            self::SPECIAL_SCORE => '#F7C242',
+            self::DEPENDS_ON_LIFE => '#EB7A77',
+            self::DEPENDS_ON_ACCURACY => '#E16B8C',
+            self::SPECIAL_LIFE => '#7BA23F',
+            self::UNIT_SCORE_BOOST => '#CB4042',
+        ];
+
+        foreach ($colors as $key => $color) {
+            if ($value === $key) {
+                return $color;
+            }
+        }
+
+        return "#eee";
     }
 }

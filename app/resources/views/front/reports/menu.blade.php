@@ -45,6 +45,10 @@
                 <a href="{{ route('front.reports.card-attributes') }}"
                    class="nav-link{{ Request::routeIs('front.reports.card-attributes') ? ' active' : '' }}">カード属性</a>
             </li>
+            <li class="nav-item me-1 mb-1">
+                <a href="{{ route('front.reports.card-skills') }}"
+                   class="nav-link{{ Request::routeIs('front.reports.card-skills') ? ' active' : '' }}">カードスキル</a>
+            </li>
         </ul>
         <p class="mt-2 h6 text-danger">
             <i class="fa-solid fa-circle-exclamation"></i> 集計データはカード「<img

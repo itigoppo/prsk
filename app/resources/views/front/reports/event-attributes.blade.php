@@ -105,10 +105,10 @@
                                             @if(!empty($event->bannerCard))
                                                 @if($event->unit_count > 1)
                                                     <span class="badge bg-white"
-                                                          style="border: solid 1px {{ Attribute::getColor($event->attribute->value) }}; color: {{ Attribute::getColor($event->attribute->value) }};">{{ $event->attribute->description }}(混合)</span>
+                                                          style="border: solid 1px {{ Attribute::getColor($event->attribute->value) }}; color: {{ Attribute::getColor($event->attribute->value) }};">{{ $event->attribute->description }}(混合{{ $event->bannerCard->card->is_limited ? '/限定' : '' }})</span>
                                                 @else
                                                     <span class="badge"
-                                                          style="background-color: {{ Attribute::getColor($event->attribute->value) }};">{{ $event->attribute->description }}</span>
+                                                          style="background-color: {{ Attribute::getColor($event->attribute->value) }};">{{ $event->attribute->description }}{{ $event->bannerCard->card->is_limited ? '(限定)' : '' }}</span>
                                                 @endif
                                             @endif
                                         @endforeach
@@ -168,10 +168,10 @@
                                             @if(!empty($event->bannerCard))
                                                 @if($event->unit_count > 1)
                                                     <span class="badge bg-white"
-                                                          style="border: solid 1px {{ Attribute::getColor($event->attribute->value) }}; color: {{ Attribute::getColor($event->attribute->value) }};">{{ $event->attribute->description }}(混合)</span>
+                                                          style="border: solid 1px {{ Attribute::getColor($event->attribute->value) }}; color: {{ Attribute::getColor($event->attribute->value) }};">{{ $event->attribute->description }}(混合{{ $event->bannerCard->card->is_limited ? '/限定' : '' }})</span>
                                                 @else
                                                     <span class="badge"
-                                                          style="background-color: {{ Attribute::getColor($event->attribute->value) }};">{{ $event->attribute->description }}</span>
+                                                          style="background-color: {{ Attribute::getColor($event->attribute->value) }};">{{ $event->attribute->description }}{{ $event->bannerCard->card->is_limited ? '(限定)' : '' }}</span>
                                                 @endif
                                             @endif
                                         @endforeach

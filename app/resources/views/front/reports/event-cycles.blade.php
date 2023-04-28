@@ -39,12 +39,13 @@
                                                 <span class="badge me-2"
                                                       style="border: solid 1px {{ $event->bannerCard->card->member->unit->bg_color }}; background-color: #ffffff; color: {{ $event->bannerCard->card->member->unit->bg_color }}">
                                                     {{ $event->bannerCard->card->member->unit->short }}
-                                                        (混合)
+                                                    (混合{{ $event->bannerCard->card->is_limited ? '/限定' : '' }})
                                                 </span>
                                             @else
                                                 <span class="badge me-2"
                                                       style="background-color: {{ $event->bannerCard->card->member->unit->bg_color }}; color: {{ $event->bannerCard->card->member->unit->color }}">
                                                     {{ $event->bannerCard->card->member->unit->short }}
+                                                    {{ $event->bannerCard->card->is_limited ? '(限定)' : '' }}
                                                 </span>
                                             @endif
                                         @endif
@@ -101,12 +102,13 @@
                                                 <span class="badge me-2 bg-white"
                                                       style="border: solid 1px {{ Attribute::getColor($event->attribute->value) }}; color: {{ Attribute::getColor($event->attribute->value) }}">
                                                     {{ $event->attribute->description }}
-                                                        (混合)
+                                                    (混合{{ $event->bannerCard->card->is_limited ? '/限定' : '' }})
                                                 </span>
                                             @else
                                                 <span class="badge me-2 text-white"
                                                       style="background-color: {{ Attribute::getColor($event->attribute->value) }}; }}">
                                                     {{ $event->attribute->description }}
+                                                    {{ $event->bannerCard->card->is_limited ? '(限定)' : '' }}
                                                 </span>
                                             @endif
                                         @endif
@@ -149,12 +151,13 @@
                                                                 <span class="badge me-2"
                                                                       style="border: solid 1px {{ $event->bannerCard->card->member->bg_color }}; background-color: #ffffff; color: {{ $event->bannerCard->card->member->bg_color }}">
                                                                 {{ $event->bannerCard->card->member->display_short }}
-                                                                    (混合)
+                                                                (混合{{ $event->bannerCard->card->is_limited ? '/限定' : '' }})
                                                             </span>
                                                             @else
                                                                 <span class="badge me-2"
                                                                       style="background-color: {{ $event->bannerCard->card->member->bg_color }}; color: {{ $event->bannerCard->card->member->color }}">
                                                                 {{ $event->bannerCard->card->member->display_short }}
+                                                                    {{ $event->bannerCard->card->is_limited ? '(限定)' : '' }}
                                                             </span>
                                                             @endif
                                                         @endif

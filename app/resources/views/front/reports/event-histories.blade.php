@@ -30,6 +30,10 @@
                                     <span>{{ $event->name }}</span>
                                 </div>
                                 <div>
+                                    @if(!empty($event->bannerCard) && $event->bannerCard->card->is_limited)
+                                        <span
+                                            class="badge border bg-white border-danger text-danger">限定</span>
+                                    @endif
                                     <span
                                         class="badge border bg-white {{ $event->type->value === \App\Enums\EventType::MARATHON ? "border-warning text-warning" : "border-success text-success" }}">{{ $event->type->description}}</span>
                                     <span class="badge"

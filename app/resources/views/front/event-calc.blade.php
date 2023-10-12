@@ -412,9 +412,9 @@
             <li>マスランボーナス
                 <dl class="row">
                     <dt class="col-1">☆4</dt>
-                    <dd class="col-11">+0 / 10 / 11 / 12 / 13 / 15</dd>
+                    <dd class="col-11">+10 / 12.5 / 15 / 17 / 20 / 25</dd>
                     <dt class="col-1">BR</dt>
-                    <dd class="col-11">+0 / 5 / 6 / 7 / 8 / 10</dd>
+                    <dd class="col-11">+5 / 7 / 9 / 11 / 13 / 15</dd>
                     <dt class="col-1">☆3</dt>
                     <dd class="col-11">+0 / 1 / 2 / 3 / 4 / 5</dd>
                     <dt class="col-1">☆2</dt>

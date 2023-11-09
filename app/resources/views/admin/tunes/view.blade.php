@@ -98,6 +98,7 @@
                                     <th>HARD</th>
                                     <th>EXPERT</th>
                                     <th>MASTER</th>
+                                    <th>APPEND</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -107,6 +108,7 @@
                                     <td>{{ $tune->hard_level }}</td>
                                     <td>{{ $tune->expert_level }}</td>
                                     <td>{{ $tune->master_level }}</td>
+                                    <td>{{ $tune->append_level }}</td>
                                 </tr>
                                 </tbody>
                             </table>

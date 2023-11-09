@@ -61,11 +61,10 @@ class CardsRepository implements CardsRepositoryInterface
         $entity->skill_name = $request->skill_name;
         $entity->costume = $request->costume;
         $entity->has_hair_style = $request->get('has_hair_style', false);
+        $entity->has_another_cut = $request->get('has_another_cut', false);
         $entity->is_limited = $request->get('is_limited', false);
         $entity->is_fes = $request->get('is_fes', false);
         $entity->performance = $request->get('performance', 0);
-        $entity->technique = $request->get('technique', 0);
-        $entity->stamina = $request->get('stamina', 0);
         $entity->normal_file = empty($request->normal_file_path) ? null : $request->normal_file_path;
         $entity->after_training_file = empty($request->after_training_file_path) ? null : $request->after_training_file_path;
 
@@ -83,11 +82,10 @@ class CardsRepository implements CardsRepositoryInterface
         $entity->skill_name = $request->skill_name;
         $entity->costume = $request->costume;
         $entity->has_hair_style = $request->get('has_hair_style', false);
+        $entity->has_another_cut = $request->get('has_another_cut', false);
         $entity->is_limited = $request->get('is_limited', false);
         $entity->is_fes = $request->get('is_fes', false);
         $entity->performance = $request->get('performance', 0);
-        $entity->technique = $request->get('technique', 0);
-        $entity->stamina = $request->get('stamina', 0);
         $entity->normal_file = empty($request->normal_file_path) ? null : $request->normal_file_path;
         $entity->after_training_file = empty($request->after_training_file_path) ? null : $request->after_training_file_path;
 

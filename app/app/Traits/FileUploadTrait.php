@@ -97,11 +97,12 @@ trait FileUploadTrait
      * @param string $attribute
      * @param bool $ltd
      * @param bool $fes
+     * @param bool $another
      * @param string $mode
      * @param string $file
      * @return false|string
      */
-    private function createSvg(string $rarity, string $attribute, bool $ltd, bool $fes, string $mode, string $file)
+    private function createSvg(string $rarity, string $attribute, bool $ltd, bool $fes, bool $another, string $mode, string $file)
     {
         $baseFile = storage_path('data/cards/' . $file);
         if (!file_exists($baseFile)) {
@@ -169,6 +170,21 @@ trait FileUploadTrait
                 . '        <stop offset="0%" stop-color="#ed0e9f" />'
                 . "\n"
                 . '        <stop offset="100%" stop-color="#f5acdb" />'
+                . "\n"
+                . '    </linearGradient>'
+                . "\n";
+        } elseif ($ltd && $another) {
+            $limitedContents = '<!-- 限定(アナザーカット) -->'
+                . "\n"
+                . '    <rect width="60" height="25" rx="10" ry="10" x="96" y="1" fill="url(#ltd-another-color)" style="stroke: rgb(255, 255, 255);"></rect>'
+                . "\n"
+                . '    <text style="fill: rgb(255, 255, 255); font-family: &quot;M PLUS 1&quot;; font-size: 15px; font-weight: 300; white-space: pre;" x="98.738" y="18.225">Limited</text>'
+                . "\n"
+                . '    <linearGradient id="ltd-another-color" x1="0" y1="0" x2="0" y2="1">'
+                . "\n"
+                . '        <stop offset="0%" stop-color="#005caf" />'
+                . "\n"
+                . '        <stop offset="100%" stop-color="#2ea9df" />'
                 . "\n"
                 . '    </linearGradient>'
                 . "\n";

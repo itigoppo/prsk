@@ -20,6 +20,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * @property int $hard_level
  * @property int $expert_level
  * @property int $master_level
+ * @property int $append_level
  * @property array $vocalists
  */
 class TuneCreate extends FormRequest
@@ -87,6 +88,10 @@ class TuneCreate extends FormRequest
                 'nullable',
                 'numeric',
             ],
+            'append_level' => [
+                'nullable',
+                'numeric',
+            ],
             'vocalists.*' => [
                 'nullable',
                 'array',
@@ -124,6 +129,7 @@ class TuneCreate extends FormRequest
             'hard_level' => 'HARD Lv',
             'expert_level' => 'EXPERT Lv',
             'master_level' => 'MASTER Lv',
+            'append_level' => 'APPEND Lv',
             'vocalists.*.type' => 'ボーカル種別',
             'vocalists.*.key' => 'キー',
             'vocalists.*.members' => 'ボーカルメンバー',

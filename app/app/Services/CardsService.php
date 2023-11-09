@@ -157,7 +157,7 @@ class CardsService
 
                 foreach($csv as $key => $line) {
                     // スキル名が入ってないなら多分埋めてないからパス
-                    if ($key === 0 || empty($line[12])) {
+                    if ($key === 0 || empty($line[13])) {
                         continue;
                     }
 
@@ -227,10 +227,11 @@ class CardsService
                             break;
                     }
 
-                    $ltd = !empty($line[11]);
+                    $ltd = !empty($line[12]);
+                    $another = !empty($line[11]);
 
                     $fes = false;
-                    if (!empty($line[11]) && $line[11] === 'fes') {
+                    if (!empty($line[12]) && $line[12] === 'fes') {
                         $fes = true;
                     }
 
@@ -258,10 +259,10 @@ class CardsService
 
                     $normal = '';
                     $after = '';
-                    if (!empty($line[16])) {
-                        $normal = $this->createSvg($rarity, $attribute, $ltd, $fes, 'normal', $line[16] . '_normal.jpg');
+                    if (!empty($line[15])) {
+                        $normal = $this->createSvg($rarity, $attribute, $ltd, $fes, $another, 'normal', $line[15] . '_normal.jpg');
                         if (in_array($rarity, [Rarity::STAR_THREE, Rarity::STAR_FOUR])) {
-                            $after = $this->createSvg($rarity, $attribute, $ltd, $fes, 'after', $line[16] . '_after_training.jpg');
+                            $after = $this->createSvg($rarity, $attribute, $ltd, $fes, $another, 'after', $line[15] . '_after_training.jpg');
                         }
                     }
 
@@ -272,14 +273,13 @@ class CardsService
                         'name' => $line[4],
                         'member_id' => $member->id,
                         'skill_effect' => $skill,
-                        'skill_name' => $line[12],
+                        'skill_name' => $line[13],
                         'costume' => (empty($line[9]) ? null : $line[9]),
                         'has_hair_style' => !empty($line[10]),
+                        'has_another_cut' => $another,
                         'is_limited' => $ltd,
                         'is_fes' => $fes,
-                        'performance' => (empty($line[13]) ? null : $line[13]),
-                        'technique' => (empty($line[14]) ? null : $line[14]),
-                        'stamina' => (empty($line[15]) ? null : $line[15]),
+                        'performance' => (empty($line[14]) ? null : $line[14]),
                         'normal_file_path' => $normal,
                         'after_training_file_path' => $after,
                     ]);

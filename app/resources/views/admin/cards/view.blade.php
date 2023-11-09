@@ -59,10 +59,17 @@
                                 なし
                             @endif
                         </dd>
-                        <dt class="col-sm-3">総合力</dt>
+                        <dt class="col-sm-3">アナザーカット</dt>
                         <dd class="col-sm-9">
-                            {{ $card->performance + $card->technique + $card->stamina }}
-                            (Pf:{{ $card->performance }} / Te:{{ $card->technique }} / St:{{ $card->stamina }})
+                            @if($card->has_another_cut)
+                                あり
+                            @else
+                                なし
+                            @endif
+                        </dd>
+                        <dt class="col-sm-3">パフォーマンス</dt>
+                        <dd class="col-sm-9">
+                            {{ $card->performance }}
                         </dd>
                         <dt class="col-sm-3">イラスト</dt>
                         <dd class="col-sm-9">

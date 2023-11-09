@@ -173,6 +173,14 @@
         </div>
 
         <div class="checkbox icheck-primary icheck-inline">
+            <input id="has-another-cut" class="form-check-input @error('has_another_cut') is-invalid @enderror"
+                   type="checkbox"
+                   name="has_another_cut"
+                   value="1"{{ old('has_another_cut', $card->has_another_cut ?? '') ? ' checked' : '' }}>
+            <label class="form-check-label" for="has-another-cut">アナザーカットあり</label>
+        </div>
+
+        <div class="checkbox icheck-primary icheck-inline">
             <input id="is-limited" class="form-check-input @error('is_limited') is-invalid @enderror"
                    type="checkbox"
                    name="is_limited"
@@ -221,37 +229,6 @@
             @enderror
         </div>
     </div>
-
-    <div class="col">
-        <div class="form-group">
-            <label for="technique" class="col-form-label text-md-end">テクニック</label>
-            <input id="technique" type="text"
-                   class="form-control @error('technique') is-invalid @enderror" name="technique"
-                   value="{{ old('technique', $card->technique ?? '') }}" inputmode="numeric" pattern="\d*">
-
-            @error('technique')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
-    </div>
-
-    <div class="col">
-        <div class="form-group">
-            <label for="stamina" class="col-form-label text-md-end">スタミナ</label>
-            <input id="stamina" type="text"
-                   class="form-control @error('stamina') is-invalid @enderror" name="stamina"
-                   value="{{ old('stamina', $card->stamina ?? '') }}" inputmode="numeric" pattern="\d*">
-
-            @error('stamina')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
-    </div>
-
 </div>
 
 

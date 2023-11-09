@@ -25,6 +25,7 @@ use Illuminate\Support\Carbon;
  * @property int $hard_level
  * @property int $expert_level
  * @property int $master_level
+ * @property int $append_level
  * @property Carbon $created_at
  * @property int $created_by
  * @property Carbon $updated_at

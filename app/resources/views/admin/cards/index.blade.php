@@ -2,6 +2,7 @@
     /**
      * @var \App\Models\Card[]|\Illuminate\Contracts\Pagination\LengthAwarePaginator $cards
      */
+    use App\Enums\Attribute;
 @endphp
 
 @extends('layouts.admin')
@@ -36,6 +37,7 @@
                         <th>スキル</th>
                         <th>衣装</th>
                         <th>髪型</th>
+                        <th>MV</th>
                         <th style="width: 120px"></th>
                     </tr>
                     </thead>
@@ -55,7 +57,8 @@
                                 {{ $card->rarity->description }}
                             </td>
                             <td>
-                                {{ $card->attribute->description}}
+                                <span class="badge"
+                                      style="background-color: {{ Attribute::getColor($card->attribute->value) }};">{{ mb_substr($card->attribute->description, 0, 1) }}</span>
                             </td>
                             <td>
                                 [{{ $card->name}}]<br>
@@ -72,6 +75,11 @@
                             <td>
                                 @if($card->has_hair_style)
                                     <i class="fa-solid fa-scissors"></i>
+                                @endif
+                            </td>
+                            <td>
+                                @if($card->has_another_cut)
+                                    <i class="fa-solid fa-film"></i>
                                 @endif
                             </td>
                             <td class="text-end">

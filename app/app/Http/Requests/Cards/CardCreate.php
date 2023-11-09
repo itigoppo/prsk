@@ -18,11 +18,10 @@ use Illuminate\Foundation\Http\FormRequest;
  * @property string $skill_name
  * @property string $costume
  * @property bool $has_hair_style
+ * @property bool $has_another_cut
  * @property bool $is_limited
  * @property bool $is_fes
  * @property int $performance
- * @property int $technique
- * @property int $stamina
  * @property string $normal_file
  * @property string $normal_file_path
  * @property string $after_training_file
@@ -79,6 +78,9 @@ class CardCreate extends FormRequest
             'has_hair_style' => [
                 'boolean',
             ],
+            'has_another_cut' => [
+                'boolean',
+            ],
             'is_limited' => [
                 'boolean',
             ],
@@ -86,14 +88,6 @@ class CardCreate extends FormRequest
                 'boolean',
             ],
             'performance' => [
-                'nullable',
-                'numeric',
-            ],
-            'technique' => [
-                'nullable',
-                'numeric',
-            ],
-            'stamina' => [
                 'nullable',
                 'numeric',
             ],
@@ -127,11 +121,10 @@ class CardCreate extends FormRequest
             'skill_name' => 'スキル名',
             'costume' => '衣装名',
             'has_hair_style' => 'ヘアスタイル',
+            'has_another_cut' => 'アナザーカット',
             'is_limited' => '限定',
             'is_fes' => 'フェス限',
             'performance' => 'パフォーマンス',
-            'technique' => 'テクニック',
-            'stamina' => 'スタミナ',
             'normal_file' => '特訓前画像',
             'after_training_file' => '特訓後画像',
         ];

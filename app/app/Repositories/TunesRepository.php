@@ -64,6 +64,7 @@ class TunesRepository implements TunesRepositoryInterface
         $entity->hard_level = $request->hard_level;
         $entity->expert_level = $request->expert_level;
         $entity->master_level = $request->master_level;
+        $entity->append_level = $request->append_level;
 
         if (!$entity->save()) {
             return false;

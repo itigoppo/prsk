@@ -238,6 +238,21 @@
             @enderror
         </div>
     </div>
+
+    <div class="col">
+        <div class="form-group">
+            <label for="append-level" class="col-form-label text-md-end">APPEND Lv</label>
+            <input id="append-level" type="text"
+                   class="form-control @error('append_level') is-invalid @enderror" name="append_level"
+                   value="{{ old('append_level', $tune->append_level ?? '') }}" inputmode="numeric" pattern="\d*">
+
+            @error('append_level')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+    </div>
 </div>
 
 @php

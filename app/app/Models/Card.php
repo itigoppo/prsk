@@ -24,11 +24,10 @@ use Illuminate\Support\Carbon;
  * @property string $skill_name
  * @property string $costume
  * @property bool $has_hair_style
+ * @property bool $has_another_cut
  * @property bool $is_limited
  * @property bool $is_fes
  * @property int $performance
- * @property int $technique
- * @property int $stamina
  * @property string $normal_file
  * @property string $after_training_file
  * @property Carbon $created_at

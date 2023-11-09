@@ -12,6 +12,7 @@ final class EventType extends Enum
 {
     const MARATHON = 'marathon';
     const CHEERFUL = 'cheerful';
+    const WORLD_LINK = 'world-link';
 
     /**
      * Get the description for an enum value.
@@ -24,6 +25,7 @@ final class EventType extends Enum
         $descriptions = [
             self::MARATHON => 'マラソン',
             self::CHEERFUL => 'チアフルカーニバル',
+            self::WORLD_LINK => 'ワールドリンク',
         ];
 
         foreach ($descriptions as $key => $description) {

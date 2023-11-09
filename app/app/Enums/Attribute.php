@@ -13,6 +13,8 @@ use BenSampo\Enum\Enum;
  */
 final class Attribute extends Enum
 {
+    const ALL = 'all';
+
     const CUTE = 'cute';
     const COOL = 'cool';
     const PURE = 'pure';
@@ -28,6 +30,7 @@ final class Attribute extends Enum
     public static function getDescription($value): string
     {
         $descriptions = [
+            self::ALL => 'すべて',
             self::CUTE => 'キュート',
             self::COOL => 'クール',
             self::PURE => 'ピュア',
@@ -47,6 +50,7 @@ final class Attribute extends Enum
     public static function getColor($value): string
     {
         $colors = [
+            self::ALL => '#91989F',
             self::CUTE => '#FF6CAA',
             self::COOL => '#3B53F9',
             self::PURE => '#02BB44',

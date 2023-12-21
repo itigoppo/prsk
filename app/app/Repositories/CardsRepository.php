@@ -62,6 +62,7 @@ class CardsRepository implements CardsRepositoryInterface
         $entity->costume = $request->costume;
         $entity->has_hair_style = $request->get('has_hair_style', false);
         $entity->has_another_cut = $request->get('has_another_cut', false);
+        $entity->has_avatar_accessory = $request->get('has_avatar_accessory', false);
         $entity->is_limited = $request->get('is_limited', false);
         $entity->is_fes = $request->get('is_fes', false);
         $entity->performance = $request->get('performance', 0);
@@ -83,6 +84,7 @@ class CardsRepository implements CardsRepositoryInterface
         $entity->costume = $request->costume;
         $entity->has_hair_style = $request->get('has_hair_style', false);
         $entity->has_another_cut = $request->get('has_another_cut', false);
+        $entity->has_avatar_accessory = $request->get('has_avatar_accessory', false);
         $entity->is_limited = $request->get('is_limited', false);
         $entity->is_fes = $request->get('is_fes', false);
         $entity->performance = $request->get('performance', 0);

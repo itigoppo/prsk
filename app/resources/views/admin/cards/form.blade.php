@@ -181,6 +181,14 @@
         </div>
 
         <div class="checkbox icheck-primary icheck-inline">
+            <input id="has-avatar-accessory" class="form-check-input @error('has_avatar_accessory') is-invalid @enderror"
+                   type="checkbox"
+                   name="has_avatar_accessory"
+                   value="1"{{ old('has_avatar_accessory', $card->has_avatar_accessory ?? '') ? ' checked' : '' }}>
+            <label class="form-check-label" for="has-avatar-accessory">アバターアクセサリーあり</label>
+        </div>
+
+        <div class="checkbox icheck-primary icheck-inline">
             <input id="is-limited" class="form-check-input @error('is_limited') is-invalid @enderror"
                    type="checkbox"
                    name="is_limited"
@@ -239,7 +247,7 @@
             @if(!empty($card->normal_file))
                 <div class="row mb-2">
                     <div class="col">
-                        <img src="{{ route('admin.cards.display', ['card_id' => $card->id, 'mode' => 'normal']) }}" width="50">
+                        <img src="{{ route('admin.cards.display', ['card_id' => $card->id, 'mode' => 'normal']) }}" width="60">
                     </div>
                     <div class="col">
                         <div class="icheck-primary">
@@ -270,7 +278,7 @@
             @if(!empty($card->after_training_file))
                 <div class="row mb-2">
                     <div class="col">
-                        <img src="{{ route('admin.cards.display', ['card_id' => $card->id, 'mode' => 'after_training']) }}" width="50">
+                        <img src="{{ route('admin.cards.display', ['card_id' => $card->id, 'mode' => 'after_training']) }}" width="60">
                     </div>
                     <div class="col">
                         <div class="icheck-primary">

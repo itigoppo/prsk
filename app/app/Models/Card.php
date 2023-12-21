@@ -25,6 +25,7 @@ use Illuminate\Support\Carbon;
  * @property string $costume
  * @property bool $has_hair_style
  * @property bool $has_another_cut
+ * @property bool $has_avatar_accessory
  * @property bool $is_limited
  * @property bool $is_fes
  * @property int $performance

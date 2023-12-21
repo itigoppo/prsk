@@ -19,6 +19,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * @property string $costume
  * @property bool $has_hair_style
  * @property bool $has_another_cut
+ * @property bool $has_avatar_accessory
  * @property bool $is_limited
  * @property bool $is_fes
  * @property int $performance
@@ -83,6 +84,9 @@ class CardUpdate extends FormRequest
             'has_another_cut' => [
                 'boolean',
             ],
+            'has_avatar_accessory' => [
+                'boolean',
+            ],
             'is_limited' => [
                 'boolean',
             ],
@@ -124,6 +128,7 @@ class CardUpdate extends FormRequest
             'costume' => '衣装名',
             'has_hair_style' => 'ヘアスタイル',
             'has_another_cut' => 'アナザーカット',
+            'has_avatar_accessory' => 'アバターアクセサリー',
             'is_limited' => '限定',
             'is_fes' => 'フェス限',
             'stamina' => 'スタミナ',

@@ -30,14 +30,11 @@
                 <table class="table table-hover table-striped">
                     <thead>
                     <tr>
-                        <th style="width: 130px">イラスト</th>
+                        <th style="width: 150px">イラスト</th>
                         <th>レア</th>
                         <th>属性</th>
                         <th>カード名</th>
                         <th>スキル</th>
-                        <th>衣装</th>
-                        <th>髪型</th>
-                        <th>MV</th>
                         <th style="width: 120px"></th>
                     </tr>
                     </thead>
@@ -47,10 +44,10 @@
                             <td>
 
                                 @if($card->normal_file)
-                                    <img src="{{ route('admin.cards.display', ['card_id' => $card->id, 'mode' => 'normal']) }}" width="50">
+                                    <img src="{{ route('admin.cards.display', ['card_id' => $card->id, 'mode' => 'normal']) }}" width="60">
                                 @endif
                                 @if($card->after_training_file)
-                                    <img src="{{ route('admin.cards.display', ['card_id' => $card->id, 'mode' => 'after_training']) }}" width="50">
+                                    <img src="{{ route('admin.cards.display', ['card_id' => $card->id, 'mode' => 'after_training']) }}" width="60">
                                 @endif
                             </td>
                             <td>
@@ -66,21 +63,6 @@
                             </td>
                             <td>
                                 {{ $card->skill_effect->description }}
-                            </td>
-                            <td>
-                                @if(!empty($card->costume))
-                                    <i class="fa-solid fa-shirt"></i>
-                                @endif
-                            </td>
-                            <td>
-                                @if($card->has_hair_style)
-                                    <i class="fa-solid fa-scissors"></i>
-                                @endif
-                            </td>
-                            <td>
-                                @if($card->has_another_cut)
-                                    <i class="fa-solid fa-film"></i>
-                                @endif
                             </td>
                             <td class="text-end">
                                 <a href="{{ route('admin.cards.view', ['card_id' => $card->id]) }}"

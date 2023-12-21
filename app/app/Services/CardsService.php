@@ -156,13 +156,22 @@ class CardsService
                 );
 
                 foreach($csv as $key => $line) {
-                    // スキル名が入ってないなら多分埋めてないからパス
-                    if ($key === 0 || empty($line[13])) {
+                    list(
+                        $no, $releasedDay, $releasedHour,
+                        $rarity, $name, $member, $attribute, $unit, $skill,
+                        $costume, $hasHairstyle, $hasAnother, $hasAvatar,
+                        $ltdType, $skillName, $performance, $fileName
+                        ) = $line;
+                    // ヘッダーはスキップ
+                    if ($key === 0) {
                         continue;
                     }
+                    // スキル名が入ってないなら多分埋めてないからそれ以降止める
+                    if (empty($skillName)) {
+                        break;
+                    }
 
-                    $rarity = '';
-                    switch ($line[3]) {
+                    switch ($rarity) {
                         case '1':
                             $rarity = Rarity::STAR_ONE;
                             break;
@@ -178,10 +187,12 @@ class CardsService
                         case 'BD':
                             $rarity = Rarity::BIRTHDAY;
                             break;
+                        default :
+                            $rarity = "";
+                            break;
                     }
 
-                    $attribute = '';
-                    switch ($line[6]) {
+                    switch ($attribute) {
                         case 'キュート':
                             $attribute = Attribute::CUTE;
                             break;
@@ -197,10 +208,12 @@ class CardsService
                         case 'ミステリアス':
                             $attribute = Attribute::MYSTERIOUS;
                             break;
+                        default :
+                            $attribute = "";
+                            break;
                     }
 
-                    $skill = '';
-                    switch ($line[8]) {
+                    switch ($skill) {
                         case 'スコア':
                             $skill = SkillEffect::SCORE_BOOST;
                             break;
@@ -225,20 +238,26 @@ class CardsService
                         case 'VS1':
                             $skill = SkillEffect::UNIT_SCORE_BOOST;
                             break;
+                        default :
+                            $skill = "";
+                            break;
                     }
 
-                    $ltd = !empty($line[12]);
-                    $another = !empty($line[11]);
+                    $isLtd = !empty($ltdType);
+                    $hasCostume = !empty($costume);
+                    $hasHairstyle = !empty($hasHairstyle);
+                    $hasAnother = !empty($hasAnother);
+                    $hasAvatar = !empty($hasAvatar);
 
-                    $fes = false;
-                    if (!empty($line[12]) && $line[12] === 'fes') {
-                        $fes = true;
+                    $isFes = false;
+                    if ($isLtd && $ltdType === 'fes') {
+                        $isFes = true;
                     }
 
                     $memberQuery = Member::query()
-                        ->where('members.name', '=', $line[5]);
-                    if (strpos($line[7], 'VS') !== false) {
-                        $match = preg_match('{\((.*)\)}', $line[7], $matches);
+                        ->where('members.name', '=', $member);
+                    if (strpos($unit, 'VS') !== false) {
+                        $match = preg_match('{\((.*)\)}', $unit, $matches);
                         if ($match === 0) {
                             $unit = 'VS';
                         } else {
@@ -259,27 +278,36 @@ class CardsService
 
                     $normal = '';
                     $after = '';
-                    if (!empty($line[15])) {
-                        $normal = $this->createSvg($rarity, $attribute, $ltd, $fes, $another, 'normal', $line[15] . '_normal.jpg');
+                    if (!empty($fileName)) {
+                        $normal = $this->createSvg(
+                            $rarity, $attribute, $isLtd, $isFes,
+                            $hasCostume, $hasHairstyle, $hasAnother, $hasAvatar,
+                            'normal', $fileName . '_normal.jpg'
+                        );
                         if (in_array($rarity, [Rarity::STAR_THREE, Rarity::STAR_FOUR])) {
-                            $after = $this->createSvg($rarity, $attribute, $ltd, $fes, $another, 'after', $line[15] . '_after_training.jpg');
+                            $after = $this->createSvg(
+                                $rarity, $attribute, $isLtd, $isFes,
+                                $hasCostume, $hasHairstyle, $hasAnother, $hasAvatar,
+                                'after', $fileName . '_after_training.jpg'
+                            );
                         }
                     }
 
                     $input = new CardCreate([
-                        'released_at' =>  $line[1] . ' ' . $line[2],
+                        'released_at' => $releasedDay . ' ' . $releasedHour,
                         'rarity' => $rarity,
                         'attribute' => $attribute,
-                        'name' => $line[4],
+                        'name' => $name,
                         'member_id' => $member->id,
                         'skill_effect' => $skill,
-                        'skill_name' => $line[13],
-                        'costume' => (empty($line[9]) ? null : $line[9]),
-                        'has_hair_style' => !empty($line[10]),
-                        'has_another_cut' => $another,
-                        'is_limited' => $ltd,
-                        'is_fes' => $fes,
-                        'performance' => (empty($line[14]) ? null : $line[14]),
+                        'skill_name' => $skillName,
+                        'costume' => (empty($costume) ? null : $line[9]),
+                        'has_hair_style' => $hasHairstyle,
+                        'has_another_cut' => $hasAnother,
+                        'has_avatar_accessory' => $hasAvatar,
+                        'is_limited' => $isLtd,
+                        'is_fes' => $isFes,
+                        'performance' => (empty($performance) ? null : $performance),
                         'normal_file_path' => $normal,
                         'after_training_file_path' => $after,
                     ]);

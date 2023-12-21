@@ -95,14 +95,27 @@ trait FileUploadTrait
     /**
      * @param string $rarity
      * @param string $attribute
-     * @param bool $ltd
-     * @param bool $fes
-     * @param bool $another
+     * @param bool $isLtd
+     * @param bool $isFes
+     * @param bool $hasCostume,
+     * @param bool $hasHairstyle,
+     * @param bool $hasAnother,
+     * @param bool $hasAvatar,
      * @param string $mode
      * @param string $file
      * @return false|string
      */
-    private function createSvg(string $rarity, string $attribute, bool $ltd, bool $fes, bool $another, string $mode, string $file)
+    private function createSvg(
+        string $rarity,
+        string $attribute,
+        bool $isLtd,
+        bool $isFes,
+        bool $hasCostume,
+        bool $hasHairstyle,
+        bool $hasAnother,
+        bool $hasAvatar,
+        string $mode,
+        string $file)
     {
         $baseFile = storage_path('data/cards/' . $file);
         if (!file_exists($baseFile)) {
@@ -157,8 +170,7 @@ trait FileUploadTrait
         $contents = str_replace('{{rarity}}', $rarityContents, $contents);
 
         $limitedContents = '';
-
-        if ($ltd && $fes) {
+        if ($isLtd && $isFes) {
             $limitedContents = '<!-- Fes -->'
                 . "\n"
                 . '    <rect width="60" height="25" rx="10" ry="10" x="96" y="1" fill="url(#fes-color)" style="stroke: rgb(255, 255, 255);"></rect>'
@@ -173,22 +185,7 @@ trait FileUploadTrait
                 . "\n"
                 . '    </linearGradient>'
                 . "\n";
-        } elseif ($ltd && $another) {
-            $limitedContents = '<!-- 限定(アナザーカット) -->'
-                . "\n"
-                . '    <rect width="60" height="25" rx="10" ry="10" x="96" y="1" fill="url(#ltd-another-color)" style="stroke: rgb(255, 255, 255);"></rect>'
-                . "\n"
-                . '    <text style="fill: rgb(255, 255, 255); font-family: &quot;M PLUS 1&quot;; font-size: 15px; font-weight: 300; white-space: pre;" x="98.738" y="18.225">Limited</text>'
-                . "\n"
-                . '    <linearGradient id="ltd-another-color" x1="0" y1="0" x2="0" y2="1">'
-                . "\n"
-                . '        <stop offset="0%" stop-color="#005caf" />'
-                . "\n"
-                . '        <stop offset="100%" stop-color="#2ea9df" />'
-                . "\n"
-                . '    </linearGradient>'
-                . "\n";
-        } elseif ($ltd) {
+        } elseif ($isLtd) {
             $limitedContents = '<!-- 限定 -->'
                 . "\n"
                 . '    <rect width="60" height="25" rx="10" ry="10" x="96" y="1" fill="url(#ltd-color)" style="stroke: rgb(255, 255, 255);"></rect>'
@@ -205,6 +202,48 @@ trait FileUploadTrait
                 . "\n";
         }
         $contents = str_replace('{{limited}}', $limitedContents, $contents);
+
+        $accessoryContents = '';
+        if ($hasHairstyle) {
+            $hairstyleTemplate = '<!-- ヘアスタイル -->'
+                . "\n".
+                '<image width="22" height="22" x="103.500" y="124"'
+                . "\n"
+                . '           xlink:href="{{data}}"></image>'
+                . "\n";
+            $data = $this->fileBase64(storage_path('data/card-parts/has_hairstyle.png'));
+            $accessoryContents .= str_replace('{{data}}', $data, $hairstyleTemplate);
+        } elseif ($hasAnother) {
+            $anotherTemplate = '<!-- アナザーカット -->'
+                . "\n".
+                '<image width="22" height="22" x="103.500" y="124"'
+                . "\n"
+                . '           xlink:href="{{data}}"></image>'
+                . "\n";
+            $data = $this->fileBase64(storage_path('data/card-parts/has_mv.png'));
+            $accessoryContents .= str_replace('{{data}}', $data, $anotherTemplate);
+        } elseif ($hasAvatar) {
+            $avatarTemplate = '<!-- アバターアクセサリー -->'
+                . "\n".
+                '<image width="22" height="22" x="103.500" y="124"'
+                . "\n"
+                . '           xlink:href="{{data}}"></image>'
+                . "\n";
+            $data = $this->fileBase64(storage_path('data/card-parts/has_avatar.png'));
+            $accessoryContents .= str_replace('{{data}}', $data, $avatarTemplate);
+        }
+
+        if ($hasCostume) {
+            $costumeTemplate = '<!-- 衣装 -->'
+                . "\n".
+                '<image width="22" height="22" x="126" y="124"'
+                . "\n"
+                . '           xlink:href="{{data}}"></image>'
+                . "\n";
+            $data = $this->fileBase64(storage_path('data/card-parts/has_costume.png'));
+            $accessoryContents .= str_replace('{{data}}', $data, $costumeTemplate);
+        }
+        $contents = str_replace('{{hasAccessories}}', $accessoryContents, $contents);
 
         $svgPath = storage_path('data/card.svg');
         file_put_contents($svgPath, $contents);

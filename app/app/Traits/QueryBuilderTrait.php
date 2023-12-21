@@ -16,6 +16,9 @@ trait QueryBuilderTrait
     {
         if (!empty($conditions)) {
             foreach ($conditions as $condition) {
+                if (empty($condition['type'])) {
+                    continue;
+                }
                 switch ($condition['type']) {
                     case 'where':
                         if (empty($condition['closure'])) {
@@ -45,6 +48,8 @@ trait QueryBuilderTrait
                         break;
                     case 'whereNull':
                         $query->whereNull($condition['column']);
+                        break;
+                    default:
                         break;
                 }
             }

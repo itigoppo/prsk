@@ -1,6 +1,6 @@
 @php
     /**
-     * @var \App\Models\Event[] $events
+     * @var \App\Models\Event[]|\Illuminate\Contracts\Pagination\LengthAwarePaginator $events
      */
     use App\Models\Card;
 @endphp
@@ -18,6 +18,61 @@
         @include('front.reports.menu', ['current' => 'event-histories'])
         <div class="row justify-content-center mt-2">
             <div class="col-md-8">
+
+                <div id="search-collapse">
+                    <div class="card my-3">
+                        <div class="card-body search">
+
+                            <form method="GET" action="{{ route('front.reports.event-histories') }}">
+                                <div class="row mb-2">
+                                    <div>
+                                        <div class="icheck-primary icheck-inline">
+                                            <input id="search-ltd" class="form-check-input" type="checkbox" name="ltd"
+                                                   value="1"{{ !empty($search['ltd']) ? ' checked' : '' }} />
+                                            <label for="search-ltd">限定イベント</label>
+                                        </div>
+
+                                        <div class="icheck-primary icheck-inline">
+                                            <label for="search-unit-only">
+                                                <input id="search-unit-only" class="form-check-input" type="radio"
+                                                       name="unit"
+                                                       value="only"{{ !empty($search['unit']) && $search['unit'] === 'only' ? ' checked' : '' }} />
+                                                箱イベ
+                                            </label>
+                                            <label for="search-unit-mix">
+                                                <input id="search-unit-mix" class="form-check-input" type="radio"
+                                                       name="unit"
+                                                       value="mix"{{ !empty($search['unit']) && $search['unit'] === 'mix' ? ' checked' : '' }} />
+                                                混合イベ
+                                            </label>
+                                            <label for="search-unit">
+                                                <input id="search-unit" class="form-check-input" type="radio"
+                                                       name="unit"
+                                                       value=""{{ empty($search['unit']) ? ' checked' : '' }} />
+                                                こだわらない
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-0 mx-5">
+                                    <div class="col">
+                                        <a href="{{ route('front.reports.event-histories') }}"
+                                           class="btn btn-sm btn-outline-dark w-100">
+                                            <i class="fa-solid fa-rotate"></i> リセット
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-primary btn-sm w-100">
+                                            <i class="fa-solid fa-magnifying-glass"></i> 検索
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
                 <div>
                     @foreach($events as $event)
                         <div class="card mb-2">
@@ -101,7 +156,10 @@
                     @endforeach
 
                 </div>
+
+                {{ $events->links() }}
             </div>
+
         </div>
 
     </div>

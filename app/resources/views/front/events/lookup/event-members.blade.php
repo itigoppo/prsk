@@ -10,18 +10,18 @@
 </div>
 <div class="d-flex flex-wrap">
     @foreach($event->eventCards as $eventCard)
-        <div class="m-1 py-2 border text-center" style="width: 120px">
+        <div class="m-1 py-2 border text-center" style="width: 140px">
             @if($eventCard->card->normal_file)
                 <img
                     src="{{ Card::url(route('medias.cards', ['card_id' => $eventCard->card->uuid, 'mode' => 'normal']), 600) }}"
                     alt="{{ $eventCard->card->display_name }}"
-                    width="50">
+                    width="60">
             @endif
             @if($eventCard->card->after_training_file)
                 <img
                     src="{{ Card::url(route('medias.cards', ['card_id' => $eventCard->card->uuid, 'mode' => 'after']), 600) }}"
                     alt="{{ $eventCard->card->display_name }}"
-                    width="50">
+                    width="60">
             @endif
         </div>
     @endforeach

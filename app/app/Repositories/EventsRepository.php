@@ -6,6 +6,7 @@ use App\Http\Requests\Events\EventCreate;
 use App\Http\Requests\Events\EventUpdate;
 use App\Interfaces\EventsRepositoryInterface;
 use App\Models\Event;
+use App\Models\EventCard;
 use App\Models\EventMember;
 use App\Traits\QueryBuilderTrait;
 use Illuminate\Database\Eloquent\Builder;
@@ -30,7 +31,16 @@ class EventsRepository implements EventsRepositoryInterface
         $query->select([
             '*',
         ]);
-        $this->addUnitCountToSelect($query);
+
+        $subQuery = $this->addUnitCountSubQuery();
+        $query->joinSub($subQuery, 'unit_count', function ($join) {
+            $join->on('events.id', '=', 'unit_count.event_id');
+        });
+
+        $subQuery = $this->addLtdSubQuery();
+        $query->joinSub($subQuery, 'banner_card', function ($join) {
+            $join->on('events.id', '=', 'banner_card.event_id');
+        });
 
         return $query->paginate($limit);
     }
@@ -51,7 +61,10 @@ class EventsRepository implements EventsRepositoryInterface
         $query->select([
             '*',
         ]);
-        $this->addUnitCountToSelect($query);
+        $subQuery = $this->addUnitCountSubQuery();
+        $query->joinSub($subQuery, 'unit_count', function ($join) {
+            $join->on('events.id', '=', 'unit_count.event_id');
+        });
 
         return $query->get();
     }
@@ -63,25 +76,39 @@ class EventsRepository implements EventsRepositoryInterface
         $query->select([
             '*',
         ]);
-        $this->addUnitCountToSelect($query);
+        $subQuery = $this->addUnitCountSubQuery();
+        $query->joinSub($subQuery, 'unit_count', function ($join) {
+            $join->on('events.id', '=', 'unit_count.event_id');
+        });
 
         return $query->where($this->getFindOneCondition($id))->first();
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    private function addUnitCountToSelect(Builder $query): \Illuminate\Database\Eloquent\Builder
+    private function addUnitCountSubQuery(): \Illuminate\Database\Eloquent\Builder
     {
         $subQuery = EventMember::query()
-            ->selectRaw('count(distinct unit_id)')
+            ->selectRaw('count(distinct unit_id) AS unit_count')
+            ->addSelect(['event_id'])
             ->leftJoin('members', 'members.id', '=', 'event_members.member_id')
-            ->whereColumn('event_members.event_id', 'events.id');
+            ->groupBy('event_members.event_id');
 
-        $query->selectSub($subQuery, 'unit_count');
+        return $subQuery;
+    }
 
-        return $query;
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    private function addLtdSubQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        $subQuery = EventCard::query()
+            ->select(['is_limited', 'event_id'])
+            ->leftJoin('cards', 'cards.id', '=', 'event_cards.card_id')
+            ->where('event_cards.is_banner', '1');
+
+        return $subQuery;
     }
 
     public function create(EventCreate $request)

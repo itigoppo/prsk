@@ -46,6 +46,30 @@ class EventsService
     public function findPaginate(array $query = [], array $order = [], int $limit = 20): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         $search = [];
+        if (!empty($query['ltd'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'banner_card.is_limited',
+                'operator' => '=',
+                'value' => '1',
+            ];
+        }
+        if (!empty($query['unit']) && $query['unit'] === 'only') {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'unit_count.unit_count',
+                'operator' => '=',
+                'value' => '1',
+            ];
+        }
+        if (!empty($query['unit']) && $query['unit'] === 'mix') {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'unit_count.unit_count',
+                'operator' => '!=',
+                'value' => '1',
+            ];
+        }
 
         return $this->eventsRepository->findPaginate($search, $order, $limit);
     }
@@ -58,6 +82,30 @@ class EventsService
     public function findAll(array $query = [], array $order = [])
     {
         $search = [];
+        if (!empty($query['ltd'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'banner_card.is_limited',
+                'operator' => '=',
+                'value' => '1',
+            ];
+        }
+        if (!empty($query['unit']) && $query['unit'] === 'only') {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'unit_count.unit_count',
+                'operator' => '=',
+                'value' => '1',
+            ];
+        }
+        if (!empty($query['unit']) && $query['unit'] === 'mix') {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'unit_count.unit_count',
+                'operator' => '!=',
+                'value' => '1',
+            ];
+        }
 
         return $this->eventsRepository->findAll($search, $order);
     }

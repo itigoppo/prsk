@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ReportsController extends Controller
 {
@@ -104,7 +105,7 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function eventHistories()
+    public function eventHistories(Request $request)
     {
         /** @var \App\Services\EventsService $eventsService */
         $eventsService = app()->make('EventsService');
@@ -112,11 +113,12 @@ class ReportsController extends Controller
         $cardsService = app()->make('CardsService');
 
         $card = $cardsService->findAll()->first();
-        $events = $eventsService->findAll();
+        $events = $eventsService->findPaginate($request->query(), [])->withQueryString();
 
         return view('front.reports.event-histories', [
             'card' => $card,
             'events' => $events,
+            'search' => $request->query(),
         ]);
     }
 

@@ -33,12 +33,12 @@ class EventsRepository implements EventsRepositoryInterface
         ]);
 
         $subQuery = $this->addUnitCountSubQuery();
-        $query->joinSub($subQuery, 'unit_count', function ($join) {
+        $query->leftJoinSub($subQuery, 'unit_count', function ($join) {
             $join->on('events.id', '=', 'unit_count.event_id');
         });
 
         $subQuery = $this->addLtdSubQuery();
-        $query->joinSub($subQuery, 'banner_card', function ($join) {
+        $query->leftJoinSub($subQuery, 'banner_card', function ($join) {
             $join->on('events.id', '=', 'banner_card.event_id');
         });
 

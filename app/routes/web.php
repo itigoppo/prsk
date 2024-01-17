@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\MembersController;
 use App\Http\Controllers\Admin\TunesController;
 use App\Http\Controllers\Admin\UnitsController;
 use App\Http\Controllers\Admin\VirtualLivesController;
+use App\Http\Controllers\Front\CardReportsController;
+use App\Http\Controllers\Front\EventReportsController;
 use App\Http\Controllers\Front\EventsController as FrontEventsController;
 use App\Http\Controllers\Front\InteractionsController as FrontInteractionsController;
 use App\Http\Controllers\Front\ReportsController;
@@ -378,34 +380,34 @@ Route::group(['as' => 'front.'], function () {
         Route::get('/', [ReportsController::class, 'index'])
             ->name('index');
 
-        Route::get('/event-count', [ReportsController::class, 'eventCount'])
+        Route::get('/event-count', [EventReportsController::class, 'eventCount'])
             ->name('event-count');
 
-        Route::get('/event-cycles', [ReportsController::class, 'eventCycles'])
+        Route::get('/event-cycles', [EventReportsController::class, 'eventCycles'])
             ->name('event-cycles');
 
-        Route::get('/event-attributes', [ReportsController::class, 'eventAttributes'])
+        Route::get('/event-attributes', [EventReportsController::class, 'eventAttributes'])
             ->name('event-attributes');
 
-        Route::get('/event-tunes', [ReportsController::class, 'eventTunes'])
+        Route::get('/event-tunes', [EventReportsController::class, 'eventTunes'])
             ->name('event-tunes');
 
-        Route::get('/event-stamps', [ReportsController::class, 'eventStamps'])
+        Route::get('/event-stamps', [EventReportsController::class, 'eventStamps'])
             ->name('event-stamps');
 
-        Route::get('/event-histories', [ReportsController::class, 'eventHistories'])
+        Route::get('/event-histories', [EventReportsController::class, 'eventHistories'])
             ->name('event-histories');
 
-        Route::get('/card-count', [ReportsController::class, 'cardCount'])
+        Route::get('/card-count', [CardReportsController::class, 'cardCount'])
             ->name('card-count');
 
-        Route::get('/card-released', [ReportsController::class, 'cardReleased'])
+        Route::get('/card-released', [CardReportsController::class, 'cardReleased'])
             ->name('card-released');
 
-        Route::get('/card-attributes', [ReportsController::class, 'cardAttributes'])
+        Route::get('/card-attributes', [CardReportsController::class, 'cardAttributes'])
             ->name('card-attributes');
 
-        Route::get('/card-skills', [ReportsController::class, 'cardSkills'])
+        Route::get('/card-skills', [CardReportsController::class, 'cardSkills'])
             ->name('card-skills');
     });
 

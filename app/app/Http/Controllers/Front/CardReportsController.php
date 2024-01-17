@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 class CardReportsController extends Controller
 {
-    public function cardCount()
+    public function count()
     {
         /** @var \App\Services\CardReportsService $reportsService */
         $reportsService = app()->make('CardReportsService');
@@ -24,7 +24,7 @@ class CardReportsController extends Controller
         ]);
     }
 
-    public function cardReleased()
+    public function released()
     {
         /** @var \App\Services\CardReportsService $reportsService */
         $reportsService = app()->make('CardReportsService');
@@ -40,7 +40,7 @@ class CardReportsController extends Controller
         ]);
     }
 
-    public function cardAttributes()
+    public function attributes()
     {
         /** @var \App\Services\CardReportsService $reportsService */
         $reportsService = app()->make('CardReportsService');
@@ -57,7 +57,8 @@ class CardReportsController extends Controller
             'virtualSingers' => $virtualSingers,
         ]);
     }
-    public function cardSkills()
+
+    public function skills()
     {
         /** @var \App\Services\CardReportsService $reportsService */
         $reportsService = app()->make('CardReportsService');
@@ -74,5 +75,4 @@ class CardReportsController extends Controller
             'virtualSingers' => $virtualSingers,
         ]);
     }
-
 }

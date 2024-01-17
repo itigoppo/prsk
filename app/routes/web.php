@@ -380,34 +380,34 @@ Route::group(['as' => 'front.'], function () {
         Route::get('/', [ReportsController::class, 'index'])
             ->name('index');
 
-        Route::get('/event-count', [EventReportsController::class, 'eventCount'])
+        Route::get('/event-count', [EventReportsController::class, 'count'])
             ->name('event-count');
 
-        Route::get('/event-cycles', [EventReportsController::class, 'eventCycles'])
+        Route::get('/event-cycles', [EventReportsController::class, 'cycles'])
             ->name('event-cycles');
 
-        Route::get('/event-attributes', [EventReportsController::class, 'eventAttributes'])
+        Route::get('/event-attributes', [EventReportsController::class, 'attributes'])
             ->name('event-attributes');
 
-        Route::get('/event-tunes', [EventReportsController::class, 'eventTunes'])
+        Route::get('/event-tunes', [EventReportsController::class, 'tunes'])
             ->name('event-tunes');
 
-        Route::get('/event-stamps', [EventReportsController::class, 'eventStamps'])
+        Route::get('/event-stamps', [EventReportsController::class, 'stamps'])
             ->name('event-stamps');
 
-        Route::get('/event-histories', [EventReportsController::class, 'eventHistories'])
+        Route::get('/event-histories', [EventReportsController::class, 'histories'])
             ->name('event-histories');
 
-        Route::get('/card-count', [CardReportsController::class, 'cardCount'])
+        Route::get('/card-count', [CardReportsController::class, 'count'])
             ->name('card-count');
 
-        Route::get('/card-released', [CardReportsController::class, 'cardReleased'])
+        Route::get('/card-released', [CardReportsController::class, 'released'])
             ->name('card-released');
 
-        Route::get('/card-attributes', [CardReportsController::class, 'cardAttributes'])
+        Route::get('/card-attributes', [CardReportsController::class, 'attributes'])
             ->name('card-attributes');
 
-        Route::get('/card-skills', [CardReportsController::class, 'cardSkills'])
+        Route::get('/card-skills', [CardReportsController::class, 'skills'])
             ->name('card-skills');
     });
 

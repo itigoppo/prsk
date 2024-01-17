@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class EventReportsController extends Controller
 {
-    public function eventCount()
+    public function count()
     {
         /** @var \App\Services\EventReportsService $reportsService */
         $reportsService = app()->make('EventReportsService');
@@ -25,7 +25,7 @@ class EventReportsController extends Controller
         ]);
     }
 
-    public function eventCycles()
+    public function cycles()
     {
         /** @var \App\Services\EventReportsService $reportsService */
         $reportsService = app()->make('EventReportsService');
@@ -43,7 +43,7 @@ class EventReportsController extends Controller
         ]);
     }
 
-    public function eventAttributes()
+    public function attributes()
     {
         /** @var \App\Services\EventReportsService $reportsService */
         $reportsService = app()->make('EventReportsService');
@@ -63,7 +63,7 @@ class EventReportsController extends Controller
         ]);
     }
 
-    public function eventTunes()
+    public function tunes()
     {
         /** @var \App\Services\EventReportsService $reportsService */
         $reportsService = app()->make('EventReportsService');
@@ -83,7 +83,7 @@ class EventReportsController extends Controller
         ]);
     }
 
-    public function eventStamps()
+    public function stamps()
     {
         /** @var \App\Services\EventReportsService $reportsService */
         $reportsService = app()->make('EventReportsService');
@@ -99,7 +99,7 @@ class EventReportsController extends Controller
         ]);
     }
 
-    public function eventHistories(Request $request)
+    public function histories(Request $request)
     {
         /** @var \App\Services\EventsService $eventsService */
         $eventsService = app()->make('EventsService');

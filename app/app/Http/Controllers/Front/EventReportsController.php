@@ -18,7 +18,7 @@ class EventReportsController extends Controller
         $units = $reportsService->aggregateTheNumberOfEventsByUnit();
         $members = $reportsService->aggregateTheNumberOfEventsByMember();
 
-        return view('front.reports.event-count', [
+        return view('front.reports.events.count', [
             'card' => $card,
             'units' => $units,
             'members' => $members,
@@ -36,7 +36,7 @@ class EventReportsController extends Controller
         $cycles = $reportsService->aggregateEventCycles();
         $units = $reportsService->aggregateEventCyclesByUnit();
 
-        return view('front.reports.event-cycles', [
+        return view('front.reports.events.cycles', [
             'card' => $card,
             'cycles' => $cycles,
             'units' => $units,
@@ -55,7 +55,7 @@ class EventReportsController extends Controller
         $units = $reportsService->aggregateEventAttributesByUnit();
         $members = $reportsService->aggregateEventAttributesByMember();
 
-        return view('front.reports.event-attributes', [
+        return view('front.reports.events.attributes', [
             'card' => $card,
             'attributes' => $attributes,
             'units' => $units,
@@ -75,7 +75,7 @@ class EventReportsController extends Controller
         $members = $reportsService->aggregateEventTunesByMember();
         $virtualSingers = $reportsService->aggregateEventTunesByVirtualSinger();
 
-        return view('front.reports.event-tunes', [
+        return view('front.reports.events.tunes', [
             'card' => $card,
             'units' => $units,
             'members' => $members,
@@ -93,7 +93,7 @@ class EventReportsController extends Controller
         $card = $cardsService->findAll()->first();
         $members = $reportsService->aggregateEventStampsByMember();
 
-        return view('front.reports.event-stamps', [
+        return view('front.reports.events.stamps', [
             'card' => $card,
             'members' => $members,
         ]);
@@ -109,7 +109,7 @@ class EventReportsController extends Controller
         $card = $cardsService->findAll()->first();
         $events = $eventsService->findPaginate($request->query(), [])->withQueryString();
 
-        return view('front.reports.event-histories', [
+        return view('front.reports.events.histories', [
             'card' => $card,
             'events' => $events,
             'search' => $request->query(),

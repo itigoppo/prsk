@@ -17,7 +17,7 @@ class CardReportsController extends Controller
         $members = $reportsService->aggregateNumberOfCardsByMember();
         $virtualSingers = $reportsService->aggregateNumberOfCardsByVirtualSinger();
 
-        return view('front.reports.card-count', [
+        return view('front.reports.cards.count', [
             'card' => $card,
             'members' => $members,
             'virtualSingers' => $virtualSingers,
@@ -34,7 +34,7 @@ class CardReportsController extends Controller
         $card = $cardsService->findAll()->first();
         $members = $reportsService->aggregateNumberOfCardsByMember();
 
-        return view('front.reports.card-released', [
+        return view('front.reports.cards.released', [
             'card' => $card,
             'members' => $members,
         ]);
@@ -51,7 +51,7 @@ class CardReportsController extends Controller
         $members = $reportsService->aggregateCardAttributesByMember();
         $virtualSingers = $reportsService->aggregateCardAttributesByVirtualSinger();
 
-        return view('front.reports.card-attributes', [
+        return view('front.reports.cards.attributes', [
             'card' => $card,
             'members' => $members,
             'virtualSingers' => $virtualSingers,
@@ -68,7 +68,7 @@ class CardReportsController extends Controller
         $members = $reportsService->aggregateCardSkillsByMember();
         $virtualSingers = $reportsService->aggregateCardSkillsByVirtualSinger();
 
-        return view('front.reports.card-skills', [
+        return view('front.reports.cards.skills', [
             'card' => $card,
             'members' => $members,
             'virtualSingers' => $virtualSingers,

@@ -103,8 +103,39 @@ class CardReportsService
             );
 
             $member->setAttribute(
+                'report_total_limited_count',
+                empty($results[$member->id]['total_limited']) ? 0 : $results[$member->id]['total_limited']['count']
+            );
+            $member->setAttribute(
+                'report_total_limited_date',
+                empty($results[$member->id]['total_limited']) ? null : $results[$member->id]['total_limited']['date']
+            );
+
+            $member->setAttribute(
                 'report_hair_style_count',
                 empty($results[$member->id]['hair_style']) ? 0 : $results[$member->id]['hair_style']['count']
+            );
+            $member->setAttribute(
+                'report_hair_style_date',
+                empty($results[$member->id]['hair_style']) ? null : $results[$member->id]['hair_style']['date']
+            );
+
+            $member->setAttribute(
+                'report_another_cut_count',
+                empty($results[$member->id]['has_another_cut']) ? 0 : $results[$member->id]['has_another_cut']['count']
+            );
+            $member->setAttribute(
+                'report_another_cut_date',
+                empty($results[$member->id]['has_another_cut']) ? null : $results[$member->id]['has_another_cut']['date']
+            );
+
+            $member->setAttribute(
+                'report_avatar_accessory_count',
+                empty($results[$member->id]['has_avatar_accessory']) ? 0 : $results[$member->id]['has_avatar_accessory']['count']
+            );
+            $member->setAttribute(
+                'report_avatar_accessory_date',
+                empty($results[$member->id]['has_avatar_accessory']) ? null : $results[$member->id]['has_avatar_accessory']['date']
             );
         }
 
@@ -196,8 +227,39 @@ class CardReportsService
             );
 
             $member->setAttribute(
+                'report_total_limited_count',
+                empty($results[$member->id]['total_limited']) ? 0 : $results[$member->id]['total_limited']['count']
+            );
+            $member->setAttribute(
+                'report_total_limited_date',
+                empty($results[$member->id]['total_limited']) ? null : $results[$member->id]['total_limited']['date']
+            );
+
+            $member->setAttribute(
                 'report_hair_style_count',
                 empty($results[$member->id]['hair_style']) ? 0 : $results[$member->id]['hair_style']['count']
+            );
+            $member->setAttribute(
+                'report_hair_style_date',
+                empty($results[$member->id]['hair_style']) ? null : $results[$member->id]['hair_style']['date']
+            );
+
+            $member->setAttribute(
+                'report_another_cut_count',
+                empty($results[$member->id]['has_another_cut']) ? 0 : $results[$member->id]['has_another_cut']['count']
+            );
+            $member->setAttribute(
+                'report_another_cut_date',
+                empty($results[$member->id]['has_another_cut']) ? null : $results[$member->id]['has_another_cut']['date']
+            );
+
+            $member->setAttribute(
+                'report_avatar_accessory_count',
+                empty($results[$member->id]['has_avatar_accessory']) ? 0 : $results[$member->id]['has_avatar_accessory']['count']
+            );
+            $member->setAttribute(
+                'report_avatar_accessory_date',
+                empty($results[$member->id]['has_avatar_accessory']) ? null : $results[$member->id]['has_avatar_accessory']['date']
             );
         }
 
@@ -242,8 +304,8 @@ class CardReportsService
             $results[$id]['fes']['date'] = $card->released_at;
         }
 
-        // 通常限
-        if ($card->is_limited && !$card->is_fes) {
+        // 星4通常限(サンリオが星2限定
+        if ($card->rarity->value === Rarity::STAR_FOUR && $card->is_limited && !$card->is_fes) {
             if (!isset($results[$id]['limited']['count'])) {
                 $results[$id]['limited']['count'] = 0;
             }
@@ -251,12 +313,40 @@ class CardReportsService
             $results[$id]['limited']['date'] = $card->released_at;
         }
 
-        // 限定合計
-        if ($card->is_limited) {
+        // 星4限定合計(サンリオが星2限定
+        if ($card->rarity->value === Rarity::STAR_FOUR && $card->is_limited) {
+            if (!isset($results[$id]['total_limited']['count'])) {
+                $results[$id]['total_limited']['count'] = 0;
+            }
+            $results[$id]['total_limited']['count']++;
+            $results[$id]['total_limited']['date'] = $card->released_at;
+        }
+
+        // 髪型あり
+        if ($card->is_limited && $card->has_hair_style) {
             if (!isset($results[$id]['hair_style']['count'])) {
                 $results[$id]['hair_style']['count'] = 0;
             }
             $results[$id]['hair_style']['count']++;
+            $results[$id]['hair_style']['date'] = $card->released_at;
+        }
+
+        // アナザーカットあり
+        if ($card->is_limited && $card->has_another_cut) {
+            if (!isset($results[$id]['has_another_cut']['count'])) {
+                $results[$id]['has_another_cut']['count'] = 0;
+            }
+            $results[$id]['has_another_cut']['count']++;
+            $results[$id]['has_another_cut']['date'] = $card->released_at;
+        }
+
+        // 豆腐あり
+        if ($card->is_limited && $card->has_avatar_accessory) {
+            if (!isset($results[$id]['has_avatar_accessory']['count'])) {
+                $results[$id]['has_avatar_accessory']['count'] = 0;
+            }
+            $results[$id]['has_avatar_accessory']['count']++;
+            $results[$id]['has_avatar_accessory']['date'] = $card->released_at;
         }
 
         return $results;

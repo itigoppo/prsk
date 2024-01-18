@@ -27,9 +27,6 @@
                             <th>星4</th>
                             <th>星3</th>
                             <th>星2</th>
-                            <th>限定</th>
-                            <th>フェス限</th>
-                            <th>恒常</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -48,11 +45,51 @@
                                 <td>
                                     {{ empty($member->getAttribute('report_' . Rarity::STAR_TWO . '_date')) ? '-' : $member->getAttribute('report_' . Rarity::STAR_TWO . '_date')->format('Y/m/d') }}
                                 </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div>
+                    <table class="table table-sm table-striped table-hover table-sort">
+                        <thead class="table-light text-center">
+                        <tr>
+                            <th class="data-sort" style="width: 80px">メンバー</th>
+                            <th>限定＋フェス</th>
+                            <th>限定</th>
+                            <th>フェス限</th>
+                            <th>髪型有り</th>
+                            <th>MV有り</th>
+                            <th>豆腐有り</th>
+                            <th>恒常</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($members as $member)
+                            <tr>
+                                <td data-sort="{{ $member->unit->id }}-{{ $member->id }}">
+                                    <span class="badge me-2"
+                                          style="background-color: {{ $member->bg_color }}; color: {{ $member->color }}">{{ $member->display_short }}</span>
+                                </td>
+                                <td>
+                                    {{ empty($member->getAttribute('report_total_limited_date')) ? '-' : $member->getAttribute('report_limited_date')->format('Y/m/d') }}
+                                </td>
                                 <td>
                                     {{ empty($member->getAttribute('report_limited_date')) ? '-' : $member->getAttribute('report_limited_date')->format('Y/m/d') }}
                                 </td>
                                 <td>
                                     {{ empty($member->getAttribute('report_fes_date')) ? '-' : $member->getAttribute('report_fes_date')->format('Y/m/d') }}
+                                </td>
+                                <td>
+                                    {{ empty($member->getAttribute('report_hair_style_date')) ? '-' : $member->getAttribute('report_hair_style_date')->format('Y/m/d') }}
+                                </td>
+                                <td>
+                                    {{ empty($member->getAttribute('report_another_cut_date')) ? '-' : $member->getAttribute('report_another_cut_date')->format('Y/m/d') }}
+                                </td>
+                                <td>
+                                    {{ empty($member->getAttribute('report_avatar_accessory_date')) ? '-' : $member->getAttribute('report_avatar_accessory_date')->format('Y/m/d') }}
                                 </td>
                                 <td>
                                     {{ empty($member->getAttribute('report_regular_date')) ? '-' : $member->getAttribute('report_regular_date')->format('Y/m/d') }}

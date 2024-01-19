@@ -1,6 +1,13 @@
 $(function () {
-    const cardCollapseEls = document.querySelectorAll(".event-card-collapse");
-    cardCollapseEls.forEach(function(target) {
+    const eventCardsCollapseEls = document.querySelectorAll(".event-card-collapse");
+    eventCardsCollapseEls.forEach(function(target) {
+        target.addEventListener('show.bs.collapse', function() {
+            showCardCollapse(event);
+        });
+    });
+
+    const memberCardsCollapseEls = document.querySelectorAll(".member-cards-collapse");
+    memberCardsCollapseEls.forEach(function(target) {
         target.addEventListener('show.bs.collapse', function() {
             showCardCollapse(event);
         });

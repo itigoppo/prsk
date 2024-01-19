@@ -10,6 +10,7 @@ use App\Repositories\CardsRepository;
 use App\Repositories\EventsRepository;
 use App\Repositories\MembersRepository;
 use App\Repositories\UnitsRepository;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class CardReportsService
@@ -574,6 +575,193 @@ class CardReportsService
             $results[$id][$card->rarity->value][$card->skill_effect->value] = 0;
         }
         $results[$id][$card->rarity->value][$card->skill_effect->value]++;
+
+        return $results;
+    }
+
+    public function virtualSingers()
+    {
+        return $this->membersRepository->findAll([
+            [
+                'type' => 'where',
+                'column' => 'is_active',
+                'operator' => '=',
+                'value' => true,
+            ],
+            [
+                'type' => 'whereIn',
+                'column' => 'id',
+                'values' => [1, 2, 3, 4, 5, 6],
+            ],
+        ]);
+    }
+
+    public function aggregateHistoriesByVirtualSinger()
+    {
+        $allCards = $this->cardsRepository->findAll([], ['released_at' => 'asc']);
+        $virtualSingers = ['miku', 'rin', 'len', 'luka', 'meiko', 'kaito'];
+
+        $aggregateResults = [];
+        foreach ($allCards as $card) {
+            /** @var \App\Models\Card $card */
+            if (!Str::endsWith($card->member->code, $virtualSingers)) {
+                continue;
+            }
+
+            foreach ($virtualSingers as $key => $virtualSinger) {
+                if (Str::endsWith($card->member->code, $virtualSinger)) {
+                    $memberId = $key + 1;
+                    $aggregateResults = $this->setCard($aggregateResults, $memberId, $card);
+                }
+            }
+        }
+
+        $members = $this->membersRepository->findAll([
+            [
+                'type' => 'where',
+                'column' => 'is_active',
+                'operator' => '=',
+                'value' => true,
+            ],
+            [
+                'type' => 'whereIn',
+                'column' => 'id',
+                'values' => [1, 2, 3, 4, 5, 6],
+            ],
+        ]);
+
+        foreach ($members as $member) {
+            /** @var \App\Models\Member|\Illuminate\Database\Eloquent\Model $member */
+
+            /** @var \Illuminate\Support\Collection $cards */
+            $results = collect([]);
+            foreach ($aggregateResults[$member->id] as $key => $cards) {
+                $results->put($key, collect($cards));
+
+            }
+
+            $member->setAttribute('cards', $results);
+        }
+
+        return $members;
+    }
+
+    /**
+     * @param array $cards
+     * @param Card $card
+     * @return Card
+     */
+    private function setCardDiff(array $cards,Card $card): Card
+    {
+        $count = count($cards);
+        if ($count === 0) {
+            $diff = null;
+        } else {
+            /** @var Card $before */
+            $before = $cards[$count - 1];
+            $diff = $before->released_at->diffInDays($card->released_at);
+        }
+        $item = clone $card;
+        $item->setAttribute("diff", $diff);
+
+        return $item;
+    }
+
+
+    /**
+     * @param array $results
+     * @param int $id
+     * @param Card $card
+     * @return array
+     */
+    private function setCard(array $results, int $id, Card $card): array
+    {
+        // レアリティ毎
+        $key = $card->rarity->value;
+        if (!isset($results[$id][$key])) {
+            $results[$id][$key] = [];
+        }
+        $results[$id][$key][] = $this->setCardDiff($results[$id][$key], $card);
+
+        // 恒常星4
+        if ($card->rarity->value === Rarity::STAR_FOUR && !$card->is_limited) {
+            $key = 'regular';
+            if (!isset($results[$id][$key])) {
+                $results[$id][$key] = [];
+            }
+            $results[$id][$key][] = $this->setCardDiff($results[$id][$key], $card);
+        }
+
+        // フェス限
+        if ($card->rarity->value === Rarity::STAR_FOUR && $card->is_fes) {
+            $key = 'fes';
+            if (!isset($results[$id][$key])) {
+                $results[$id][$key] = [];
+            }
+            $results[$id][$key][] = $this->setCardDiff($results[$id][$key], $card);
+        }
+
+        // 星4通常限(サンリオが星2限定
+        if ($card->rarity->value === Rarity::STAR_FOUR && $card->is_limited && !$card->is_fes) {
+            $key = 'limited';
+            if (!isset($results[$id][$key])) {
+                $results[$id][$key] = [];
+            }
+            $results[$id][$key][] = $this->setCardDiff($results[$id][$key], $card);
+        }
+
+        // 星4限定合計(サンリオが星2限定
+        if ($card->rarity->value === Rarity::STAR_FOUR && $card->is_limited) {
+            $key = 'total_limited';
+            if (!isset($results[$id][$key])) {
+                $results[$id][$key] = [];
+            }
+            $results[$id][$key][] = $this->setCardDiff($results[$id][$key], $card);
+        }
+
+        // 髪型あり
+        if ($card->rarity->value === Rarity::STAR_FOUR && $card->is_limited && $card->has_hair_style) {
+            $key = 'has_hair_style';
+            if (!isset($results[$id][$key])) {
+                $results[$id][$key] = [];
+            }
+            $results[$id][$key][] = $this->setCardDiff($results[$id][$key], $card);
+        }
+
+        // アナザーカットあり
+        if ($card->rarity->value === Rarity::STAR_FOUR && $card->is_limited && $card->has_another_cut) {
+            $key = 'has_another_cut';
+            if (!isset($results[$id][$key])) {
+                $results[$id][$key] = [];
+            }
+            $results[$id][$key][] = $this->setCardDiff($results[$id][$key], $card);
+        }
+
+        // 豆腐あり
+        if ($card->rarity->value === Rarity::STAR_FOUR && $card->is_limited && $card->has_avatar_accessory) {
+            $key = 'has_avatar_accessory';
+            if (!isset($results[$id][$key])) {
+                $results[$id][$key] = [];
+            }
+            $results[$id][$key][] = $this->setCardDiff($results[$id][$key], $card);
+        }
+
+        if ($card->rarity->value === Rarity::STAR_FOUR) {
+            // スキル毎(星4のみ
+            $key = 'four_star_' . $card->skill_effect->value;
+            if (!isset($results[$id][$key])) {
+                $results[$id][$key] = [];
+            }
+            $results[$id][$key][] = $this->setCardDiff($results[$id][$key], $card);
+
+
+            // タイプ毎(星4のみ
+            $key = 'four_star_' . $card->attribute->value;
+            if (!isset($results[$id][$key])) {
+                $results[$id][$key] = [];
+            }
+            $results[$id][$key][] = $this->setCardDiff($results[$id][$key], $card);
+        }
 
         return $results;
     }

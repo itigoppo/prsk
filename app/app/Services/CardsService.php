@@ -76,6 +76,78 @@ class CardsService
                 'value' => $query['at'],
             ];
         }
+        if (!empty($query['ske'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'skill_effect',
+                'operator' => '=',
+                'value' => $query['ske'],
+            ];
+        }
+        if (!empty($query['ray'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'rarity',
+                'operator' => '=',
+                'value' => $query['ray'],
+            ];
+        }
+        if (!empty($query['ltd'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'is_limited',
+                'operator' => '=',
+                'value' => 1,
+            ];
+        }
+        if (!empty($query['nltd'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'is_limited',
+                'operator' => '!=',
+                'value' => 1,
+            ];
+        }
+        if (!empty($query['fes'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'is_fes',
+                'operator' => '=',
+                'value' => 1,
+            ];
+        }
+        if (!empty($query['nfes'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'is_fes',
+                'operator' => '!=',
+                'value' => 1,
+            ];
+        }
+        if (!empty($query['hhs'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'has_hair_style',
+                'operator' => '=',
+                'value' => 1,
+            ];
+        }
+        if (!empty($query['hac'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'has_another_cut',
+                'operator' => '=',
+                'value' => 1,
+            ];
+        }
+        if (!empty($query['haa'])) {
+            $search[] = [
+                'type' => 'where',
+                'column' => 'has_avatar_accessory',
+                'operator' => '=',
+                'value' => 1,
+            ];
+        }
 
         return $this->cardsRepository->findAll($search, $order);
     }

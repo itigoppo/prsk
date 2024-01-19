@@ -14,6 +14,7 @@ use App\Http\Controllers\Front\CardReportsController;
 use App\Http\Controllers\Front\EventReportsController;
 use App\Http\Controllers\Front\EventsController as FrontEventsController;
 use App\Http\Controllers\Front\InteractionsController as FrontInteractionsController;
+use App\Http\Controllers\Front\MembersController as FrontMembersController;
 use App\Http\Controllers\Front\ReportsController;
 use App\Http\Controllers\MediasController;
 use Illuminate\Support\Facades\Auth;
@@ -409,6 +410,9 @@ Route::group(['as' => 'front.'], function () {
 
         Route::get('/card-skills', [CardReportsController::class, 'skills'])
             ->name('card-skills');
+
+        Route::get('/card-separate', [CardReportsController::class, 'separate'])
+            ->name('card-separate');
     });
 
     Route::group(['prefix' => 'events', 'as' => 'events.'], function () {
@@ -420,6 +424,18 @@ Route::group(['as' => 'front.'], function () {
                 ->name('event-members');
             Route::get('bonus-cards', [FrontEventsController::class, 'lookupBonusCards'])
                 ->name('bonus-cards');
+        });
+    });
+
+    Route::group(['prefix' => 'members', 'as' => 'members.'], function () {
+        Route::group([
+            'prefix' => '{member_id}',
+            'where' => ['member_id' => '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'],
+        ], function () {
+            Route::get('member-cards', [FrontMembersController::class, 'lookupCards'])
+                ->name('member-cards');
+            Route::get('virtual-singer-cards', [FrontMembersController::class, 'lookupVirtualSingerCards'])
+                ->name('virtual-singer-cards');
         });
     });
 });

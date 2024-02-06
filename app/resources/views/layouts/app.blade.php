@@ -28,6 +28,10 @@
 
     gtag('config', 'G-MW8ES70LY8');
   </script>
+
+  @hasSection('head')
+    @yield('head')
+  @endif
 </head>
 
 <body class="font-sans antialiased">
@@ -46,6 +50,24 @@
     <!-- Page Content -->
     <main>
       {{ $slot }}
+
+      <div x-cloak x-data="{ scroll: false }"
+        @scroll.window="document.documentElement.scrollTop > 20 ? scroll = true : scroll = false" x-show="scroll"
+        @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+        class="fixed bottom-20 right-3 z-10 cursor-pointer transition duration-150 ease-in-out" x-transition.opacity>
+        <div class="flex h-12 w-12 flex-col items-center justify-center rounded-full bg-gray-500">
+          <span class="mt-2 h-4 w-4 rotate-45 border-l-2 border-t-2 border-white"></span>
+        </div>
+      </div>
+
+      <div x-cloak x-data="{ scroll: false }"
+        @scroll.window="document.documentElement.scrollTop > 20 ? scroll = true : scroll = false" x-show="scroll"
+        @click="window.scrollTo({top: document.documentElement.scrollHeight, behavior: 'smooth'})"
+        class="fixed bottom-5 right-3 z-10 cursor-pointer transition duration-150 ease-in-out" x-transition.opacity>
+        <div class="flex h-12 w-12 flex-col items-center justify-center rounded-full bg-gray-500">
+          <span class="mb-2 h-4 w-4 rotate-45 border-b-2 border-r-2 border-white"></span>
+        </div>
+      </div>
     </main>
   </div>
 </body>

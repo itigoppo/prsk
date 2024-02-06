@@ -1,0 +1,45 @@
+@import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+@import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+@import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+
+.material-symbols-rounded {
+  /* Rules for using icons as black on a light background. */
+  &.dark {
+    background: black;
+    color: rgba(255, 255, 255, 1);
+    font-variation-settings: "GRAD" -25;
+  }
+  &.dark-inactive {
+    background: black;
+    color: rgba(255, 255, 255, 0.3);
+    font-variation-settings: "GRAD" -25;
+  }
+}
+
+.material-symbols-outlined {
+  /* Rules for using icons as black on a light background. */
+  &.dark {
+    background: black;
+    color: rgba(255, 255, 255, 1);
+    font-variation-settings: "GRAD" -25;
+  }
+  &.dark-inactive {
+    background: black;
+    color: rgba(255, 255, 255, 0.3);
+    font-variation-settings: "GRAD" -25;
+  }
+}
+
+.material-symbols-sharp {
+  /* Rules for using icons as black on a light background. */
+  &.dark {
+    background: black;
+    color: rgba(255, 255, 255, 1);
+    font-variation-settings: "GRAD" -25;
+  }
+  &.dark-inactive {
+    background: black;
+    color: rgba(255, 255, 255, 0.3);
+    font-variation-settings: "GRAD" -25;
+  }
+}

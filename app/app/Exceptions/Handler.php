@@ -3,25 +3,12 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
     /**
-     * A list of the exception types that are not reported.
-     *
-     * @var array<int, class-string<Throwable>>
-     */
-    protected $dontReport = [
-        //
-    ];
-
-    /**
-     * A list of the inputs that are never flashed for validation exceptions.
+     * The list of the inputs that are never flashed to the session on validation exceptions.
      *
      * @var array<int, string>
      */
@@ -33,41 +20,11 @@ class Handler extends ExceptionHandler
 
     /**
      * Register the exception handling callbacks for the application.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->reportable(function (Throwable $e) {
             //
-        });
-
-        $this->renderable(function (Throwable $e, Request $request) {
-            if ($request->is('api/*') || $request->ajax()) {
-                Log::error('[API Error] '.$request->method().': '.$request->fullUrl());
-
-                if ($this->isHttpException($e)) {
-                    $message = $e->getMessage() ?: HttpResponse::$statusTexts[$e->getStatusCode()];
-                    Log::error($message);
-
-                    return response()->json([
-                        'success' => false,
-                        'message' => $message,
-                    ], $e->getStatusCode());
-                } elseif ($e instanceof ValidationException) {
-                    Log::error($e->errors());
-
-                    return $this->invalidJson($request, $e);
-                } else {
-                    $message = $e->getMessage() ?: HttpResponse::$statusTexts[$e->getStatusCode()];
-                    Log::error($message);
-
-                    return response()->json([
-                        'success' => false,
-                        'message' => $message,
-                    ], 400);
-                }
-            }
         });
     }
 }

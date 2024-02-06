@@ -1,5 +1,5 @@
 # ヒストリファイルを指定
-HISTFILE=/var/log/httpd/.zsh_history
+HISTFILE=/var/log/zsh/.zsh_history
 
 # ヒストリに保存するコマンド数
 HISTSIZE=10000

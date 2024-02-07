@@ -32,6 +32,10 @@
   @hasSection('head')
     @yield('head')
   @endif
+
+  @if (isset($script))
+    {{ $script }}
+  @endif
 </head>
 
 <body class="font-sans antialiased">

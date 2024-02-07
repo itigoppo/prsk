@@ -23,7 +23,7 @@
         <!-- Navigation Links -->
         <div class="hidden space-x-2 md:-my-px md:ms-10 md:flex">
           @auth
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
               {{ __('Dashboard') }}
             </x-nav-link>
 
@@ -162,7 +162,7 @@
               </x-slot>
 
               <x-slot name="content">
-                <x-dropdown-link :href="route('profile.edit')">
+                <x-dropdown-link :href="route('admin.profile.edit')">
                   {{ __('Profile') }}
                 </x-dropdown-link>
 
@@ -208,7 +208,7 @@
   <div :class="{ 'block': open, 'hidden': !open }" class="hidden md:hidden">
     <div class="space-y-1 pb-3 pt-2">
       @auth
-        <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+        <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
           {{ __('Dashboard') }}
         </x-responsive-nav-link>
 
@@ -295,7 +295,7 @@
         </div>
 
         <div class="mt-3 space-y-1">
-          <x-responsive-nav-link :href="route('profile.edit')">
+          <x-responsive-nav-link :href="route('admin.profile.edit')">
             {{ __('Profile') }}
           </x-responsive-nav-link>
 

@@ -51,7 +51,11 @@
     </div>
 
     <div class="flex items-center gap-4">
-      <x-primary-button>{{ __('Save') }}</x-primary-button>
+      <button type="submit">
+        <x-button-surface size="sm">
+          {{ __('Save') }}
+        </x-button-surface>
+      </button>
 
       @if (session('status') === 'profile-updated')
         <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"

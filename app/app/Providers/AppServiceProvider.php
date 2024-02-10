@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\View\Components\AdminLayout;
+use App\View\Components\ButtonSurface;
 use App\View\Components\MaterialSymbol;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -27,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
   {
     Blade::component('admin-layout', AdminLayout::class);
     Blade::component('matelial-symbol', MaterialSymbol::class);
+    Blade::component('button-surface', ButtonSurface::class);
   }
 }

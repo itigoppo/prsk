@@ -5,7 +5,7 @@ use Illuminate\Support\ServiceProvider;
 
 return [
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Application Name
     |--------------------------------------------------------------------------
@@ -16,9 +16,9 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+  'name' => env('APP_NAME', 'Laravel'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
@@ -29,9 +29,9 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+  'env' => env('APP_ENV', 'production'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
     |--------------------------------------------------------------------------
@@ -42,9 +42,9 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+  'debug' => (bool) env('APP_DEBUG', false),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Application URL
     |--------------------------------------------------------------------------
@@ -55,11 +55,11 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+  'url' => env('APP_URL', 'http://localhost'),
 
-    'asset_url' => env('ASSET_URL'),
+  'asset_url' => env('ASSET_URL'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
@@ -70,9 +70,9 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Tokyo',
+  'timezone' => 'Asia/Tokyo',
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
     |--------------------------------------------------------------------------
@@ -83,9 +83,9 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+  'locale' => env('APP_LOCALE', 'en'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
     |--------------------------------------------------------------------------
@@ -96,9 +96,9 @@ return [
     |
     */
 
-    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+  'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Faker Locale
     |--------------------------------------------------------------------------
@@ -109,9 +109,9 @@ return [
     |
     */
 
-    'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+  'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Encryption Key
     |--------------------------------------------------------------------------
@@ -122,11 +122,11 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+  'key' => env('APP_KEY'),
 
-    'cipher' => 'AES-256-CBC',
+  'cipher' => 'AES-256-CBC',
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver
     |--------------------------------------------------------------------------
@@ -139,12 +139,12 @@ return [
     |
     */
 
-    'maintenance' => [
-        'driver' => 'file',
-        // 'store' => 'redis',
-    ],
+  'maintenance' => [
+    'driver' => 'file',
+    // 'store' => 'redis',
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
@@ -155,22 +155,22 @@ return [
     |
     */
 
-    'providers' => ServiceProvider::defaultProviders()->merge([
-        /*
+  'providers' => ServiceProvider::defaultProviders()->merge([
+    /*
          * Package Service Providers...
          */
-
-        /*
+    Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+    /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-    ])->toArray(),
+    App\Providers\AppServiceProvider::class,
+    App\Providers\AuthServiceProvider::class,
+    // App\Providers\BroadcastServiceProvider::class,
+    App\Providers\EventServiceProvider::class,
+    App\Providers\RouteServiceProvider::class,
+  ])->toArray(),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Class Aliases
     |--------------------------------------------------------------------------
@@ -181,8 +181,8 @@ return [
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
-    ])->toArray(),
+  'aliases' => Facade::defaultAliases()->merge([
+    // 'Example' => App\Facades\Example::class,
+  ])->toArray(),
 
 ];

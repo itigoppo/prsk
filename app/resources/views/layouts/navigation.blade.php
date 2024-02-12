@@ -78,8 +78,13 @@
             <div>
               <x-dropdown>
                 <x-slot name="trigger">
-                  <button
-                    class="inline-flex items-center py-3.5 text-sm font-medium leading-5 text-puerto-rico-200 transition duration-150 ease-in-out hover:text-puerto-rico-600 focus:text-puerto-rico-600">
+                  <button @class([
+                      'inline-flex items-center py-3.5 text-sm font-medium leading-5 transition duration-150 ease-in-out',
+                      'text-puerto-rico-600 border-puerto-rico-600 hover:text-white focus:text-white' => request()->routeIs(
+                          'front.*'),
+                      'text-white hover:text-atlantis-300 focus:text-atlantis-300' => !request()->routeIs(
+                          'front.*'),
+                  ])>
                     <div>フロント</div>
 
                     <div class="ms-1">
@@ -152,7 +157,7 @@
             <x-dropdown align="right" width="48">
               <x-slot name="trigger">
                 <button
-                  class="inline-flex items-center rounded-md border border-transparent bg-puerto-rico-300 px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300">
+                  class="inline-flex items-center rounded-md border border-transparent bg-puerto-rico-300 px-3 py-2 text-sm font-medium leading-4 text-gray-100 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300">
                   <div>{{ Auth::user()->name }}</div>
 
                   <div class="ms-1">
@@ -196,7 +201,7 @@
       <!-- Hamburger -->
       <div class="-me-2 flex items-center md:hidden">
         <button @click="open = ! open"
-          class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400">
+          class="inline-flex items-center justify-center rounded-md p-2 text-gray-100 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400">
           <x-material-symbol type="rounded" x-show="!open">menu</x-material-symbol>
           <x-material-symbol type="rounded" x-show="open">close</x-material-symbol>
         </button>

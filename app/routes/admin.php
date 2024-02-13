@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\UnitController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -17,5 +18,41 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
 
     Route::delete('/', [ProfileController::class, 'destroy'])
       ->name('destroy');
+  });
+
+  Route::group(['prefix' => 'units', 'as' => 'units.'], function () {
+    Route::get('/', [UnitController::class, 'index'])
+      ->name('index');
+
+    Route::post('/', [UnitController::class, 'search'])
+      ->name('search');
+
+    Route::get('create', [UnitController::class, 'create'])
+      ->name('create')
+      ->middleware('can:isAdmin');
+
+    Route::post('create', [UnitController::class, 'store'])
+      ->name('store')
+      ->middleware('can:isAdmin');
+
+    Route::group([
+      'prefix' => '{id}',
+      'where' => ['id' => '[0-9]+'],
+    ], function () {
+      Route::get('/', [UnitController::class, 'view'])
+        ->name('view');
+
+      Route::get('edit', [UnitController::class, 'edit'])
+        ->name('edit')
+        ->middleware('can:isAdmin');
+
+      Route::patch('/', [UnitController::class, 'update'])
+        ->name('update')
+        ->middleware('can:isAdmin');
+
+      Route::delete('/', [UnitController::class, 'destroy'])
+        ->name('destroy')
+        ->middleware('can:isAdmin');
+    });
   });
 });

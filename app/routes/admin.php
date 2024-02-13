@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\IconController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UnitController;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,28 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
         ->middleware('can:isAdmin');
 
       Route::delete('/', [UnitController::class, 'destroy'])
+        ->name('destroy')
+        ->middleware('can:isAdmin');
+    });
+  });
+
+
+  // アイコン管理
+  Route::group(['prefix' => 'icons', 'as' => 'icons.'], function () {
+    Route::get('/', [IconController::class, 'index'])
+      ->name('index');
+
+    Route::post('store', [IconController::class, 'store'])
+      ->name('store')->middleware('can:isAdmin');
+
+    Route::get('lookup', [IconController::class, 'lookup'])
+      ->name('lookup');
+
+    Route::group(['prefix' => '{id}', 'where' => ['id' => '[0-9]+']], function () {
+      Route::get('display', [IconController::class, 'display'])
+        ->name('display');
+
+      Route::delete('/', [IconController::class, 'destroy'])
         ->name('destroy')
         ->middleware('can:isAdmin');
     });

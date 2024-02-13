@@ -13,5 +13,10 @@ class RepositoryServiceProvider extends ServiceProvider
       \App\Repositories\Interfaces\UnitRepositoryInterface::class,
       \App\Repositories\UnitRepository::class
     );
+    // Icon
+    $this->app->bind(
+      \App\Repositories\Interfaces\IconRepositoryInterface::class,
+      \App\Repositories\IconRepository::class
+    );
   }
 }

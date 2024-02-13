@@ -39,6 +39,8 @@
 </head>
 
 <body class="font-sans antialiased">
+  <x-toast />
+
   <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
     @include('layouts.navigation')
 
@@ -73,6 +75,10 @@
         </div>
       </div>
     </main>
+
+    <footer class="mt-2 pb-10 text-center text-xs">
+      &copy {{ now()->year }} <a href="https://twitter.com/itigoppo" target="_brank">Hisato S.</a>
+    </footer>
   </div>
 </body>
 

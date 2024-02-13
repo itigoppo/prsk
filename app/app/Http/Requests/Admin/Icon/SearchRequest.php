@@ -32,7 +32,7 @@ class SearchRequest extends FormRequest
     $sortBy = SorterEnum::tryFrom($this->sort);
 
     if (is_null($sortBy)) {
-      return SorterEnum::Created;
+      return SorterEnum::Id;
     }
 
     return $sortBy;

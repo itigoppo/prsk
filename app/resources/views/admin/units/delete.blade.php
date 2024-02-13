@@ -4,9 +4,9 @@
     @method('delete')
 
     <div class="p-4">
-      <p class="text-sm">
+      <div class="text-sm">
         {{ $unit->name }}を削除しますが、よろしいですか？
-      </p>
+      </div>
     </div>
 
     <div class="mt-6 flex justify-end space-x-3">

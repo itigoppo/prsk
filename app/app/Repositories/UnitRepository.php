@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Collections\UnitFilterCollection;
-use App\Http\Requests\Admin\Unit\CreateRequest;
+use App\Http\Requests\Admin\Unit\StoreRequest;
 use App\Http\Requests\Admin\Unit\UpdateRequest;
 use App\Models\Unit;
 use App\Repositories\Interfaces\UnitRepositoryInterface;
@@ -24,7 +24,7 @@ class UnitRepository implements UnitRepositoryInterface
     return $query->paginate(10)->withQueryString();
   }
 
-  public function store(CreateRequest $request)
+  public function store(StoreRequest $request)
   {
     $entity = new Unit();
     $entity->name = $request->name;

@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Collections\IconFilterCollection;
-use App\Http\Requests\Admin\Icon\CreateRequest;
+use App\Http\Requests\Admin\Icon\StoreRequest;
 use App\Models\Icon;
 use App\Repositories\Interfaces\IconRepositoryInterface;
 use App\Repositories\Sorters\Sorter;
@@ -23,7 +23,7 @@ class IconRepository implements IconRepositoryInterface
     return $query->paginate(18)->withQueryString();
   }
 
-  public function store(CreateRequest $request)
+  public function store(StoreRequest $request)
   {
     $entity = new Icon();
     $entity->path = $request->path;

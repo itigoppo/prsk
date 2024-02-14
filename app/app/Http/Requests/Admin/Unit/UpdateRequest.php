@@ -8,6 +8,6 @@ namespace App\Http\Requests\Admin\Unit;
  * @property string $bg_color
  * @property string $color
  */
-class UpdateRequest extends CreateRequest
+class UpdateRequest extends StoreRequest
 {
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Unit\SearchRequest;
-use App\Http\Requests\Admin\Unit\CreateRequest;
+use App\Http\Requests\Admin\Unit\StoreRequest;
 use App\Http\Requests\Admin\Unit\UpdateRequest;
 use App\Services\UnitService;
 use Illuminate\View\View;
@@ -46,7 +46,7 @@ class UnitController extends Controller
     return view('admin.units.create', []);
   }
 
-  public function store(CreateRequest $request): RedirectResponse
+  public function store(StoreRequest $request): RedirectResponse
   {
     $result  = $this->unitService->store($request);
 

@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Admin\Unit;
+namespace App\Http\Requests\Admin\Icon;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
+ * @property string $path
  * @property string $name
- * @property string $short
- * @property string $bg_color
- * @property string $color
+ * @property string $mime_type
+ * @property string $extension
+ * @property string $label
  */
-class CreateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -30,22 +31,19 @@ class CreateRequest extends FormRequest
   public function rules()
   {
     return [
+      'path' => [
+        'required',
+      ],
       'name' => [
         'required',
-        'max:20',
       ],
-      'short' => [
+      'mime_type' => [
         'required',
-        'max:10',
       ],
-      'bg_color' => [
+      'extension' => [
         'required',
-        'size:7',
       ],
-      'color' => [
-        'required',
-        'size:7',
-      ],
+      'label' => [],
     ];
   }
 
@@ -55,10 +53,11 @@ class CreateRequest extends FormRequest
   public function attributes()
   {
     return [
-      'name' => 'ユニット名',
-      'short' => '短縮名',
-      'bg_color' => 'ユニットカラーコード',
-      'color' => 'テキストカラーコード',
+      'path' => 'ファイルパス',
+      'name' => 'ファイル名',
+      'mime_type' => 'Mimetype',
+      'extension' => '拡張子',
+      'label' => 'ラベル',
     ];
   }
 }

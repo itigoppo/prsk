@@ -3,7 +3,7 @@
 namespace App\Repositories\Interfaces;
 
 use App\Collections\UnitFilterCollection;
-use App\Http\Requests\Admin\Unit\CreateRequest;
+use App\Http\Requests\Admin\Unit\StoreRequest;
 use App\Http\Requests\Admin\Unit\UpdateRequest;
 use App\Models\Unit;
 use App\Repositories\Sorters\Sorter;
@@ -12,7 +12,7 @@ interface UnitRepositoryInterface
 {
   public function paginate(UnitFilterCollection $filters, ?Sorter $sorter);
 
-  public function store(CreateRequest $request);
+  public function store(StoreRequest $request);
 
   public function findOneOrFail(int $id);
 

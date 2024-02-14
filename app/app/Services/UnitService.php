@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Http\Requests\Admin\Unit\CreateRequest;
+use App\Http\Requests\Admin\Unit\StoreRequest;
 use App\Http\Requests\Admin\Unit\SearchRequest;
 use App\Http\Requests\Admin\Unit\UpdateRequest;
 use App\Repositories\UnitRepository;
@@ -26,7 +26,7 @@ class UnitService
     return $this->unitRepository->findOneOrFail($id);
   }
 
-  public function store(CreateRequest $request): bool
+  public function store(StoreRequest $request): bool
   {
     return $this->unitRepository->store($request);
   }

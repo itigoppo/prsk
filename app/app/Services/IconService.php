@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Http\Requests\Admin\Icon\CreateRequest;
+use App\Http\Requests\Admin\Icon\StoreRequest;
 use App\Http\Requests\Admin\Icon\SearchRequest;
 use App\Models\Icon;
 use App\Repositories\IconRepository;
@@ -94,7 +94,7 @@ class IconService
     }
 
     try {
-      if (!$this->iconRepository->store(new CreateRequest($validator->validated()))) {
+      if (!$this->iconRepository->store(new StoreRequest($validator->validated()))) {
         Storage::disk('local')->delete($path);
 
         return false;

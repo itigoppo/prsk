@@ -41,43 +41,52 @@
               <div class="w-3/12 text-center md:w-[20%]">操作</div>
             </div>
 
-            @foreach ($units as $unit)
+            @if ($units->total() === 0)
               <div
-                class="min-h-10 flex w-full items-center space-x-1 border-x border-b border-gray-700 bg-white px-2 text-sm last:rounded-b-md md:px-8">
-                <div class="w-1/12 md:w-[8%]">
-                  <x-material-symbol optical-size="20" class="text-picton-blue-600">
-                    {{ $unit->is_active ? 'music_note' : 'music_off' }}
-                  </x-material-symbol>
-                </div>
-                <div class="w-5/12 md:w-[37%]">
-                  {{ $unit->name }}
-                </div>
-                <div class="max-md:hidden md:w-[25%]">
-                  {{ $unit->short }}
-                </div>
-                <div class="w-3/12 md:w-[10%]">
-                  <span class="rounded px-2 py-1 text-xs"
-                    style="background-color: {{ $unit->bg_color }}; color: {{ $unit->color }}">color</span>
-                </div>
-                <div class="w-3/12 md:w-[20%]">
-                  <div class="flex flex-col justify-center p-2 max-md:space-y-1 md:flex-row md:space-x-2">
-                    <a href="{{ route('admin.units.view', ['id' => $unit->id]) }}">
-                      <x-button-surface type="outline" size="sm">
-                        詳細
-                      </x-button-surface>
-                    </a>
+                class="flex h-16 w-full items-center justify-center rounded-b-md border-x border-b border-gray-700 bg-white px-8 text-sm">
+                まだ登録されていません
+              </div>
+            @endif
 
-                    <button type="button" x-data=""
-                      x-on:click.prevent="$dispatch('open-modal', 'confirm-deletion-{{ $unit->id }}')">
-                      <x-button-surface type="secondary" size="sm">
-                        削除
-                      </x-button-surface>
-                    </button>
-                    @include('admin.units.delete')
+            @if ($units->total() !== 0)
+              @foreach ($units as $unit)
+                <div
+                  class="min-h-10 flex w-full items-center space-x-1 border-x border-b border-gray-700 bg-white px-2 text-sm last:rounded-b-md md:px-8">
+                  <div class="w-1/12 md:w-[8%]">
+                    <x-material-symbol optical-size="20" class="text-picton-blue-600">
+                      {{ $unit->is_active ? 'music_note' : 'music_off' }}
+                    </x-material-symbol>
+                  </div>
+                  <div class="w-5/12 md:w-[37%]">
+                    {{ $unit->name }}
+                  </div>
+                  <div class="max-md:hidden md:w-[25%]">
+                    {{ $unit->short }}
+                  </div>
+                  <div class="w-3/12 md:w-[10%]">
+                    <span class="rounded px-2 py-1 text-xs"
+                      style="background-color: {{ $unit->bg_color }}; color: {{ $unit->color }}">color</span>
+                  </div>
+                  <div class="w-3/12 md:w-[20%]">
+                    <div class="flex flex-col justify-center p-2 max-md:space-y-1 md:flex-row md:space-x-2">
+                      <a href="{{ route('admin.units.view', ['id' => $unit->id]) }}">
+                        <x-button-surface type="outline" size="sm">
+                          詳細
+                        </x-button-surface>
+                      </a>
+
+                      <button type="button" x-data=""
+                        x-on:click.prevent="$dispatch('open-modal', 'confirm-deletion-{{ $unit->id }}')">
+                        <x-button-surface type="secondary" size="sm">
+                          削除
+                        </x-button-surface>
+                      </button>
+                      @include('admin.units.delete')
+                    </div>
                   </div>
                 </div>
-              </div>
-            @endforeach
+              @endforeach
+            @endif
           </div>
 
           {{ $units->onEachSide(0)->links() }}

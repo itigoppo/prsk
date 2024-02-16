@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\IconController;
+use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UnitController;
 use Illuminate\Support\Facades\Route;
@@ -36,10 +37,7 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
       ->name('store')
       ->middleware('can:isAdmin');
 
-    Route::group([
-      'prefix' => '{id}',
-      'where' => ['id' => '[0-9]+'],
-    ], function () {
+    Route::group(['prefix' => '{id}', 'where' => ['id' => '[0-9]+']], function () {
       Route::get('/', [UnitController::class, 'view'])
         ->name('view');
 
@@ -54,9 +52,28 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
       Route::delete('/', [UnitController::class, 'destroy'])
         ->name('destroy')
         ->middleware('can:isAdmin');
+
+      // メンバー管理
+      Route::group(['prefix' => 'members', 'as' => 'members.'], function () {
+        Route::group(['prefix' => '{member_id}', 'where' => ['member_id' => '[0-9]+']], function () {
+          Route::get('/', [MemberController::class, 'view'])
+            ->name('view');
+
+          Route::get('edit', [MemberController::class, 'edit'])
+            ->name('edit')
+            ->middleware('can:isAdmin');
+
+          Route::patch('/', [MemberController::class, 'update'])
+            ->name('update')
+            ->middleware('can:isAdmin');
+
+          Route::delete('/', [MemberController::class, 'destroy'])
+            ->name('destroy')
+            ->middleware('can:isAdmin');
+        });
+      });
     });
   });
-
 
   // アイコン管理
   Route::group(['prefix' => 'icons', 'as' => 'icons.'], function () {
@@ -77,5 +94,22 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
         ->name('destroy')
         ->middleware('can:isAdmin');
     });
+  });
+
+  // メンバー管理
+  Route::group(['prefix' => 'members', 'as' => 'members.'], function () {
+    Route::get('/', [MemberController::class, 'index'])
+      ->name('index');
+
+    Route::post('/', [MemberController::class, 'search'])
+      ->name('search');
+
+    Route::get('create', [MemberController::class, 'create'])
+      ->name('create')
+      ->middleware('can:isAdmin');
+
+    Route::post('create', [MemberController::class, 'store'])
+      ->name('store')
+      ->middleware('can:isAdmin');
   });
 });

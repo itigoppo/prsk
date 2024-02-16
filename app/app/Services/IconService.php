@@ -23,9 +23,14 @@ class IconService
     $this->iconRepository = $iconRepository;
   }
 
-  public function findAll(SearchRequest $request)
+  public function findPaginate(SearchRequest $request)
   {
     return $this->iconRepository->paginate($request->filters(), $request->sorter());
+  }
+
+  public function findAll(SearchRequest $request)
+  {
+    return $this->iconRepository->findAll($request->filters(), $request->sorter());
   }
 
   public function findOne(int|string $id)

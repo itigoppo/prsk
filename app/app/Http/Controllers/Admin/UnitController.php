@@ -15,13 +15,12 @@ class UnitController extends Controller
 {
   public function __construct(private UnitService $unitService)
   {
-    $this->unitService = $unitService;
   }
 
   public function index(SearchRequest $request): View
   {
     $request['sort_direction'] = 'asc';
-    $units = $this->unitService->findAll($request);
+    $units = $this->unitService->findPaginate($request);
 
     return view('admin.units.index', [
       'units' => $units,

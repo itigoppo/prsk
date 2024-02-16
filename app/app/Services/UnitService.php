@@ -16,9 +16,14 @@ class UnitService
     $this->unitRepository = $unitRepository;
   }
 
-  public function findAll(SearchRequest $request)
+  public function findPaginate(SearchRequest $request)
   {
     return $this->unitRepository->paginate($request->filters(), $request->sorter());
+  }
+
+  public function findAll(SearchRequest $request)
+  {
+    return $this->unitRepository->findAll($request->filters(), $request->sorter());
   }
 
   public function findOne(int|string $id)

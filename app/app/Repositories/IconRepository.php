@@ -23,6 +23,15 @@ class IconRepository implements IconRepositoryInterface
     return $query->paginate(18)->withQueryString();
   }
 
+  public function findAll(IconFilterCollection $filters, ?Sorter $sorter)
+  {
+    $query = Icon::query();
+    $filters->handle($query);
+    $sorter->handle($query);
+
+    return $query->get();
+  }
+
   public function store(StoreRequest $request)
   {
     $entity = new Icon();

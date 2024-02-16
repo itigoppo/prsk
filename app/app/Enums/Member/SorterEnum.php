@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Enums\Icon;
+namespace App\Enums\Member;
 
 use App\Enums\SortDirectionEnum;
 use App\Repositories\Sorters\Sorter;
-use App\Repositories\Sorters\Icon\CreatedSorter;
-use App\Repositories\Sorters\Icon\LabelSorter;
-use App\Repositories\Sorters\Icon\PrimaryKeySorter;
+use App\Repositories\Sorters\Member\CreatedSorter;
+use App\Repositories\Sorters\Member\PrimaryKeySorter;
+use App\Repositories\Sorters\Member\UnitSorter;
 
 enum SorterEnum: string
 {
   case Created = 'created_at';
   case Id = 'id';
-  case Label = 'label';
+  case Unit = 'unit';
 
   public function createSorter(SortDirectionEnum $sortDirection): Sorter
   {
     return match ($this) {
       self::Created => new CreatedSorter($sortDirection),
       self::Id => new PrimaryKeySorter($sortDirection),
-      self::Label => new LabelSorter($sortDirection),
+      self::Unit => new UnitSorter($sortDirection),
     };
   }
 }

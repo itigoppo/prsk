@@ -11,6 +11,8 @@ interface IconRepositoryInterface
 {
   public function paginate(IconFilterCollection $filters, ?Sorter $sorter);
 
+  public function findAll(IconFilterCollection $filters, ?Sorter $sorter);
+
   public function store(StoreRequest $request);
 
   public function findOneOrFail(int $id);

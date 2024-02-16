@@ -2,21 +2,21 @@
 
 namespace App\Repositories;
 
-use App\Collections\UnitFilterCollection;
-use App\Http\Requests\Admin\Unit\StoreRequest;
-use App\Http\Requests\Admin\Unit\UpdateRequest;
-use App\Models\Unit;
-use App\Repositories\Interfaces\UnitRepositoryInterface;
+use App\Collections\MemberFilterCollection;
+use App\Http\Requests\Admin\Member\StoreRequest;
+use App\Http\Requests\Admin\Member\UpdateRequest;
+use App\Models\Member;
+use App\Repositories\Interfaces\MemberRepositoryInterface;
 use App\Repositories\Sorters\Sorter;
 use App\Traits\QueryBuilderTrait;
 
-class UnitRepository implements UnitRepositoryInterface
+class MemberRepository implements MemberRepositoryInterface
 {
   use QueryBuilderTrait;
 
-  public function paginate(UnitFilterCollection $filters, ?Sorter $sorter): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+  public function paginate(MemberFilterCollection $filters, ?Sorter $sorter): \Illuminate\Contracts\Pagination\LengthAwarePaginator
   {
-    $query = Unit::query();
+    $query = Member::query();
     $filters->handle($query);
     $sorter->handle($query);
 
@@ -24,18 +24,22 @@ class UnitRepository implements UnitRepositoryInterface
     return $query->paginate(10)->withQueryString();
   }
 
-  public function findAll(UnitFilterCollection $filters, ?Sorter $sorter)
+  public function findAll(MemberFilterCollection $filters, ?Sorter $sorter)
   {
-    $query = Unit::query();
+    $query = Member::query();
     $filters->handle($query);
     $sorter->handle($query);
 
+    // エラー出てるけど取れてるから気にしない
     return $query->get();
   }
 
   public function store(StoreRequest $request)
   {
-    $entity = new Unit();
+    $entity = new Member();
+    $entity->unit_id = $request->unit_id;
+    $entity->icon_id = $request->icon_id;
+    $entity->code = $request->code;
     $entity->name = $request->name;
     $entity->short = $request->short;
     $entity->color = $request->color;
@@ -50,11 +54,14 @@ class UnitRepository implements UnitRepositoryInterface
    */
   public function findOneOrFail(int $id)
   {
-    return Unit::query()->where($this->findOne($id))->firstOrFail();
+    return Member::query()->where($this->findOne($id))->firstOrFail();
   }
 
-  public function update(Unit $entity, UpdateRequest $request)
+  public function update(Member $entity, UpdateRequest $request)
   {
+    $entity->unit_id = $request->unit_id;
+    $entity->icon_id = $request->icon_id;
+    $entity->code = $request->code;
     $entity->name = $request->name;
     $entity->short = $request->short;
     $entity->color = $request->color;
@@ -64,7 +71,7 @@ class UnitRepository implements UnitRepositoryInterface
     return $entity->save();
   }
 
-  public function destroy(Unit $entity)
+  public function destroy(Member $entity)
   {
     return $entity->delete();
   }

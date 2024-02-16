@@ -12,6 +12,8 @@ interface UnitRepositoryInterface
 {
   public function paginate(UnitFilterCollection $filters, ?Sorter $sorter);
 
+  public function findAll(UnitFilterCollection $filters, ?Sorter $sorter);
+
   public function store(StoreRequest $request);
 
   public function findOneOrFail(int $id);

@@ -1,11 +1,21 @@
 <div class="mb-4">
-  <form method="POST" action="{{ route('admin.units.search') }}">
+  <form method="POST" action="{{ route('admin.members.search') }}">
     @csrf
 
     <fieldset class="flex flex-col md:flex-row md:border-y md:border-gray-100">
       <div
         class="flex items-center border-l-4 border-puerto-rico-200 px-4 py-2 md:w-1/4 md:border-0 md:bg-puerto-rico-200 md:p-4">
-        <x-input-label for="name" value="ユニット名" />
+        <x-input-label for="unit_id" value="ユニット" />
+      </div>
+      <div class="flex-1 p-4">
+        <x-select class="w-full" name="filter[unit]" :current="(int) $filter->get('unit')" :options="$unitOptions" />
+      </div>
+    </fieldset>
+
+    <fieldset class="flex flex-col md:flex-row md:border-b md:border-gray-100">
+      <div
+        class="flex items-center border-l-4 border-puerto-rico-200 px-4 py-2 md:w-1/4 md:border-0 md:bg-puerto-rico-200 md:p-4">
+        <x-input-label for="name" value="メンバー名" />
       </div>
       <div class="flex-1 p-4">
         <x-text-input name="filter[name]" type="text" class="block w-full" :value="$filter->get('name')" />
@@ -28,7 +38,7 @@
 
     <div class="mt-8 flex justify-center space-x-2 md:px-56">
 
-      <a href="{{ route('admin.units.index') }}" class="flex-1">
+      <a href="{{ route('admin.members.index') }}" class="flex-1">
         <x-button-surface type="secondary">
           リセット
         </x-button-surface>

@@ -22,7 +22,7 @@ class IconController extends Controller
 
   public function index(SearchRequest $request): View
   {
-    $icons = $this->iconService->findAll($request);
+    $icons = $this->iconService->findPaginate($request);
 
     return view('admin.icons.index', [
       'icons' => $icons,
@@ -59,7 +59,7 @@ class IconController extends Controller
 
   public function lookup(SearchRequest $request): View
   {
-    $icons = $this->iconService->findAll($request);
+    $icons = $this->iconService->findPaginate($request);
 
     return view('admin.icons.lookup', [
       'icons' => $icons,

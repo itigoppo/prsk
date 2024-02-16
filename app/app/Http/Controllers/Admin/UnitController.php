@@ -19,6 +19,7 @@ class UnitController extends Controller
 
   public function index(SearchRequest $request): View
   {
+    $request['sort'] = 'id';
     $request['sort_direction'] = 'asc';
     $units = $this->unitService->findPaginate($request);
 

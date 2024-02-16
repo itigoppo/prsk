@@ -26,6 +26,7 @@ class MemberController extends Controller
 
   public function index(SearchRequest $request): View
   {
+    $request['sort'] = 'id';
     $request['sort_direction'] = 'asc';
     $members = $this->memberService->findPaginate($request);
 

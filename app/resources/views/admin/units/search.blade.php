@@ -29,13 +29,13 @@
     <div class="mt-8 flex justify-center space-x-2 md:px-56">
 
       <a href="{{ route('admin.units.index') }}" class="flex-1">
-        <x-button-surface type="secondary">
+        <x-button-surface type="secondary" size="sm" class="py-2.5">
           リセット
         </x-button-surface>
       </a>
 
       <button type="submit" class="flex-1">
-        <x-button-surface type="outline">
+        <x-button-surface type="outline" size="sm">
           <x-material-symbol optical-size="20">search</x-material-symbol>
           検索
         </x-button-surface>

@@ -59,7 +59,7 @@
     <x-input-label for="bg_color" value="メンバーカラーコード" />
   </div>
   <div class="flex-1 p-4">
-    <x-text-input id="bg_color" name="bg_color" type="color" class="block h-10" :value="old('bg_color', $member->bg_color ?? '')" required />
+    <x-text-input id="bg_color" name="bg_color" type="color" class="block h-10" :value="old('bg_color', $member->bg_color ?? '#e9ecef')" required />
     <x-input-error class="mt-2" :messages="$errors->get('bg_color')" />
   </div>
 </fieldset>

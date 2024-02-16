@@ -34,10 +34,10 @@
           <div class="my-4">
             <div
               class="flex h-10 w-full items-center space-x-1 rounded-t-md border border-gray-700 bg-gray-100 px-2 text-xs font-bold md:px-8">
-              <div class="w-1/12 md:w-[8%]"></div>
-              <div class="w-5/12 md:w-[36%]">ユニット名</div>
+              <div class="w-1/12 md:w-[3%]"></div>
+              <div class="w-5/12 md:w-[35%]">ユニット名</div>
               <div class="max-md:hidden md:w-[20%]">短縮名</div>
-              <div class="w-2/12 md:w-[10%]">カラー</div>
+              <div class="w-2/12 md:w-[11%]">カラー</div>
               <div class="w-4/12 text-center md:w-[31%]">操作</div>
             </div>
 
@@ -52,19 +52,22 @@
               @foreach ($units as $unit)
                 <div
                   class="min-h-10 flex w-full items-center space-x-1 border-x border-b border-gray-700 bg-white px-2 text-sm last:rounded-b-md md:px-8">
-                  <div class="w-1/12 md:w-[8%]">
+                  <div class="w-1/12 md:w-[3%]">
                     <x-material-symbol optical-size="20" class="text-picton-blue-600">
                       {{ $unit->is_active ? 'music_note' : 'music_off' }}
                     </x-material-symbol>
                   </div>
-                  <div class="w-5/12 md:w-[36%]">
+                  <div class="w-5/12 md:w-[35%]">
                     {{ $unit->name }}
                   </div>
                   <div class="max-md:hidden md:w-[20%]">
                     {{ $unit->short }}
                   </div>
-                  <div class="w-2/12 md:w-[10%]">
-                    <x-name-label :color="$unit->color" :bg-color="$unit->bg_color">color</x-name-label>
+                  <div class="w-2/12 md:w-[11%]">
+                    <div class="flex flex-wrap content-start items-start gap-0.5 self-stretch">
+                      <x-name-label :color="$unit->color" :bg-color="$unit->bg_color">color</x-name-label>
+                      <x-name-label :color="$unit->color" :bg-color="$unit->bg_color" type="outline">color</x-name-label>
+                    </div>
                   </div>
                   <div class="w-4/12 md:w-[31%]">
                     <div class="flex flex-col justify-center p-2 max-md:space-y-1 md:flex-row md:space-x-2">

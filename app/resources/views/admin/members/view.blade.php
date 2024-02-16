@@ -47,6 +47,16 @@
           <fieldset class="flex flex-col md:flex-row md:border-b md:border-gray-100">
             <div
               class="flex items-center border-l-4 border-puerto-rico-200 px-4 py-2 md:w-1/4 md:border-0 md:bg-puerto-rico-200 md:p-4">
+              <x-input-label for="code" value="メンバーコード" />
+            </div>
+            <div class="flex-1 p-4">
+              {{ $member->code }}
+            </div>
+          </fieldset>
+
+          <fieldset class="flex flex-col md:flex-row md:border-b md:border-gray-100">
+            <div
+              class="flex items-center border-l-4 border-puerto-rico-200 px-4 py-2 md:w-1/4 md:border-0 md:bg-puerto-rico-200 md:p-4">
               <x-input-label for="name" value="メンバー名" />
             </div>
             <div class="flex-1 p-4">

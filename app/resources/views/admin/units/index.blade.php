@@ -53,7 +53,7 @@
                 <div
                   class="min-h-10 flex w-full items-center space-x-1 border-x border-b border-gray-700 bg-white px-2 text-sm last:rounded-b-md md:px-8">
                   <div class="w-1/12 md:w-[3%]">
-                    <x-material-symbol optical-size="20" class="text-picton-blue-600">
+                    <x-material-symbol optical-size="20" class="text-scooter-600">
                       {{ $unit->is_active ? 'music_note' : 'music_off' }}
                     </x-material-symbol>
                   </div>

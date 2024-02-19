@@ -130,16 +130,16 @@
               checked: "peer-checked:border-azure-600 peer-checked:bg-azure-600 dark:peer-checked:text-azure-600",
             },
             {
-              default: "border-picton-blue-400 text-picton-blue-400 dark:bg-picton-blue-400",
-              checked: "peer-checked:border-picton-blue-400 peer-checked:bg-picton-blue-400 dark:peer-checked:text-picton-blue-400",
+              default: "border-scooter-500 text-scooter-500 dark:bg-scooter-500",
+              checked: "peer-checked:border-scooter-500 peer-checked:bg-scooter-500 dark:peer-checked:text-scooter-500",
             },
             {
-              default: "border-crusta-400 text-crusta-400 dark:bg-crusta-400",
-              checked: "peer-checked:border-crusta-400 peer-checked:bg-crusta-400 dark:peer-checked:text-crusta-400",
+              default: "border-flamenco-400 text-flamenco-400 dark:bg-flamenco-400",
+              checked: "peer-checked:border-flamenco-400 peer-checked:bg-flamenco-400 dark:peer-checked:text-flamenco-400",
             },
             {
-              default: "border-sea-pink-700 bg-white text-sea-pink-700 dark:bg-sea-pink-700",
-              checked: "peer-checked:border-sea-pink-700 peer-checked:bg-sea-pink-700 dark:peer-checked:text-sea-pink-700",
+              default: "border-sea-pink-500 bg-white text-sea-pink-500 dark:bg-sea-pink-500",
+              checked: "peer-checked:border-sea-pink-500 peer-checked:bg-sea-pink-500 dark:peer-checked:text-sea-pink-500",
             },
           ],
           onClickAttribute(e) {

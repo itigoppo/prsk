@@ -73,7 +73,7 @@
               <x-input-label for="is_active" value="有効/無効" />
             </div>
             <div class="flex flex-1 items-center gap-x-2 p-4">
-              <x-material-symbol optical-size="20" class="text-picton-blue-600">
+              <x-material-symbol optical-size="20" class="text-scooter-600">
                 {{ $unit->is_active ? 'music_note' : 'music_off' }}
               </x-material-symbol>
               <span>

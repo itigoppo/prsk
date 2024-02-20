@@ -122,24 +122,24 @@
             },
           ],
           colors: [{
-              default: "border-atlantis-400 text-atlantis-400 dark:bg-atlantis-400",
-              checked: "peer-checked:border-atlantis-400 peer-checked:bg-atlantis-400 dark:peer-checked:text-atlantis-400",
+              default: "border-wild-watermelon-500 text-wild-watermelon-500 dark:bg-wild-watermelon-500",
+              checked: "peer-checked:border-wild-watermelon-500 peer-checked:bg-wild-watermelon-500 dark:peer-checked:text-wild-watermelon-500",
             },
             {
-              default: "border-azure-600 text-azure-600 dark:bg-azure-600",
-              checked: "peer-checked:border-azure-600 peer-checked:bg-azure-600 dark:peer-checked:text-azure-600",
+              default: "border-selective-yellow-400 text-selective-yellow-400 dark:bg-selective-yellow-400",
+              checked: "peer-checked:border-selective-yellow-400 peer-checked:bg-selective-yellow-400 dark:peer-checked:text-selective-yellow-400",
             },
             {
-              default: "border-scooter-500 text-scooter-500 dark:bg-scooter-500",
-              checked: "peer-checked:border-scooter-500 peer-checked:bg-scooter-500 dark:peer-checked:text-scooter-500",
+              default: "border-turquoise-500 text-turquoise-500 dark:bg-turquoise-500",
+              checked: "peer-checked:border-turquoise-500 peer-checked:bg-turquoise-500 dark:peer-checked:text-turquoise-500",
             },
             {
-              default: "border-flamenco-400 text-flamenco-400 dark:bg-flamenco-400",
-              checked: "peer-checked:border-flamenco-400 peer-checked:bg-flamenco-400 dark:peer-checked:text-flamenco-400",
+              default: "border-picton-blue-400 text-picton-blue-400 dark:bg-picton-blue-400",
+              checked: "peer-checked:border-picton-blue-400 peer-checked:bg-picton-blue-400 dark:peer-checked:text-picton-blue-400",
             },
             {
-              default: "border-sea-pink-500 bg-white text-sea-pink-500 dark:bg-sea-pink-500",
-              checked: "peer-checked:border-sea-pink-500 peer-checked:bg-sea-pink-500 dark:peer-checked:text-sea-pink-500",
+              default: "border-blue-marguerite-500 bg-white text-blue-marguerite-500 dark:bg-blue-marguerite-500",
+              checked: "peer-checked:border-blue-marguerite-500 peer-checked:bg-blue-marguerite-500 dark:peer-checked:text-blue-marguerite-500",
             },
           ],
           onClickAttribute(e) {

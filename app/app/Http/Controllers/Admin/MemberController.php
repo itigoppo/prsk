@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Icon\SearchRequest as IconSearchRequest;
-use App\Http\Requests\Admin\Member\SearchRequest;
-use App\Http\Requests\Admin\Member\StoreRequest;
-use App\Http\Requests\Admin\Member\UpdateRequest;
-use App\Http\Requests\Admin\Unit\SearchRequest as UnitSearchRequest;
+use App\Http\Requests\Icon\SearchRequest as IconSearchRequest;
+use App\Http\Requests\Member\SearchRequest;
+use App\Http\Requests\Member\StoreRequest;
+use App\Http\Requests\Member\UpdateRequest;
+use App\Http\Requests\Unit\SearchRequest as UnitSearchRequest;
 use App\Services\IconService;
 use App\Services\MemberService;
 use App\Services\UnitService;

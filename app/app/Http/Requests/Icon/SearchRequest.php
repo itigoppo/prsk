@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Member;
+namespace App\Http\Requests\Icon;
 
-use App\Collections\MemberFilterCollection;
+use App\Collections\IconFilterCollection;
 use App\Enums\SortDirectionEnum;
-use App\Enums\Member\SorterEnum;
+use App\Enums\Icon\SorterEnum;
 use App\Repositories\Sorters\Sorter;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -15,9 +15,9 @@ class SearchRequest extends FormRequest
     return true;
   }
 
-  public function filters(): MemberFilterCollection
+  public function filters(): IconFilterCollection
   {
-    return new MemberFilterCollection($this->filter);
+    return new IconFilterCollection($this->filter);
   }
 
   public function sorter(): Sorter
@@ -32,7 +32,7 @@ class SearchRequest extends FormRequest
     $sortBy = SorterEnum::tryFrom($this->sort);
 
     if (is_null($sortBy)) {
-      return SorterEnum::Created;
+      return SorterEnum::Id;
     }
 
     return $sortBy;

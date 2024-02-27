@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Icon\SearchRequest;
+use App\Http\Requests\Icon\SearchRequest;
 use App\Models\Icon;
 use App\Services\IconService;
 use Illuminate\Http\JsonResponse;

@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Http\Requests\Admin\Member\StoreRequest;
-use App\Http\Requests\Admin\Member\SearchRequest;
-use App\Http\Requests\Admin\Member\UpdateRequest;
+use App\Http\Requests\Member\StoreRequest;
+use App\Http\Requests\Member\SearchRequest;
+use App\Http\Requests\Member\UpdateRequest;
 use App\Repositories\MemberRepository;
 use Exception;
 use Illuminate\Support\Facades\Log;

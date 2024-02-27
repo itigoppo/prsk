@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Http\Requests\Admin\Icon\StoreRequest;
-use App\Http\Requests\Admin\Icon\SearchRequest;
+use App\Http\Requests\Icon\StoreRequest;
+use App\Http\Requests\Icon\SearchRequest;
 use App\Models\Icon;
 use App\Repositories\IconRepository;
 use Illuminate\Http\File;

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Unit\SearchRequest;
-use App\Http\Requests\Admin\Unit\StoreRequest;
-use App\Http\Requests\Admin\Unit\UpdateRequest;
+use App\Http\Requests\Unit\SearchRequest;
+use App\Http\Requests\Unit\StoreRequest;
+use App\Http\Requests\Unit\UpdateRequest;
 use App\Services\UnitService;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;

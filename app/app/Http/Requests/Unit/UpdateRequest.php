@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Unit;
+namespace App\Http\Requests\Unit;
 
 /**
  * @property string $name

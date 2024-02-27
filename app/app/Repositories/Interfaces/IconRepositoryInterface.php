@@ -3,7 +3,7 @@
 namespace App\Repositories\Interfaces;
 
 use App\Collections\IconFilterCollection;
-use App\Http\Requests\Admin\Icon\StoreRequest;
+use App\Http\Requests\Icon\StoreRequest;
 use App\Models\Icon;
 use App\Repositories\Sorters\Sorter;
 

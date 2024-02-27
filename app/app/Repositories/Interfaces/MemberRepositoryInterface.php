@@ -3,8 +3,8 @@
 namespace App\Repositories\Interfaces;
 
 use App\Collections\MemberFilterCollection;
-use App\Http\Requests\Admin\Member\StoreRequest;
-use App\Http\Requests\Admin\Member\UpdateRequest;
+use App\Http\Requests\Member\StoreRequest;
+use App\Http\Requests\Member\UpdateRequest;
 use App\Models\Member;
 use App\Repositories\Sorters\Sorter;
 

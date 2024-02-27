@@ -23,7 +23,7 @@ class MemberService
 
   public function findAll(SearchRequest $request)
   {
-    return $this->memberRepository->paginate($request->filters(), $request->sorter());
+    return $this->memberRepository->findAll($request->filters(), $request->sorter());
   }
 
   public function findOne(int|string $id)

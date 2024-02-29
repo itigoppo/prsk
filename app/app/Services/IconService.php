@@ -10,7 +10,6 @@ use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -43,7 +42,7 @@ class IconService
     try {
       $entity = $this->findOne($id);
 
-      if (!Storage::disk('local')->exists(Icon::filePath($entity))) {
+      if (!Storage::disk('local')->exists(\StorageUtil::filePath($entity))) {
         throw new FileNotFoundException('icon record id: ' . $id);
       }
 
@@ -117,7 +116,7 @@ class IconService
   {
     try {
       $entity = $this->findOne($id);
-      $path = Icon::filePath($entity);
+      $path = \StorageUtil::filePath($entity);
 
       if (Storage::disk('local')->exists($path)) {
         if (!Storage::disk('local')->delete($path)) {

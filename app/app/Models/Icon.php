@@ -72,9 +72,4 @@ class Icon extends Model
    * @var array<string, string>
    */
   protected $casts = [];
-
-  public static function filePath(Icon $entity): string
-  {
-    return $entity->path . '/' . $entity->name;
-  }
 }

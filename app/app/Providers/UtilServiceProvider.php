@@ -13,6 +13,7 @@ class UtilServiceProvider extends ServiceProvider
   {
     //
     $this->app->singleton('form', 'App\Facades\Utilities\FormUtil');
+    $this->app->singleton('storage', 'App\Facades\Utilities\StorageUtil');
   }
 
   /**

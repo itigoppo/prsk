@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Icon\SearchRequest;
-use App\Models\Icon;
 use App\Services\IconService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
@@ -69,7 +68,7 @@ class IconController extends Controller
   public function display(int $id): StreamedResponse
   {
     $icon = $this->iconService->findOne($id);
-    $path = Icon::filePath($icon);
+    $path = \StorageUtil::filePath($icon);
 
     return Storage::disk('local')->download($path);
   }

@@ -183,6 +183,7 @@ return [
 
   'aliases' => Facade::defaultAliases()->merge([
     'FormUtil' => App\Facades\FormUtilFacade::class,
+    'StorageUtil' => App\Facades\StorageUtilFacade::class,
   ])->toArray(),
 
 ];

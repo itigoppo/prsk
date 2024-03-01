@@ -48,7 +48,7 @@ class UnitRepository implements UnitRepositoryInterface
   /**
    * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<\Illuminate\Database\Eloquent\Model>
    */
-  public function findOneOrFail(int $id)
+  public function findOneOrFail(int|string $id)
   {
     return Unit::query()->where($this->findOne($id))->firstOrFail();
   }

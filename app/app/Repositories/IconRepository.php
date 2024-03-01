@@ -47,7 +47,7 @@ class IconRepository implements IconRepositoryInterface
   /**
    * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<\Illuminate\Database\Eloquent\Model>
    */
-  public function findOneOrFail(int $id)
+  public function findOneOrFail(int|string $id)
   {
     return Icon::query()->where($this->findOne($id))->firstOrFail();
   }

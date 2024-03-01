@@ -52,7 +52,7 @@ class MemberRepository implements MemberRepositoryInterface
   /**
    * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<\Illuminate\Database\Eloquent\Model>
    */
-  public function findOneOrFail(int $id)
+  public function findOneOrFail(int|string $id)
   {
     return Member::query()->where($this->findOne($id))->firstOrFail();
   }

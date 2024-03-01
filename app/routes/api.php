@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Front\AuthController;
+use App\Http\Controllers\Api\Front\MemberController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware('guest')->group(function () {
   Route::post('login', [AuthController::class, 'login']);
+});
+
+Route::group(['middleware' => 'auth:api'], function () {
+  Route::group(['prefix' => 'members', 'as' => 'members.'], function () {
+    Route::get('/', [MemberController::class, 'index'])
+      ->name('index');
+  });
 });

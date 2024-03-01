@@ -39,7 +39,7 @@
             <div class="flex-1 p-4">
               @if (!empty($member->icon_id))
                 <img src="{{ route('admin.icons.display', ['id' => $member->icon_id]) }}"
-                  class="aspect-square w-32 object-contain">
+                  class="aspect-square w-32 object-contain" />
               @endif
             </div>
           </fieldset>

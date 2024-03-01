@@ -62,7 +62,7 @@
                   <div class="w-1/12 md:w-[7%]">
                     @if (!empty($member->icon_id))
                       <img src="{{ route('admin.icons.display', ['id' => $member->icon_id]) }}"
-                        class="aspect-square h-10 object-contain">
+                        class="aspect-square h-10 object-contain" />
                     @endif
                   </div>
                   <div class="w-2/12 text-center md:w-[10%]">

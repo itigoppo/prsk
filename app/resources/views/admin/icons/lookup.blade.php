@@ -14,7 +14,8 @@
       <div
         class="grid grid-rows-[auto_1fr] overflow-hidden rounded shadow-[4px_4px_16px_0px_rgba(0,_0,_0,_0.08),_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)]">
         <div class="bg-gray-50">
-          <img src="{{ route('admin.icons.display', ['id' => $icon->id]) }}" class="aspect-square w-full object-contain">
+          <img src="{{ route('admin.icons.display', ['id' => $icon->id]) }}"
+            class="aspect-square w-full object-contain" />
         </div>
 
         <div class="grid grid-rows-[1fr_auto] p-2">

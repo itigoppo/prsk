@@ -3,7 +3,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "cache-clear": "php artisan cache:clear && php artisan config:clear && php artisan config:cache && php artisan route:clear && php artisan view:clear",
+    "ide-helper": "php artisan ide-helper:generate && php artisan ide-helper:models -N && php artisan ide-helper:models -W"
   },
   "devDependencies": {
     "@prettier/plugin-php": "^0.22.2",

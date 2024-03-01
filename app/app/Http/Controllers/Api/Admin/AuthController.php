@@ -12,8 +12,8 @@ class AuthController extends Controller
   public function login(Request $request)
   {
     if (Str::startsWith($request->headers->get('referer'), env('APP_URL'))) {
-      $request['email'] = env('API_USER');
-      $request['password'] = env('API_PASSWORD');
+      $request['email'] = config('custom.api_user');
+      $request['password'] = config('custom.api_password');
     }
 
     $credentials = $request->validate([

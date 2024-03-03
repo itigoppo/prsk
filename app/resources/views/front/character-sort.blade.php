@@ -287,7 +287,7 @@
                 <div class="absolute right-4 flex h-40 w-40 items-center justify-center bg-flamenco-400">
                   <img :src="player1.icon" class="h-40 w-40 object-cover" />
                   <div class="absolute bottom-0 w-full bg-gray-950/60 p-1 text-start text-xs text-white"
-                    x-html="player1.name">
+                    x-html="player1.nameWithUnit">
                   </div>
                 </div>
               </div>
@@ -297,7 +297,7 @@
                 <div class="absolute left-4 h-40 w-40 items-center justify-center bg-scooter-400">
                   <img :src="player2.icon" class="h-40 w-40 object-cover" />
                   <div class="absolute bottom-0 w-full bg-gray-950/60 p-1 text-start text-xs text-white"
-                    x-html="player2.name">
+                    x-html="player2.nameWithUnit">
                   </div>
                 </div>
               </div>
@@ -328,7 +328,7 @@
               <span x-text="Object.keys(members).length"></span>
               人
             </div>
-            <div class="grid grid-cols-6 gap-2 md:grid-cols-10">
+            <div class="grid grid-cols-2 gap-2 md:grid-cols-8">
               <template x-for="(member, index) in members" :key="index">
                 <div
                   class="grid grid-rows-[auto_1fr] overflow-hidden rounded shadow-[4px_4px_16px_0px_rgba(0,_0,_0,_0.08),_0px_0px_2px_0px_rgba(0,_0,_0,_0.25)]">
@@ -340,7 +340,7 @@
                     <span x-data="{ color: member.bgColor }" :style="`color: ${color}`">
                       <x-material-symbol type="rounded" optical-size="16">energy_program_saving</x-material-symbol>
                     </span>
-                    <span class="break-all text-xs" x-html="member.name"></span>
+                    <span class="break-all text-xs" x-html="member.nameWithUnit"></span>
                   </div>
                 </div>
               </template>

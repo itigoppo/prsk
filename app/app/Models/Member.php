@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Traits\UuidObservable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 /**
  * App\Models\Member
@@ -45,6 +47,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Member whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Member withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Member withoutTrashed()
+ * @property-read string $name_with_unit
+ * @property-read string $short_with_unit
  * @mixin \Eloquent
  */
 class Member extends Model
@@ -100,5 +104,28 @@ class Member extends Model
   public function icon()
   {
     return $this->belongsTo(Icon::class);
+  }
+
+  protected function nameWithUnit(): Attribute
+  {
+    return Attribute::make(
+      get: fn (): string => $this->displayName($this->name),
+    );
+  }
+
+  protected function shortWithUnit(): Attribute
+  {
+    return Attribute::make(
+      get: fn (): string => $this->displayName($this->short),
+    );
+  }
+
+  private function displayName($value): string
+  {
+    if (Str::endsWith($this->code, ['miku', 'rin', 'len', 'luka', 'meiko', 'kaito'])) {
+      $value .= '(' . $this->unit->short . ')';
+    }
+
+    return $value;
   }
 }

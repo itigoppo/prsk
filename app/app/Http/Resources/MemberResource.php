@@ -17,7 +17,9 @@ class MemberResource extends JsonResource
     return [
       'id' => $this->uuid,
       'name' => $this->name,
+      'nameWithUnit' => $this->name_with_unit,
       'short' => $this->short,
+      'shortWithUnit' => $this->short_with_unit,
       'bgColor' => $this->bg_color,
       'color' => $this->color,
       'icon' => empty($this->icon) ? null : route('media.icons', ['id' => $this->icon->uuid, 'token' => \StorageUtil::createToken(600)]),

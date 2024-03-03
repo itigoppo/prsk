@@ -13,7 +13,6 @@ class UnitService
 {
   public function __construct(private UnitRepository $unitRepository)
   {
-    $this->unitRepository = $unitRepository;
   }
 
   public function findPaginate(SearchRequest $request)

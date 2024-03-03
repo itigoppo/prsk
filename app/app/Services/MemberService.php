@@ -13,7 +13,6 @@ class MemberService
 {
   public function __construct(private MemberRepository $memberRepository)
   {
-    $this->memberRepository = $memberRepository;
   }
 
   public function findPaginate(SearchRequest $request)

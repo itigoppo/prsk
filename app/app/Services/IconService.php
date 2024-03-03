@@ -19,7 +19,6 @@ class IconService
 {
   public function __construct(private IconRepository $iconRepository)
   {
-    $this->iconRepository = $iconRepository;
   }
 
   public function findPaginate(SearchRequest $request)

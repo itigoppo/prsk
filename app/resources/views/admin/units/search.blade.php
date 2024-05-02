@@ -18,7 +18,7 @@
         <x-input-label for="is_active" value="有効/無効" />
       </div>
       <div class="flex-1 p-4">
-        <x-select class="w-full" name="filter[is_active]" :current="$filter->get('is_active')" :options="collect([
+        <x-radio-group class="w-full" name="filter[is_active]" :current="$filter->get('is_active') ?? ''" :options="collect([
             ['label' => '問わない', 'value' => ''],
             ['label' => '有効', 'value' => '1'],
             ['label' => '無効', 'value' => '0'],

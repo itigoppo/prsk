@@ -8,7 +8,7 @@ abstract class Filter
 {
   public readonly mixed $value;
 
-  public function __construct(ValueFilter|string|int|float $value)
+  public function __construct(ValueFilter|string|int|float|array $value)
   {
     $this->value = $value instanceof ValueFilter ? $value->cast() : $value;
   }

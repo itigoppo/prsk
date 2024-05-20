@@ -12,7 +12,7 @@ enum FilterEnum: string
   case Name = 'name';
   case IsActive = 'is_active';
 
-  public function create(ValueFilter|string|int|float $value): Filter
+  public function create(ValueFilter|string|int|float|array $value): Filter
   {
     return match ($this) {
       self::Name => new NameFilter($value),

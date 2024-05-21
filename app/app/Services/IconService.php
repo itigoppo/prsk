@@ -6,12 +6,10 @@ use App\Http\Requests\Icon\StoreRequest;
 use App\Http\Requests\Icon\SearchRequest;
 use App\Models\Icon;
 use App\Repositories\IconRepository;
-use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -41,7 +39,7 @@ class IconService
     try {
       $entity = $this->findOne($id);
 
-      if (!Storage::disk('local')->exists(\StorageUtil::filePath($entity))) {
+      if (!\StorageUtil::exists(\StorageUtil::iconFilePath($entity))) {
         throw new FileNotFoundException('icon record id: ' . $id);
       }
 
@@ -61,7 +59,7 @@ class IconService
       return false;
     }
 
-    $path = Storage::disk('local')->putFile(Icon::FILE_PATH, new File($file->getPathname()));
+    $path = \StorageUtil::upload($request, 'file', Icon::FILE_PATH);
     if (!$path) {
       return false;
     }
@@ -91,19 +89,19 @@ class IconService
     ]);
 
     if ($validator->fails()) {
-      Storage::disk('local')->delete($path);
+      \StorageUtil::remove($path);
 
       return false;
     }
 
     try {
       if (!$this->iconRepository->store(new StoreRequest($validator->validated()))) {
-        Storage::disk('local')->delete($path);
+        \StorageUtil::remove($path);
 
         return false;
       }
     } catch (ValidationException $e) {
-      Storage::disk('local')->delete($path);
+      \StorageUtil::remove($path);
 
       return false;
     }
@@ -115,13 +113,8 @@ class IconService
   {
     try {
       $entity = $this->findOne($id);
-      $path = \StorageUtil::filePath($entity);
-
-      if (Storage::disk('local')->exists($path)) {
-        if (!Storage::disk('local')->delete($path)) {
-          return false;
-        }
-      }
+      $path = \StorageUtil::iconFilePath($entity);
+      \StorageUtil::remove($path);
 
       return $this->iconRepository->destroy($entity);
     } catch (Exception $e) {

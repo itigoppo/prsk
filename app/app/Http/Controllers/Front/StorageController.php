@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Services\IconService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class StorageController extends Controller
 {
@@ -18,12 +17,12 @@ class StorageController extends Controller
   {
     $icon = $this->iconService->findOne($uuid);
 
-    $path = \StorageUtil::filePath($icon);
+    $path = \StorageUtil::iconFilePath($icon);
 
-    if (!Storage::disk('local')->exists($path)) {
+    if (!\StorageUtil::exists($path)) {
       abort(404);
     }
 
-    return Storage::disk('local')->download($path);
+    return \StorageUtil::download($path);
   }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DialogueController;
 use App\Http\Controllers\Admin\IconController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -111,5 +112,42 @@ Route::group(['middleware' => 'verified', 'prefix' => 'admin', 'as' => 'admin.']
     Route::post('create', [MemberController::class, 'store'])
       ->name('store')
       ->middleware('can:isAdmin');
+  });
+
+  // 掛け合い管理
+  Route::group(['prefix' => 'dialogues', 'as' => 'dialogues.'], function () {
+    Route::get('/', [DialogueController::class, 'index'])
+      ->name('index');
+
+    Route::post('/', [DialogueController::class, 'search'])
+      ->name('search');
+
+    Route::get('create', [DialogueController::class, 'create'])
+      ->name('create')
+      ->middleware('can:isAdmin');
+
+    Route::post('create', [DialogueController::class, 'store'])
+      ->name('store')
+      ->middleware('can:isAdmin');
+
+    Route::group(['prefix' => '{id}', 'where' => ['id' => '[0-9]+']], function () {
+      Route::get('/', [DialogueController::class, 'view'])
+        ->name('view');
+
+      Route::get('display', [DialogueController::class, 'display'])
+        ->name('display');
+
+      Route::get('edit', [DialogueController::class, 'edit'])
+        ->name('edit')
+        ->middleware('can:isAdmin');
+
+      Route::patch('/', [DialogueController::class, 'update'])
+        ->name('update')
+        ->middleware('can:isAdmin');
+
+      Route::delete('/', [DialogueController::class, 'destroy'])
+        ->name('destroy')
+        ->middleware('can:isAdmin');
+    });
   });
 });

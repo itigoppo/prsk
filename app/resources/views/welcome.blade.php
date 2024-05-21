@@ -60,9 +60,9 @@
                 content: "よくあるやつ。",
               },
             @endif
-            @if (Route::has('front.interactions.index'))
+            @if (Route::has('front.dialogues.index'))
               {
-                href: "{{ route('front.interactions.index') }}",
+                href: "{{ route('front.dialogues.index') }}",
                 label: "掛け合い",
                 content: "わんわんーーーわんだほーーーい☆",
               },

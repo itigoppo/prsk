@@ -45,8 +45,8 @@
               </x-nav-link>
             @endif
 
-            @if (Route::has('admin.interactions.index'))
-              <x-nav-link :href="route('admin.interactions.index')" :active="request()->routeIs('admin.interactions.*')">
+            @if (Route::has('admin.dialogues.index'))
+              <x-nav-link :href="route('admin.dialogues.index')" :active="request()->routeIs('admin.dialogues.*')">
                 掛け合い管理
               </x-nav-link>
             @endif
@@ -106,8 +106,8 @@
                     </x-dropdown-link>
                   @endif
 
-                  @if (Route::has('front.interactions.index'))
-                    <x-dropdown-link :href="route('front.interactions.index')">
+                  @if (Route::has('front.dialogues.index'))
+                    <x-dropdown-link :href="route('front.dialogues.index')">
                       掛け合い
                     </x-dropdown-link>
                   @endif
@@ -135,8 +135,8 @@
               </x-nav-link>
             @endif
 
-            @if (Route::has('front.interactions.index'))
-              <x-nav-link :href="route('front.interactions.index')" :active="request()->routeIs('front.interactions.*')">
+            @if (Route::has('front.dialogues.index'))
+              <x-nav-link :href="route('front.dialogues.index')" :active="request()->routeIs('front.dialogues.*')">
                 掛け合い
               </x-nav-link>
             @endif
@@ -235,8 +235,8 @@
           </x-responsive-nav-link>
         @endif
 
-        @if (Route::has('admin.interactions.index'))
-          <x-responsive-nav-link :href="route('admin.interactions.index')" :active="request()->routeIs('admin.interactions.*')">
+        @if (Route::has('admin.dialogues.index'))
+          <x-responsive-nav-link :href="route('admin.dialogues.index')" :active="request()->routeIs('admin.dialogues.*')">
             掛け合い管理
           </x-responsive-nav-link>
         @endif
@@ -278,8 +278,8 @@
         </x-responsive-nav-link>
       @endif
 
-      @if (Route::has('front.interactions.index'))
-        <x-responsive-nav-link :href="route('front.interactions.index')" :active="request()->routeIs('front.interactions.*')">
+      @if (Route::has('front.dialogues.index'))
+        <x-responsive-nav-link :href="route('front.dialogues.index')" :active="request()->routeIs('front.dialogues.*')">
           掛け合い
         </x-responsive-nav-link>
       @endif
